@@ -42,9 +42,9 @@ const Card = ({
           }}
         >
           {listName === "Outfit" ? (
-            <icon>{/* display x icon*/}</icon>
+            <i>{/* display x icon*/}</i>
           ) : (
-            <icon>{/* display Start icon*/}</icon>
+            <i>{/* display Start icon*/}</i>
           )}
         </button>
         <img src={productImg} alt="Related-Product Item" />

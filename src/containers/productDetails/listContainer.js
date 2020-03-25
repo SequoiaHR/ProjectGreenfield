@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
-import List from "../components/productDetails/list.jsx";
-// import addToArrayDummy from "../redux/actions/addDummyActionCreator.js";
+import List from "../../components/productDetails/list.jsx";
+import { fetchRelatedProducts } from "../../redux/actions/getRelatedProducts.js";
 
 const mapStateToProps = state => {
   return {
-    pageProduct: state.details,
+    pageProduct: state.product_details,
     products: state.related,
     productsImgs: state.relatedImgs
     //Still need to map avgRating
@@ -13,6 +13,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchDataAsync: id => {
+      dispatch(fetchRelatedProducts(id));
+    },
     onClickDetails: e => {
       console.log("new product ID to switch to: ", e.target.name);
       //dispatch(actionCreatorToRouteToNewItem);
