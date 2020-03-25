@@ -1,5 +1,6 @@
 import React from "react";
 import ReviewBreakdown from "./reviewBreakdown.jsx";
+import ReviewTile from "./reviewTile.jsx";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class ReviewsList extends React.Component {
   }
 
   toggleFilter(stars) {
-    let current = this.state.filters;
+    let current = new Set(this.state.filters);
     if (current.has(stars)) {
       current.delete(stars);
     } else {
@@ -62,7 +63,27 @@ class ReviewsList extends React.Component {
         {/* if filters has any filters, apply them to list in props */}
         {/* slice correct number of reviews and and map to list tile components */}
         <div>
-          Reviews List Placeholder: Showing {this.state.reviewsShown} reviews
+          Reviews List Placeholder: Showing {this.state.reviewsShown} reviews, one placeholder:
+          <ReviewTile review={{
+            "review_id": 5,
+            "rating": 3,
+            "summary": "I'm enjoying wearing these shades",
+            "recommend": 0,
+            "response": "",
+            "body": "Comfortable and practical.",
+            "date": "2019-04-14T00:00:00.000Z",
+            "reviewer_name": "shortandsweeet",
+            "helpfulness": 5,
+            "photos": [{
+                "id": 1,
+                "url": "urlplaceholder/review_5_photo_number_1.jpg"
+              },
+              {
+                "id": 2,
+                "url": "urlplaceholder/review_5_photo_number_2.jpg"
+              }
+            ]
+          }} />
           {this.state.showMoreButton ? <div onClick={this.loadMoreBound}>More Reviews</div>
           : null}
         </div>

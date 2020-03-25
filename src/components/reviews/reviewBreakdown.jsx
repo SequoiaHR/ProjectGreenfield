@@ -1,6 +1,7 @@
 import React from "react";
+import FeaturesBreakdown from "./featuresBreakdown.jsx";
 
-const ReviewBreakdown = ({ filters, reviewMetadata, toggleHandler, clearHandler }) => {
+const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => {
 
   return (
     <div>
@@ -15,6 +16,7 @@ const ReviewBreakdown = ({ filters, reviewMetadata, toggleHandler, clearHandler 
       </div>
       {filters.size > 0 ? <div onClick={clearHandler}>Remove all filters</div>
       : null}
+      <FeaturesBreakdown metadata={metadata} />
     </div>
   );
 };
