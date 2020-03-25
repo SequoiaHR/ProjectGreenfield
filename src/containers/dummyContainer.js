@@ -1,10 +1,6 @@
 import { connect } from 'react-redux';
-// ESLINT gives issues on unused varables without the below comment, and Im pausing on redux -TMD
-// eslint-disable-next-line
-import {DummyButton, DumdumButton} from '../components/dummyComponent.jsx'
-// ESLINT gives issues on unused varables without the below comment, and Im pausing on redux -TMD
-// eslint-disable-next-line
-import {addToArrayDummy, addCountToDumdum} from "../redux/actions/addDummyActionCreator.js"
+import {DummyButton, DumdumButton} from '../components/dummyComponent.jsx';
+import {addToArrayDummy, addCountToDumdum} from "../redux/actions/addDummyActionCreator.js";
 
 const mapStateToProps = (state) => {
     return {
@@ -22,4 +18,16 @@ const mapDispatchToProps = (dispatch) => {
 
 const DummyContainer = connect(mapStateToProps, mapDispatchToProps)(DummyButton);
 
-export default DummyContainer;
+
+
+
+const stateToProps = (state) => {return {value: state.dumdum} }
+const dispatchToProps = (dispatch) => {
+    return {
+        clicker: ()=> { dispatch(addCountToDumdum()) }
+    }
+}
+
+const DumdumContainer = connect(stateToProps, dispatchToProps)(DumdumButton);
+
+export { DummyContainer, DumdumContainer };

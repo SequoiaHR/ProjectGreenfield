@@ -1,5 +1,5 @@
 import React from "react";
-import DummyContainer from "./containers/dummyContainer.js";
+import {DummyContainer, DumdumContainer} from "./containers/dummyContainer.js";
 import QuestionList from "./components/questions/questionsList";
 
 function App() {
@@ -7,6 +7,7 @@ function App() {
     <div className="App">
       <h1>Redux App</h1>
       <DummyContainer />
+      <DumdumContainer/>
       {/* <QuestionList /> */}
     </div>
   );

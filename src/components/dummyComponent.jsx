@@ -8,7 +8,7 @@ const DummyButton = ({ onClick, text }) => {
   );
 };
 
-const DumdumButton = (clicker)=>{
+const DumdumButton = ({clicker})=>{
   return(
     <div>
       <button onClick={clicker}>+1</button>
