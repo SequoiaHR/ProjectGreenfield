@@ -1,2 +1,4 @@
-export const ADD_DUMMY = 'ADD_DUMMY';
-export const COUNT_DUMMY = 'COUNT_DUMDUM';
+const ADD_DUMMY = 'ADD_DUMMY';
+const COUNT_DUMDUM = 'COUNT_DUMDUM';
+
+export {ADD_DUMMY, COUNT_DUMDUM}
