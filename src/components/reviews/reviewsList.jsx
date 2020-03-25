@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewBreakdown from "./reviewBreakdown.jsx";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -6,12 +7,16 @@ class ReviewsList extends React.Component {
 
     this.state = {
       reviewsShown: 0,
-      showMoreButton: true
+      showMoreButton: true,
+      filters: new Set()
     };
     this.loadMoreBound = this.loadMore.bind(this);
+    this.toggleFilterBound = this.toggleFilter.bind(this);
+    this.clearFiltersBound = this.clearFilters.bind(this);
   }
 
   componentDidMount() {
+    // get metadata dispatch
     // get reviews dispatch
     // set state reviewsShown to min of 2 or length of reviews
     // if length of reviews <= 2,
@@ -28,13 +33,39 @@ class ReviewsList extends React.Component {
     });
   }
 
+  toggleFilter(stars) {
+    let current = this.state.filters;
+    if (current.has(stars)) {
+      current.delete(stars);
+    } else {
+      current.add(stars);
+    }
+    this.setState({
+      filters: current
+    });
+  }
+
+  clearFilters() {
+    this.setState({
+      filters: new Set()
+    });
+  }
+
   render() {
     return(
-      // slice review props and map
       <div>
-        Reviews List Placeholder: Showing {this.state.reviewsShown} reviews
-        {this.state.showMoreButton ? <div onClick={this.loadMoreBound}>More Reviews</div>
-        : null}
+        <ReviewBreakdown
+          metadata={this.props.metadata}
+          filters={this.state.filters}
+          toggleHandler={this.toggleFilterBound}
+          clearHandler={this.clearFiltersBound} />
+        {/* if filters has any filters, apply them to list in props */}
+        {/* slice correct number of reviews and and map to list tile components */}
+        <div>
+          Reviews List Placeholder: Showing {this.state.reviewsShown} reviews
+          {this.state.showMoreButton ? <div onClick={this.loadMoreBound}>More Reviews</div>
+          : null}
+        </div>
       </div>
     );
   }
