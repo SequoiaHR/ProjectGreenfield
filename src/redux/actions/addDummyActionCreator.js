@@ -8,6 +8,6 @@ function addToArrayDummy(text) {
     }
 }
 
-function countToDumdum
+function countToDumdum(value) {};
 
 export default addToArrayDummy;
