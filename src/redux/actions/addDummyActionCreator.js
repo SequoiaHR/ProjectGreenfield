@@ -1,4 +1,4 @@
-import {ADD_DUMMY} from './actionTypes.js';
+import {ADD_DUMMY, COUNT_DUMDUM} from './actionTypes.js';
 // import store from "../store.js"; // DO NOT NORMALLY LOAD STORE <- DONE FOR DEMONSTRATION PURPOSES
 
 function addToArrayDummy(text) {
@@ -7,5 +7,7 @@ function addToArrayDummy(text) {
         text: text
     }
 }
+
+function countToDumdum
 
 export default addToArrayDummy;
