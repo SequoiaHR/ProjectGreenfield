@@ -1,5 +1,7 @@
 import React from "react";
 import DummyContainer from "./containers/dummyContainer.js";
+import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
+import QuestionList from "./components/questions/questionsList";
 import ListContainer from "./containers/productDetails/listContainer.js";
 
 function App() {
@@ -7,7 +9,9 @@ function App() {
     <div className="App">
       <h1>Redux App</h1>
       <DummyContainer />
-      {/* <ListContainer listName="Related"/>
+      {/* <ReviewsListContainer /> */}
+      {/* <QuestionList /> */}
+       {/* <ListContainer listName="Related"/>
       <ListContainer listName='Outfit'/> */}
     </div>
   );

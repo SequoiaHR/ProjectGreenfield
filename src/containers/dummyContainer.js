@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import DummyButton from '../components/dummyComponent.jsx'
-import addToArrayDummy from "../redux/actions/addDummyActionCreator.js"
+import {DummyButton, DumdumButton} from '../components/dummyComponent.jsx'
+import {addToArrayDummy, addCountToDumdum} from "../redux/actions/addDummyActionCreator.js"
 
 const mapStateToProps = (state) => {
     return {
