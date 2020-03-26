@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fetchImages } from "./getImagesHelper.js";
 import { GET_RELATED_IMAGES } from "./actionTypes.js";
 
 export function fetchRelatedImages(id) {
@@ -25,14 +26,4 @@ function getRelatedImages(data) {
     type: GET_RELATED_IMAGES,
     payload: data
   };
-}
-
-export function fetchImages(ids) {
-  let requests = [];
-  for (let id of ids) {
-    requests.push(
-      axios.get(`http://3.134.102.30/products/${id}/styles`)
-    );
-  }
-  return axios.all(requests);
 }

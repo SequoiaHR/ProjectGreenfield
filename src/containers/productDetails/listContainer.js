@@ -3,10 +3,13 @@ import List from "../../components/productDetails/list.jsx";
 import { fetchRelatedProducts } from "../../redux/actions/getRelatedProducts.js";
 import { fetchRelatedImages } from "../../redux/actions/getRelatedImages.js";
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     pageProduct: state.product_details,
-    products: state.related,
+    products:
+      ownProps.listName === "Related"
+        ? state.related
+        : [], // OUTFIT DATA GOES HERE
     productsImages: state.relatedImages
     //Still need to map avgRating
   };
