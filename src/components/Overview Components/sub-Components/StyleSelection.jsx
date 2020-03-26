@@ -1,6 +1,6 @@
 import React from 'react';
 
-const StyleSelection = function() {
+const StyleSelection = function(props) {
   return <div></div>;
 };
 
