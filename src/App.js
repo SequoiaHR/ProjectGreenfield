@@ -15,8 +15,8 @@ function App() {
       {/* <DummyContainer />
       <DumdumContainer /> */}
       <OverviewContainer />
-      {/* <ReviewsListContainer />
-      <QuestionList /> */}
+      <ReviewsListContainer />
+      <QuestionList />
       <ListContainer listName="Related" />
       <ListContainer listName="Outfit"/>
     </div>

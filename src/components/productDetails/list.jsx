@@ -56,7 +56,7 @@ const List = ({
     }
   }
   return (
-    <div>
+    <div class="columns">
       {listName === "Outfit" ? (
         <AddToOutfitCard
           pageProduct={pageProduct}
