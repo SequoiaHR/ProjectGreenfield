@@ -1,8 +1,8 @@
 import React from "react";
-import {
-  DummyContainer,
-  DumdumContainer
-} from "./containers/dummyContainer.js";
+// import {
+//   DummyContainer,
+//   DumdumContainer
+// } from "./containers/dummyContainer.js";
 import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
 import QuestionList from "./components/questions/questionsList";
 import ListContainer from "./containers/productDetails/listContainer.js";
