@@ -5,7 +5,7 @@ import AnswerList from "./answersList"
 class Question extends React.Component{
   constructor(props){
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render(){
