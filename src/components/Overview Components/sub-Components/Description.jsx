@@ -1,13 +1,18 @@
 import React from 'react';
 
 const Description = function(props) {
-  console.log(props.state.basicDetails.id);
-  if (props.state.basicDetails.id !== undefined) {
+  if (props.state.description.slogan !== undefined) {
     return (
       <div>
-        <div>{props.state.basicDetails.category}</div>
-        <div>{props.state.basicDetails.name}</div>
-        <div>${props.state.basicDetails.price}</div>
+        <div>{props.state.description.slogan}</div>
+        <div>{props.state.description.productDescription}</div>
+        {props.state.description.features.map(eachFeature => {
+          return (
+            <div>
+              {eachFeature.feature}: {eachFeature.value}
+            </div>
+          );
+        })}
       </div>
     );
   } else {
