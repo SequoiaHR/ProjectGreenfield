@@ -7,8 +7,8 @@ function App() {
     <div className="App">
       <h1>Redux App</h1>
       <DummyContainer />
-      <ListContainer listName="Related"/>
-      <ListContainer listName='Outfit'/>
+      {/* <ListContainer listName="Related"/>
+      <ListContainer listName='Outfit'/> */}
     </div>
   );
 }
