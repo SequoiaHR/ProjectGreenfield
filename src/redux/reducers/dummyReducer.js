@@ -1,5 +1,7 @@
 // Import action creators needed for your specific reducer
-import { ADD_DUMMY } from '../actions/actionTypes.js';
+
+import { ADD_DUMMY } from "../actions/actionTypes.js";
+
 
 // Example reducer
 function dummyReducer(state = ['First'], action) {
