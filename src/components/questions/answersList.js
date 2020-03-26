@@ -1,5 +1,5 @@
 import React from "react";
-import Answer from "./answer"
+import Answer from "./answer";
 
 class AnswerList extends React.Component{
   constructor(props){
@@ -7,7 +7,7 @@ class AnswerList extends React.Component{
     this.state = {
       answers: null,
       display: 2
-    }
+    };
   }
 
   render(){
