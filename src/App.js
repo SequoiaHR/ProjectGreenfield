@@ -2,6 +2,7 @@ import React from "react";
 import DummyContainer from "./containers/dummyContainer.js";
 import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
 import QuestionList from "./components/questions/questionsList";
+import ListContainer from "./containers/productDetails/listContainer.js";
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
       <DummyContainer />
       {/* <ReviewsListContainer /> */}
       {/* <QuestionList /> */}
+       {/* <ListContainer listName="Related"/>
+      <ListContainer listName='Outfit'/> */}
     </div>
   );
 }
