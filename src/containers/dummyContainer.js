@@ -1,9 +1,5 @@
 import { connect } from 'react-redux';
-// ESLINT gives issues on unused varables without the below comment, and Im pausing on redux -TMD
-// eslint-disable-next-line
 import {DummyButton, DumdumButton} from '../components/dummyComponent.jsx'
-// ESLINT gives issues on unused varables without the below comment, and Im pausing on redux -TMD
-// eslint-disable-next-line
 import {addToArrayDummy, addCountToDumdum} from "../redux/actions/addDummyActionCreator.js"
 
 const mapStateToProps = (state) => {
