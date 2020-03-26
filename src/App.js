@@ -12,11 +12,11 @@ function App() {
       <h1>Redux App</h1>
       <DummyContainer />
       <DumdumContainer/>
-     <OverviewContainer />
-      {/* <ReviewsListContainer /> */}
-      {/* <QuestionList /> */}
-       {/* <ListContainer listName="Related"/>
-      <ListContainer listName='Outfit'/> */}
+      <OverviewContainer />
+      <ReviewsListContainer />
+      <QuestionList />
+      <ListContainer listName="Related"/>
+      <ListContainer listName='Outfit'/>
     </div>
   );
 }

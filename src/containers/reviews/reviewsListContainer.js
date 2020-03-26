@@ -4,8 +4,7 @@ import { fetchReviews, fetchMetadata } from "../../redux/actions/reviewsActionCr
 
 const mapStateToProps = (state) => {
   return {
-    // id: state.product_details.id,
-    id: 3,
+    id: state.product_details.id,
     reviews: state.reviews,
     metadata: state.reviewsMetadata
   }
@@ -13,11 +12,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getReviews: () => {
-      dispatch(fetchReviews());
-    },
-    getMetadata: () => {
-      dispatch(fetchMetadata());
+    getData: (id) => {
+      dispatch(fetchReviews(id));
+      dispatch(fetchMetadata(id));
     }
   }
 };
