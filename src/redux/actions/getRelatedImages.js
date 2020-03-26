@@ -1,19 +1,18 @@
 import axios from "axios";
-import { GET_RELATED_PRODUCTS } from "./actionTypes.js";
-// import store from "../store.js"; // DO NOT NORMALLY LOAD STORE <- DONE FOR DEMONSTRATION PURPOSES
+import { GET_RELATED_IMAGES } from "./actionTypes.js";
 
-export function fetchRelatedProducts(id) {
+export function fetchRelatedImages(id) {
   return function(dispatch) {
     return axios
       .get(`http://3.134.102.30/products/${id}/related`)
       .then(({ data }) => {
         // data is an array of ids
-        console.log(`data for ${id}: `, data);
-        return fetchProducts(data);
+        console.log(`related items to ID #${id}: `, data);
+        return fetchImages(data);
       })
       .then(responseArr => {
         let dataArray = responseArr.map(response => response.data);
-        dispatch(getRelatedProducts(dataArray));
+        dispatch(getRelatedImages(dataArray));
       })
       .catch(err => {
         console.log("err trying to fetch all related product data: ", err);
@@ -21,17 +20,19 @@ export function fetchRelatedProducts(id) {
   };
 }
 
-function getRelatedProducts(data) {
+function getRelatedImages(data) {
   return {
-    type: GET_RELATED_PRODUCTS,
+    type: GET_RELATED_IMAGES,
     payload: data
   };
 }
 
-export function fetchProducts(ids) {
+export function fetchImages(ids) {
   let requests = [];
   for (let id of ids) {
-    requests.push(axios.get(`http://3.134.102.30/products/${id}`));
+    requests.push(
+      axios.get(`http://3.134.102.30/products/${id}/styles`)
+    );
   }
   return axios.all(requests);
 }

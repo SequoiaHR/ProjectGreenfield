@@ -6,7 +6,7 @@ const Card = ({
   listName,
   pageProduct,
   product,
-  productImg,
+  productImage,
   onClickDetails,
   onClickButton
   // avgRating
@@ -31,7 +31,7 @@ const Card = ({
           <div>Modal Hidden</div>
         )}
       </div>
-      <div class="Related-Image-Container">
+      <div className="Related-Image-Container">
         <button
           value={listName}
           onClick={e => {
@@ -47,9 +47,16 @@ const Card = ({
             <i>{/* display Start icon*/}</i>
           )}
         </button>
-        <img src={productImg} alt="Related-Product Item" />
+        <img
+          src={
+            productImage === null
+              ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+              : productImage
+          }
+          alt="Related-Product Item"
+        />
       </div>
-      <div class="Related-Info-Container">
+      <div className="Related-Info-Container">
         <div>
           <span>{product.category}</span>
         </div>

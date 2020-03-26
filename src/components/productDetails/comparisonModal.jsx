@@ -31,7 +31,7 @@ const ComparisonModal = ({ setShowModal, product, pageProduct }) => {
     return uniqueFeatureComparison;
   };
 
-  let comparison = getUniqueFeatures(product.features, pageProduct.features); //{feature: [feature, value1, value2]}
+  let comparison = getUniqueFeatures(product.features, pageProduct.features);
 
   var renderTableData = (feature, idx) => {
     let [feat, pageItem, compareItem] = feature;

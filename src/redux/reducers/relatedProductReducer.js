@@ -2,7 +2,7 @@
 import { GET_RELATED_PRODUCTS } from "../actions/actionTypes.js";
 
 // Example reducer
-function relatedReducer(state = [], action) {
+function relatedProductReducer(state = [], action) {
   switch (action.type) {
     case GET_RELATED_PRODUCTS:
       return action.payload;
@@ -11,4 +11,4 @@ function relatedReducer(state = [], action) {
   }
 }
 
-export default relatedReducer;
+export default relatedProductReducer;

@@ -5,17 +5,18 @@ const List = ({
   listName,
   pageProduct,
   products,
-  productsImgs,
+  productsImages,
   onClickDetails,
-  fetchDataAsync,
+  fetchRelatedDataAsync,
   //avgRating,
   addToOutfit, // FROM MAP DISPATCH TO STORE
   removeFromOutfit // FROM MAP DISPATCH TO STORE
 }) => {
   //HANDLE FETCHING DATA ON AFTER FIRST RENDER
   useEffect(() => {
-    fetchDataAsync(1);
+    fetchRelatedDataAsync(1);
   }, []);
+
   // handle button click functionality (Q: should I move this up one level?)
   function onClickButton(action, id) {
     if (action === "Add") {
@@ -42,7 +43,11 @@ const List = ({
             listName={listName}
             pageProduct={pageProduct}
             product={product}
-            // productImg={productsImgs[idx]}
+            productImage={
+              productsImages[idx] !== undefined
+                ? productsImages[idx].results[0].photos[0].thumbnail_url
+                : null
+            }
             onClickDetails={onClickDetails}
             onClickButton={onClickButton}
             //avgRating={avgRating}
