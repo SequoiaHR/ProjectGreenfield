@@ -49,7 +49,7 @@ const ComparisonModal = ({ setShowModal, product, pageProduct }) => {
       <div className="modal-wrapper">
         <div className="modal-header">
           <button onClick={onExitClick}>
-            <icon>X</icon>
+            <i>X</i>
           </button>
         </div>
         <div className="modal-table">

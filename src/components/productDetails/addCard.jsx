@@ -1,12 +1,13 @@
 import React from "react";
 
 const AddToOutfitCard = ({
-  onClickButton
+  onClickButton,
+  pageProduct
 }) => {
   return (
-    <div onClick={onClickButton} class="Related-Product-Card">
-        <button value="Add" onClick={onClickButton}> 
-          <icon>{/* display "+" icon*/}</icon>
+    <div class="Related-Product-Card">
+        <button value="Add" onClick={(e) => onClickButton("Add", pageProduct.id)}> 
+          <icon>{"+++ADD+++"}</icon>
         </button>
     </div>
   );

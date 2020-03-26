@@ -15,11 +15,7 @@ const Card = ({
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div
-      name={product.id}
-      onClick={onClickDetails}
-      class="Related-Product-Card"
-    >
+    <div class="Related-Product-Card">
       <div>
         {showModal === true ? (
           <ComparisonModal
@@ -37,17 +33,20 @@ const Card = ({
           onClick={e => {
             if (listName === "Related") {
               setShowModal(true);
+            } else {
+              onClickButton(listName, product.id);
             }
-            onClickButton(e.target.name, product.id);
           }}
         >
           {listName === "Outfit" ? (
-            <i>{/* display x icon*/}</i>
+            <i>{"DELETE - OUTFIT"}</i>
           ) : (
-            <i>{/* display Start icon*/}</i>
+            <i>{"MODAL - RELATED"}</i>
           )}
         </button>
         <img
+          name={product.id}
+          onClick={onClickDetails}
           src={
             productImage === null
               ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
