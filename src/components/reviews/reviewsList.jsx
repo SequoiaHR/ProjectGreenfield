@@ -49,7 +49,11 @@ class ReviewsList extends React.Component {
   render() {
     var tiles = [];
     if (this.state.filters.size > 0) { // add star-filtered reviews to tile list
-      // filter reviews
+      for (const review of this.props.reviews) {
+        if (this.state.filters.has(review.rating)) {
+          tiles.push(review);
+        }
+      }
     } else {
       tiles = this.props.reviews; // if no filters, all reviews
     }
@@ -69,8 +73,8 @@ class ReviewsList extends React.Component {
         </div>
         <div>
           {this.props.reviews.length > this.state.reviewsShown
-          ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
-          : <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>}
+            ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
+            : <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>}
         </div>
       </div>
     );
