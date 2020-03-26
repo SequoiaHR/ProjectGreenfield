@@ -1,7 +1,5 @@
 // Import action creators needed for your specific reducer
-
-import { ADD_DUMMY } from "../actions/actionTypes.js";
-
+import { ADD_DUMMY, COUNT_DUMDUM } from "../actions/actionTypes.js";
 
 // Example reducer
 function dummyReducer(state = ['First'], action) {
@@ -13,4 +11,12 @@ function dummyReducer(state = ['First'], action) {
   }
 }
 
-export default dummyReducer;
+const dumdumReducer = (state = 1, action) => {
+  switch(action.type){
+    case COUNT_DUMDUM:
+      return state + 1;
+    default:
+      return state;
+}
+}
+export {dummyReducer, dumdumReducer}

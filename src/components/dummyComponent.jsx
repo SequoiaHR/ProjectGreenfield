@@ -8,4 +8,12 @@ const DummyButton = ({ onClick, text }) => {
   );
 };
 
-export default DummyButton;
+const DumdumButton = ({clicker})=>{
+  return(
+    <div>
+      <button onClick={clicker}>+1</button>
+    </div>
+  );
+}
+
+export {DummyButton, DumdumButton}

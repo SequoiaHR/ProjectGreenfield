@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 import {DummyButton, DumdumButton} from '../components/dummyComponent.jsx'
 import {addToArrayDummy, addCountToDumdum} from "../redux/actions/addDummyActionCreator.js"
 
@@ -22,4 +21,14 @@ const DummyContainer = connect(
   mapDispatchToProps
 )(DummyButton);
 
-export default DummyContainer;
+
+const stateToProps = (state) => {return {value: state.dumdum} }
+const dispatchToProps = (dispatch) => {
+    return {
+        clicker: ()=> { dispatch(addCountToDumdum()) }
+    }
+}
+
+const DumdumContainer = connect(stateToProps, dispatchToProps)(DumdumButton);
+
+export { DummyContainer, DumdumContainer };
