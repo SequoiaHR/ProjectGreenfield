@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <h1>Redux App</h1>
       <DummyContainer />
-      <ReviewsListContainer />
+      {/* <ReviewsListContainer /> */}
     </div>
   );
 }
