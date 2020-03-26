@@ -2,15 +2,22 @@ import React from "react";
 import FeaturesBreakdown from "./featuresBreakdown.jsx";
 
 const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => {
+  var total = 0;
+
+  if (metadata.recommended) {
+  total = metadata.recommended[0] + metadata.recommended[1];
+  var percent = Math.round((metadata.recommended[1] / total) * 100);
+  }
 
   return (
     <div>
       <div>
         Overall rating goes here (from store?)
       </div>
-      <div>
-        XXX% of reviewers recommend this product
-      </div>
+
+      {total
+        ? <div>{percent}% of reviewers recommend this product</div>
+        : null}
       {metadata.ratings
         ? <div>
           <div data-stars="5" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>

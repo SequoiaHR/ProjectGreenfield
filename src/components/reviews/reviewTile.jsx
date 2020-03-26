@@ -25,7 +25,7 @@ class ReviewTile extends React.Component {
     let { review } = this.props;
     return (
       <div>
-        <div>{review.rating}-star rating goes here (from store?)</div>
+        <div>{review.rating}-star rating goes here</div>
         {this.state.verified ? <div>{review.reviewer_name}, {review.date}</div>
         : <div>{review.reviewer_name}, {review.date}</div>}
         <div>{review.summary}</div>
