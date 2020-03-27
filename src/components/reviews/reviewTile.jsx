@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -24,23 +25,28 @@ class ReviewTile extends React.Component {
   render() {
     let { review } = this.props;
     return (
-      <div>
+      <div className="tile is-child box">
         <div>{review.rating}-star rating goes here</div>
-        {this.state.verified ? <div>{review.reviewer_name}, {review.date}</div>
-        : <div>{review.reviewer_name}, {review.date}</div>}
-        <div>{review.summary}</div>
-        {this.state.expanded || review.body.length <= 250 ? <div>{review.body}</div>
-        : <div>{review.body.slice(0, 250)}...</div>}
-        {review.body.length > 250 && !this.state.expanded ? <div onClick={this.toggleExpandBound}>Show more</div>
-        : null}
-        {this.state.expanded ? <div onClick={this.toggleExpandBound}>Show less</div>
-        : null}
-        {review.recommend ? <div>I recommend this product</div>
-        : null}
-        {review.response ? <div>Seller response:<br />{review.response}</div>
-        : null}
-        <div>Helpful? Yes({review.helpfulness}) | Report</div>
-        <hr />
+        {this.state.verified ?
+          <div className="has-text-right is-size-6">{review.reviewer_name}, {moment(review.date, moment.ISO_8601).format("MMMM Do YYYY")}</div>
+          : <div className="has-text-right is-size-7">{review.reviewer_name}, {review.date}</div>}
+        <div className="subtitle">{review.summary}</div>
+        {this.state.expanded || review.body.length <= 250
+          ? <div>{review.body}</div>
+          : <div>{review.body.slice(0, 250)}...</div>}
+        {review.body.length > 250 && !this.state.expanded
+          ? <div className="is-size-7" onClick={this.toggleExpandBound}>Show more</div>
+          : null}
+        {this.state.expanded
+          ? <div className="is-size-7" onClick={this.toggleExpandBound}>Show less</div>
+          : null}
+        {review.recommend
+          ? <div>I recommend this product</div>
+          : null}
+        {review.response
+          ? <div>Seller response:<br />{review.response}</div>
+          : null}
+        <div className="is-size-7">Helpful? Yes({review.helpfulness}) | Report</div>
       </div>
     );
   }
