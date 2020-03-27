@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import productDetailsActions from '../redux/actions/OverviewActions/productDetailsActions';
-import productStylesActions from '../redux/actions/OverviewActions/productStylesActions';
-import overviewMain from '../components/Overview Components/OverviewMain';
+import productDetailsActions from '../../redux/actions/OverviewActions/productDetailsActions';
+import productStylesActions from '../../redux/actions/OverviewActions/productStylesActions';
+import overviewMain from '../../components/overview/OverviewMain';
 
 const mapStateToProps = state => {
   return {

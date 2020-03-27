@@ -22,13 +22,14 @@ class overviewMain extends React.Component {
         id: undefined,
         category: undefined,
         name: undefined,
-        price: undefined,
-        reducedPrice: undefined
+        price: undefined
       },
-      styles: {
-        selectedStyle: undefined,
-        allStyles: []
+      selectedStyle: {
+        selectedStyleId: undefined,
+        selectedStyleColor: undefined,
+        selectedReducedPrice: undefined
       },
+      allStyles: [],
       cart: {
         cartSize: undefined,
         cartNumber: undefined,
@@ -41,6 +42,31 @@ class overviewMain extends React.Component {
       }
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.changeStyleOnClick = this.changeStyleOnClick.bind(this);
+  }
+
+  //this changes the style when you click it!
+  changeStyleOnClick(newStyleId) {
+    for (let i = 0; i < this.state.allStyles.length; i++) {
+      if (this.state.allStyles[i].style_id === newStyleId) {
+        this.setState({
+          selectedStyle: {
+            selectedStyleId: this.state.allStyles[i].style_id,
+            selectedStyleColor: this.state.allStyles[i].name,
+            selectedReducedPrice: this.state.allStyles[i].sale_price
+          }
+        });
+        this.setState({
+          images: {
+            currentImage: this.state.allStyles[i].photos[0],
+            thumbnailImages: this.state.allStyles[i].photos,
+            maximized: false,
+            zoomed: false
+          }
+        });
+        break;
+      }
+    }
   }
 
   componentDidMount() {
@@ -59,8 +85,7 @@ class overviewMain extends React.Component {
             id: API_details.data.id,
             category: API_details.data.category,
             name: API_details.data.name,
-            price: API_details.data.default_price,
-            reducedPrice: undefined
+            price: API_details.data.default_price
           }
         });
         this.setState({
@@ -81,16 +106,23 @@ class overviewMain extends React.Component {
         //input data into store
         this.props.storeProductStyles(API_Styles.data);
         //input this data into currentView
+        //set style data in state
+        console.log('API_Styles', API_Styles);
         this.setState({
-          styles: {
-            selectedStyle: API_Styles.data.results[0].style_id,
-            allStyles: API_Styles.data.results
+          selectedStyle: {
+            selectedStyleId: API_Styles.data.results[2].style_id,
+            selectedStyleColor: API_Styles.data.results[2].name,
+            selectedReducedPrice: API_Styles.data.results[2].sale_price
           }
         });
         this.setState({
+          allStyles: API_Styles.data.results
+        });
+        //set state for images
+        this.setState({
           images: {
-            currentImage: API_Styles.data.results[0].photos[0],
-            thumbnailImages: API_Styles.data.results[0].photos
+            currentImage: API_Styles.data.results[2].photos[0],
+            thumbnailImages: API_Styles.data.results[2].photos
           }
         });
       })
@@ -102,11 +134,20 @@ class overviewMain extends React.Component {
   render() {
     return (
       <div>
-        <ImagesViewer state={this.state} />
-        <ProductRating state={this.state} />
-        <BasicDetails state={this.state} />
-        <StyleSelection state={this.state} />
-        <AddToBag state={this.state} />
+        <div class="level">
+          <p class="level-left">
+            <ImagesViewer state={this.state} />
+          </p>
+          <p class="level-right">
+            <ProductRating state={this.state} />
+            <BasicDetails state={this.state} />
+            <StyleSelection
+              state={this.state}
+              changeStyleOnClick={this.changeStyleOnClick}
+            />
+            <AddToBag state={this.state} />
+          </p>
+        </div>
         <Description state={this.state} />
       </div>
     );
