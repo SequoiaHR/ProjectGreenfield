@@ -10,31 +10,28 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
   }
 
   return (
-    <div>
-      <div>
+    <div className="tile is-child">
+      <div className="title">
         Overall rating goes here (from store?)
       </div>
 
       {total
-        ? <div>{percent}% of reviewers recommend this product</div>
+        ? <div className="subtitle">{percent}% of reviewers recommend this product</div>
         : null}
       {metadata.ratings
         ? <div>
-          <div data-stars="5" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>
-            5 stars bar ({metadata.ratings[5] || "0"})
-          </div>
-          <div data-stars="4" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>
-            4 stars bar ({metadata.ratings[4] || "0"})
-          </div>
-          <div data-stars="3" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>
-            3 stars bar ({metadata.ratings[3] || "0"})
-          </div>
-          <div data-stars="2" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>
-            2 stars bar ({metadata.ratings[2] || "0"})
-          </div>
-          <div data-stars="1" onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>
-            1 stars bar ({metadata.ratings[1] || "0"})
-          </div>
+          {[5, 4, 3, 2, 1].map((num) => {
+          return (
+            <div key={num}>
+              <span data-stars={num} onClick={(event) => toggleHandler(Number(event.target.dataset.stars))}>{num} stars</span>
+              <progress
+                className="progress is-small is-success"
+                value={metadata.ratings[num]}
+                max={total}>{metadata.ratings[num]}
+              </progress>
+            </div>
+          );
+          })}
         </div>
         : null}
       {filters.size > 0
