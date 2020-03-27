@@ -15,7 +15,7 @@ const Card = ({
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div class="column">
+    <div class="column is-2">
       <div class="card">
         <div>
           {showModal === true ? (
