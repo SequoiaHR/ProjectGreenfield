@@ -20,9 +20,9 @@ const BasicDetails = function(props) {
     return (
       <section class="section">
         <div class="container">
-          <div>{props.state.basicDetails.category}</div>
-          <div>{props.state.basicDetails.name}</div>
-          <div>{prices}</div>
+          <h5>{props.state.basicDetails.category}</h5>
+          <h1>{props.state.basicDetails.name}</h1>
+          <h5>{prices}</h5>
         </div>
       </section>
     );
