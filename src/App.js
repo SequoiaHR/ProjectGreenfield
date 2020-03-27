@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
 // import {DummyContainer, DumdumContainer} from "./containers/dummyContainer.js";
-import ReviewsListContainer from './containers/reviews/reviewsListContainer.js';
-import QuestionListContainer from './containers/questions/questionListContainer';
-import ListContainer from './containers/productDetails/listContainer.js';
-import OverviewContainer from './containers/overview/overviewContainer';
+import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
+import QuestionListContainer from "./containers/questions/questionListContainer";
+import ListContainer from "./containers/productDetails/listContainer.js";
+import OverviewContainer from "./containers/overview/overviewContainer";
 
 function App() {
   return (
@@ -13,19 +13,21 @@ function App() {
       {/* <DummyContainer />
       <DumdumContainer/> */}
       <div className="container">
-      <OverviewContainer />
+        <OverviewContainer />
       </div>
       <div className="container">
-      <ReviewsListContainer />
+        <ReviewsListContainer />
       </div>
       <div className="container">
-      <QuestionListContainer />
+        <QuestionListContainer />
       </div>
-      <div className="container">
-      <ListContainer listName="Related" />
-      </div>
-      <div className="container">
-      <ListContainer listName="Outfit" />
+      <div class="box">
+        <div className="container">
+          <ListContainer listName="Related" />
+        </div>
+        <div className="container">
+          <ListContainer listName="Outfit" />
+        </div>
       </div>
     </div>
   );
