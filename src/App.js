@@ -1,4 +1,5 @@
 import React from "react";
+
 // import {DummyContainer, DumdumContainer} from "./containers/dummyContainer.js";
 import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
 import QuestionListContainer from "./containers/questions/questionListContainer";
@@ -16,7 +17,6 @@ function App() {
       <QuestionListContainer />
       <ListContainer listName="Related" />
       <ListContainer listName="Outfit" />
-
     </div>
   );
 }

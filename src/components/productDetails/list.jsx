@@ -1,5 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import {
+  fetchOutfits,
+  fetchOutfitsImages,
+  addToOutfit,
+  removeFromOutfit
+} from "./outfitHelpers.js";
 import Card from "./card.jsx";
+import AddToOutfitCard from "./addCard.jsx";
 
 const List = ({
   listName,
@@ -7,35 +14,57 @@ const List = ({
   products,
   productsImages,
   onClickDetails,
-  fetchRelatedDataAsync,
+  fetchRelatedDataAsync
   //avgRating,
-  addToOutfit, // FROM MAP DISPATCH TO STORE
-  removeFromOutfit // FROM MAP DISPATCH TO STORE
 }) => {
+  var [outfits, setOutfits] = useState([]);
+  var [outfitsImages, setOutfitsImages] = useState([]);
+
+  if (listName === "Outfit") {
+    products = outfits;
+    productsImages = outfitsImages;
+  }
   //HANDLE FETCHING DATA ON AFTER FIRST RENDER
   useEffect(() => {
-    fetchRelatedDataAsync(1);
+    if (listName === "Related") {
+      fetchRelatedDataAsync(4);
+    }
+  }, []); 
+
+  useEffect(() => {
+    if (listName === "Outfit") {
+      fetchOutfits(setOutfits);
+      fetchOutfitsImages(setOutfitsImages);
+    }
   }, []);
 
-  // handle button click functionality (Q: should I move this up one level?)
+  useEffect(() => {
+    if (listName === "Outfit") {
+      products = outfits;
+      productsImages = outfitsImages;
+    }
+  }, [outfits, outfitsImages]);
+
   function onClickButton(action, id) {
     if (action === "Add") {
-      console.log("Add button clicked");
-      console.log(
-        "Now a dispatch should be sent to update the outfit of a given user with this new product"
-      );
       addToOutfit(id);
+      fetchOutfits(setOutfits);
     }
     if (action === "Outfit") {
-      console.log("Button in Outfit Product List clicked");
-      console.log(
-        "Now a dispatch should be sent to update the outfit og a given user to remove this product clicked"
-      );
       removeFromOutfit(id);
+      fetchOutfits(setOutfits);
     }
   }
   return (
-    <div>
+    <div class="columns">
+      {listName === "Outfit" ? (
+        <AddToOutfitCard
+          pageProduct={pageProduct}
+          onClickButton={onClickButton}
+        />
+      ) : (
+        <div></div>
+      )}
       {products.map((product, idx) => {
         return (
           <Card

@@ -6,10 +6,7 @@ import { fetchRelatedImages } from "../../redux/actions/getRelatedImages.js";
 const mapStateToProps = (state, ownProps) => {
   return {
     pageProduct: state.product_details,
-    products:
-      ownProps.listName === "Related"
-        ? state.related
-        : [], // OUTFIT DATA GOES HERE
+    products: state.related,
     productsImages: state.relatedImages
     //Still need to map avgRating
   };
@@ -24,16 +21,6 @@ const mapDispatchToProps = dispatch => {
     onClickDetails: e => {
       console.log("new product ID to switch to: ", e.target.name);
       //dispatch(actionCreatorToRouteToNewItem);
-    },
-    addToOutfit: id => {
-      // still need to incorporate user ID into this action creator
-      console.log("ID of product to add to outfit list: ", id);
-      // dispatch(actionCreatorToAddNewItemToOutfit);
-    },
-    removeFromOutfit: id => {
-      // still need to incorporate user ID into this action creator
-      console.log("ID of product to be removed from outfit list: ", id);
-      // dispatch(actionCreatorToRemoveItemFromOutfit);
     }
   };
 };

@@ -1,18 +1,15 @@
 import React from "react";
 
-const AddToOutfitCard = ({
-  onClickButton
-}) => {
+const AddToOutfitCard = ({ onClickButton, pageProduct }) => {
   return (
-    <div onClick={onClickButton} class="Related-Product-Card">
-        <button value="Add" onClick={onClickButton}> 
-          <icon>{/* display "+" icon*/}</icon>
+    <div class="column">
+      <div class="card">
+        <button value="Add" onClick={e => onClickButton("Add", pageProduct.id)}>
+          <icon>{"+++ADD 2 OUTFIT+++"}</icon>
         </button>
+      </div>
     </div>
   );
 };
-
-//Information Needed (CARD STATE NEEDED)
-  // OnClickButton <- should take current product page id and add that to user's outfit list. This onClickButton function will conditionally execute based on value of button clicked. 
 
 export default AddToOutfitCard;
