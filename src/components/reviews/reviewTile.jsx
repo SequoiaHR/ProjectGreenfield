@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class ReviewTile extends React.Component {
       <div className="tile is-child box">
         <div>{review.rating}-star rating goes here</div>
         {this.state.verified ?
-          <div className="has-text-right is-size-6">{review.reviewer_name}, {review.date}</div>
+          <div className="has-text-right is-size-6">{review.reviewer_name}, {moment(review.date, moment.ISO_8601).format("MMMM Do YYYY")}</div>
           : <div className="has-text-right is-size-7">{review.reviewer_name}, {review.date}</div>}
         <div className="subtitle">{review.summary}</div>
         {this.state.expanded || review.body.length <= 250

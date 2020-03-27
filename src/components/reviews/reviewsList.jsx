@@ -60,24 +60,27 @@ class ReviewsList extends React.Component {
     var tiles = reviews.slice(0, this.state.reviewsShown); // select only num to be shown
 
     return(
-      <div className="tile is-ancestor">
-        <div className="tile is-parent is-4">
-          <ReviewBreakdown
-            metadata={this.props.metadata}
-            filters={this.state.filters}
-            toggleHandler={this.toggleFilterBound}
-            clearHandler={this.clearFiltersBound} />
-        </div>
-        <div className="tile is-parent is-vertical">
-          {tiles.map((review) => { // map out tiles (currently showing)
-            return <ReviewTile key={review.review_id} review={review} />;
-          })}
-          <div className="tile is-child">
-            {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-              ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
-              : reviews.length > 2 
-                ? <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>
-                : null}
+      <div>
+        <div>RATINGS & REVIEWS</div>
+        <div className="tile is-ancestor">
+          <div className="tile is-parent is-4">
+            <ReviewBreakdown
+              metadata={this.props.metadata}
+              filters={this.state.filters}
+              toggleHandler={this.toggleFilterBound}
+              clearHandler={this.clearFiltersBound} />
+          </div>
+          <div className="tile is-parent is-vertical">
+            {tiles.map((review) => { // map out tiles (currently showing)
+              return <ReviewTile key={review.review_id} review={review} />;
+            })}
+            <div className="tile is-child">
+              {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
+                ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
+                : reviews.length > 2 
+                  ? <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>
+                  : null}
+            </div>
           </div>
         </div>
       </div>
