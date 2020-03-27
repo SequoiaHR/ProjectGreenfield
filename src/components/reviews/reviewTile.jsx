@@ -7,8 +7,7 @@ class ReviewTile extends React.Component {
 
     this.state = {
       expanded: false,
-      verified: false,
-      modalOpen: false
+      verified: false
     };
     this.toggleExpandBound = this.toggleExpand.bind(this);
   }
@@ -29,8 +28,8 @@ class ReviewTile extends React.Component {
       <div className="tile is-child box">
         <div>{review.rating}-star rating goes here</div>
         {this.state.verified
-          ? <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM Do YYYY")}</div>
-          : <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM Do YYYY")}</div>}
+          ? <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>
+          : <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
         <div className="subtitle">{review.summary}</div>
         {this.state.expanded || review.body.length <= 250
           ? <div>{review.body}</div>

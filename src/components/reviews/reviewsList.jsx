@@ -1,6 +1,8 @@
 import React from "react";
 import ReviewBreakdown from "./reviewBreakdown.jsx";
 import ReviewTile from "./reviewTile.jsx";
+import Modal from "../Modal.jsx";
+import AddReviewForm from "./addReviewForm.jsx";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -8,11 +10,14 @@ class ReviewsList extends React.Component {
 
     this.state = {
       reviewsShown: 2,
-      filters: new Set()
+      filters: new Set(),
+      modalOpen: false
     };
     this.changeLoadBound = this.changeLoad.bind(this);
     this.toggleFilterBound = this.toggleFilter.bind(this);
     this.clearFiltersBound = this.clearFilters.bind(this);
+    this.openModalBound = this.openModal.bind(this);
+    this.exitModalBound = this.exitModal.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +53,18 @@ class ReviewsList extends React.Component {
     });
   }
 
+  openModal() {
+    this.setState({
+      modalOpen: true
+    })
+  }
+
+  exitModal() {
+    this.setState({
+      modalOpen: false
+    });
+  }
+
   render() {
     var reviews = [];
     if (this.state.filters.size > 0) { // add star-filtered reviews to tile list
@@ -78,10 +95,14 @@ class ReviewsList extends React.Component {
             })}
             <div className="tile is-child">
               {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-                ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
+                ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
                 : reviews.length > 2 
-                  ? <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>
+                  ? <button className="button" onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
                   : null}
+              <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
+              {this.state.modalOpen
+                ? <Modal title="Add a Review" onExitClick={this.exitModalBound}><AddReviewForm /></Modal>
+                : null}
             </div>
           </div>
         </div>
