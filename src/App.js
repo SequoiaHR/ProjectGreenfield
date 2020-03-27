@@ -8,15 +8,25 @@ import OverviewContainer from './containers/overview/overviewContainer';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Redux App</h1>
+    <div className="App" className="container">
+      <h1 className="title is-1">Sequoia Shop</h1>
       {/* <DummyContainer />
       <DumdumContainer/> */}
+      <div className="container">
       <OverviewContainer />
+      </div>
+      <div className="container">
       <ReviewsListContainer />
+      </div>
+      <div className="container">
       <QuestionListContainer />
+      </div>
+      <div className="container">
       <ListContainer listName="Related" />
+      </div>
+      <div className="container">
       <ListContainer listName="Outfit" />
+      </div>
     </div>
   );
 }
