@@ -4,7 +4,7 @@ import axios from "axios";
 
 export function fetchReviews(id) {
   return function(dispatch) {
-    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100`)
+    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=relevant`)
       .then(({data}) => {
         dispatch(setReviews(data.results));
       })

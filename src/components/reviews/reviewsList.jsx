@@ -17,7 +17,7 @@ class ReviewsList extends React.Component {
 
   componentDidMount() {
     // fetch reviews and metadata from API
-    this.props.getData(3); // HARD-CODED FOR NOW
+    this.props.getData(27); // HARD-CODED FOR NOW
   }
 
   changeLoad(direction) {
