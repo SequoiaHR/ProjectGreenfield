@@ -49,10 +49,12 @@ const List = ({
     if (action === "Add") {
       addToOutfit(id);
       fetchOutfits(setOutfits);
+      fetchOutfitsImages(setOutfitsImages);
     }
     if (action === "Outfit") {
       removeFromOutfit(id);
       fetchOutfits(setOutfits);
+      fetchOutfitsImages(setOutfitsImages);
     }
   }
   return (

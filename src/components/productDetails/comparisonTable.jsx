@@ -1,10 +1,6 @@
 import React from "react";
 
-const ComparisonModal = ({ setShowModal, product, pageProduct }) => {
-  var onExitClick = e => {
-    e.preventDefault();
-    setShowModal(false);
-  };
+const ComparisonTable = ({ product, pageProduct }) => {
 
   var getUniqueFeatures = (features, pageFeatures) => {
     let productFeatureNames = features.map(item => item.feature);
@@ -45,33 +41,22 @@ const ComparisonModal = ({ setShowModal, product, pageProduct }) => {
   };
 
   return (
-    <div>
-      <div className="modal-wrapper">
-        <div className="modal-header">
-          <button onClick={onExitClick}>
-            <i>X</i>
-          </button>
-        </div>
-        <div className="modal-table">
-          <table>
-            <thead>
-              <tr>
-                <th>{pageProduct.name}</th>
-                <th>Features</th>
-                <th>{product.name}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.values(comparison).map((feature, idx) => {
-                return renderTableData(feature, idx);
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>{pageProduct.name}</th>
+          <th>Features</th>
+          <th>{product.name}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Object.values(comparison).map((feature, idx) => {
+          return renderTableData(feature, idx);
+        })}
+      </tbody>
+    </table>
   );
 };
 
 //need to close modal as well.
-export default ComparisonModal;
+export default ComparisonTable;
