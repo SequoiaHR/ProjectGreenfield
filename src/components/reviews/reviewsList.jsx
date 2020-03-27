@@ -28,7 +28,8 @@ class ReviewsList extends React.Component {
     });
   }
 
-  toggleFilter(stars) {
+  toggleFilter(event) {
+    const stars = Number(event.target.dataset.stars);
     let current = new Set(this.state.filters);
     if (current.has(stars)) {
       current.delete(stars);
@@ -38,6 +39,7 @@ class ReviewsList extends React.Component {
     this.setState({
       filters: current
     });
+    
   }
 
   clearFilters() {
