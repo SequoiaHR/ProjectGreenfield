@@ -7,30 +7,24 @@ class ReviewsList extends React.Component {
     super(props);
 
     this.state = {
-      reviewsShown: 0,
-      showMoreButton: true,
+      reviewsShown: 2,
       filters: new Set()
     };
-    this.loadMoreBound = this.loadMore.bind(this);
+    this.changeLoadBound = this.changeLoad.bind(this);
     this.toggleFilterBound = this.toggleFilter.bind(this);
     this.clearFiltersBound = this.clearFilters.bind(this);
   }
 
   componentDidMount() {
-    // get metadata dispatch
-    // get reviews dispatch
-    // set state reviewsShown to min of 2 or length of reviews
-    // if length of reviews <= 2,
-      // set state showMoreButton to false
+    // fetch reviews and metadata from API
+    this.props.getData(3); // HARD-CODED FOR NOW
   }
 
-  loadMore() {
-    //  if state reviews shown + 2 is >= length of reviews prop,
-      // set state showMoreButton to false
-      // and state reviewsShown to length of prop
-    // else
+  changeLoad(direction) {
     this.setState({
-      reviewsShown: this.state.reviewsShown + 2
+      reviewsShown: direction === "more"
+      ? this.state.reviewsShown + 2
+      : 2
     });
   }
 
@@ -53,6 +47,18 @@ class ReviewsList extends React.Component {
   }
 
   render() {
+    var tiles = [];
+    if (this.state.filters.size > 0) { // add star-filtered reviews to tile list
+      for (const review of this.props.reviews) {
+        if (this.state.filters.has(review.rating)) {
+          tiles.push(review);
+        }
+      }
+    } else {
+      tiles = this.props.reviews; // if no filters, all reviews
+    }
+    tiles = tiles.slice(0, this.state.reviewsShown); // select only num to be shown
+
     return(
       <div>
         <ReviewBreakdown
@@ -60,32 +66,15 @@ class ReviewsList extends React.Component {
           filters={this.state.filters}
           toggleHandler={this.toggleFilterBound}
           clearHandler={this.clearFiltersBound} />
-        {/* if filters has any filters, apply them to list in props */}
-        {/* slice correct number of reviews and and map to list tile components */}
         <div>
-          Reviews List Placeholder: Showing {this.state.reviewsShown} reviews, one placeholder:
-          <ReviewTile review={{
-            "review_id": 5,
-            "rating": 3,
-            "summary": "I'm enjoying wearing these shades",
-            "recommend": 0,
-            "response": "",
-            "body": "Comfortable and practical.",
-            "date": "2019-04-14T00:00:00.000Z",
-            "reviewer_name": "shortandsweeet",
-            "helpfulness": 5,
-            "photos": [{
-                "id": 1,
-                "url": "urlplaceholder/review_5_photo_number_1.jpg"
-              },
-              {
-                "id": 2,
-                "url": "urlplaceholder/review_5_photo_number_2.jpg"
-              }
-            ]
-          }} />
-          {this.state.showMoreButton ? <div onClick={this.loadMoreBound}>More Reviews</div>
-          : null}
+          {tiles.map((review) => {
+            return <ReviewTile key={review.review_id} review={review} />
+          })}
+        </div>
+        <div>
+          {this.props.reviews.length > this.state.reviewsShown
+            ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
+            : <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>}
         </div>
       </div>
     );
