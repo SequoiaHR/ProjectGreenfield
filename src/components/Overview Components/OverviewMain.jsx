@@ -70,7 +70,6 @@ class overviewMain extends React.Component {
             features: API_details.data.features
           }
         });
-        console.log('internal state after attaching details', this.state);
       })
       .catch(err => {
         console.log(err);
@@ -94,7 +93,6 @@ class overviewMain extends React.Component {
             thumbnailImages: API_Styles.data.results[0].photos
           }
         });
-        console.log('internal state after attaching styles', this.state);
       })
       .catch(err => {
         console.log(err);

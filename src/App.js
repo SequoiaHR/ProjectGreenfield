@@ -1,10 +1,9 @@
 import React from "react";
 // import {DummyContainer, DumdumContainer} from "./containers/dummyContainer.js";
 import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
-import QuestionList from "./components/questions/questionsList";
+import QuestionListContainer from "./containers/questions/questionListContainer";
 import ListContainer from "./containers/productDetails/listContainer.js";
-import OverviewContainer from './containers/overviewContainer';
-
+import OverviewContainer from "./containers/overviewContainer";
 
 function App() {
   return (
@@ -14,9 +13,10 @@ function App() {
       <DumdumContainer/> */}
       <OverviewContainer />
       <ReviewsListContainer />
-      <QuestionList />
-      <ListContainer listName="Related"/>
-      <ListContainer listName='Outfit'/>
+      <QuestionListContainer />
+      <ListContainer listName="Related" />
+      <ListContainer listName="Outfit" />
+
     </div>
   );
 }
