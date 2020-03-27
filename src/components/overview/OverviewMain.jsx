@@ -134,11 +134,11 @@ class overviewMain extends React.Component {
   render() {
     return (
       <div>
-        <div class="level">
-          <p class="level-left">
+        <div class="columns">
+          <p class="column is-half">
             <ImagesViewer state={this.state} />
           </p>
-          <p class="level-right">
+          <p class="column is-half">
             <ProductRating state={this.state} />
             <BasicDetails state={this.state} />
             <StyleSelection
