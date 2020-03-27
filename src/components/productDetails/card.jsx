@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import ComparisonModal from "./comparisonModal.jsx";
+import Modal from "../Modal.jsx";
+import ComparisonTable from "./comparisonTable.jsx";
 
 const Card = ({
   listName,
@@ -18,18 +19,23 @@ const Card = ({
       <div class="card">
         <div>
           {showModal === true ? (
-            <ComparisonModal
-              product={product}
-              pageProduct={pageProduct}
-              setShowModal={setShowModal}
-            />
+            <div>
+              <Modal
+                onExitClick={() => {
+                  setShowModal(false);
+                }}
+                title="Comparing"
+              >
+                <ComparisonTable product={product} pageProduct={pageProduct} />
+              </Modal>
+            </div>
           ) : (
             <div></div>
           )}
         </div>
         <div class="card-image">
           <button
-            class="button"
+            class="button is-small"
             value={listName}
             onClick={e => {
               if (listName === "Related") {
@@ -40,9 +46,9 @@ const Card = ({
             }}
           >
             {listName === "Outfit" ? (
-              <i>{"DELETE FROM OUTFIT"}</i>
+              <i class="fas fa-times-circle"></i>
             ) : (
-              <i>{"OPEN MODAL"}</i>
+              <i class="fas fa-star"></i>
             )}
           </button>
           <figure class="image is-4by3">
@@ -61,8 +67,9 @@ const Card = ({
         <div class="card-content">
           <div class="media-content">
             <p class="title is-4">{product.category}</p>
-            <p class="subtitle is-6">{product.name}</p>
+            <p class="title is-5">{product.name}</p>
             <p class="subtitle is-6">{product.slogan}</p>
+            <p class="subtitle is-6">${product.default_price}</p>
             <div>{/* <StarRating avgRating={avgRating}/> component */}</div>
           </div>
           <div class="content"></div>
