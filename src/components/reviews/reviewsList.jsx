@@ -2,7 +2,7 @@ import React from "react";
 import ReviewBreakdown from "./reviewBreakdown.jsx";
 import ReviewTile from "./reviewTile.jsx";
 import Modal from "../Modal.jsx";
-import AddReviewForm from "./addReviewForm.jsx";
+import AddReviewFormContainer from "../../containers/reviews/addReviewFormContainer.js";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -101,7 +101,9 @@ class ReviewsList extends React.Component {
                   : null}
               <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
               {this.state.modalOpen
-                ? <Modal title="Add a Review" onExitClick={this.exitModalBound}><AddReviewForm /></Modal>
+                ? <Modal title="Add a Review" onExitClick={this.exitModalBound}>
+                  <AddReviewFormContainer characteristics={this.props.metadata.characteristics} />
+                  </Modal>
                 : null}
             </div>
           </div>
