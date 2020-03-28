@@ -21,7 +21,7 @@ function App() {
       <div className="container">
         <QuestionListContainer />
       </div>
-      <div class="box">
+      <div className="box">
         <div className="container">
           <ListContainer listName="Related" />
         </div>

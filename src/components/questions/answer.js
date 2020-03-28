@@ -16,7 +16,7 @@ render(){
       {this.props.photos.map( (photo, index)=>(<img
       style={{maxHeight: 100, maxWidth: 100}}
       src={photo}
-      alt="new"
+      alt={photo}
       />))}
 
     </div>
