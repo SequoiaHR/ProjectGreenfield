@@ -133,12 +133,12 @@ class overviewMain extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginBottom: '30px' }}>
         <div class="columns">
-          <p class="column is-half">
+          <span class="column is-half">
             <ImagesViewer state={this.state} />
-          </p>
-          <p class="column is-half">
+          </span>
+          <span class="column is-half">
             <ProductRating state={this.state} />
             <BasicDetails state={this.state} />
             <StyleSelection
@@ -146,7 +146,7 @@ class overviewMain extends React.Component {
               changeStyleOnClick={this.changeStyleOnClick}
             />
             <AddToBag state={this.state} />
-          </p>
+          </span>
         </div>
         <Description state={this.state} />
       </div>
