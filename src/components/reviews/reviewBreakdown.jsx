@@ -1,4 +1,6 @@
 import React from "react";
+import calculateRating from "../../calculateRating.js";
+
 import FeaturesBreakdown from "./featuresBreakdown.jsx";
 
 const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => {
@@ -12,7 +14,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
   return (
     <div className="tile is-child">
       <div className="title">
-        Overall rating goes here (from store?)
+        {calculateRating(metadata)}
       </div>
 
       {total
