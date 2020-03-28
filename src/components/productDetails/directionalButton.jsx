@@ -1,8 +1,9 @@
 import React from "react";
+import "./directionalButton.css";
 
 function DirectionalButton({ arrowDirection, icon, onArrowClick }) {
   return (
-    <div class="column is-narrow">
+    <div class="column is-narrow is-vertical-centered">
       <button onClick={() => {onArrowClick(arrowDirection)}} class="button is-small">
         <i class={icon}></i>
       </button>

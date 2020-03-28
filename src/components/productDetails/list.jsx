@@ -77,11 +77,17 @@ const List = ({
       addToOutfit(id);
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
+      // <- No update of shownIndices when you add one to the end ->
     }
     if (action === "Outfit") {
       removeFromOutfit(id);
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
+      // on delete - move all shown indices down one if first shown index doesn't equal zero.
+      if (shownIndices[0] !== 0) {
+        let newShownIndices = shownIndices.map(idx => idx - 1);
+        setShownIndices(newShownIndices);
+      }
     }
   }
   return (
@@ -119,7 +125,8 @@ const List = ({
           />
         );
       })}
-      {shownIndices[shownIndices.length - 1] !== products.length - 1 ? (
+      {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
+      products.length > shownIndices.length ? (
         <DirectionalButton
           arrowDirection={"right"}
           icon={"fas fa-arrow-right"}

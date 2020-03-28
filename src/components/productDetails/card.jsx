@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "../Modal.jsx";
 import ComparisonTable from "./comparisonTable.jsx";
+import "./card.css";
 
 const Card = ({
   listName,
