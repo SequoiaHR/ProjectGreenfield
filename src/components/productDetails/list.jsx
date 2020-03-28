@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   fetchOutfits,
   fetchOutfitsImages,
+  fetchOutfitsReviews,
   addToOutfit,
   removeFromOutfit
 } from "./outfitHelpers.js";
@@ -16,12 +17,13 @@ const List = ({
   products,
   productsImages,
   onClickDetails,
-  fetchRelatedDataAsync
-  //avgRating,
+  fetchRelatedDataAsync,
+  productsReviews
 }) => {
   // Set Local State For Outfits
   var [outfits, setOutfits] = useState([]);
   var [outfitsImages, setOutfitsImages] = useState([]);
+  var [outfitsReviews, setOutfitsReviews] = useState([]);
 
   // Set Local State For Conditionally Rendered Products
   let initialShownIndices = listName === "Outfit" ? [0, 1, 2] : [0, 1, 2, 3];
@@ -31,6 +33,7 @@ const List = ({
   if (listName === "Outfit") {
     products = outfits;
     productsImages = outfitsImages;
+    productsReviews = outfitsReviews;
   }
 
   //HANDLE FETCHING DATA ON AFTER FIRST RENDER
@@ -44,6 +47,7 @@ const List = ({
     if (listName === "Outfit") {
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
+      fetchOutfitsReviews(setOutfitsReviews);
     }
   }, []);
 
@@ -51,8 +55,9 @@ const List = ({
     if (listName === "Outfit") {
       products = outfits;
       productsImages = outfitsImages;
+      productsReviews = outfitsReviews;
     }
-  }, [outfits, outfitsImages]);
+  }, [outfits, outfitsImages, outfitsReviews]);
 
   function onArrowClick(direction) {
     if (direction === "left") {
@@ -77,12 +82,14 @@ const List = ({
       addToOutfit(id);
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
+      fetchOutfitsReviews(setOutfitsReviews);
       // <- No update of shownIndices when you add one to the end ->
     }
     if (action === "Outfit") {
       removeFromOutfit(id);
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
+      fetchOutfitsReviews(setOutfitsReviews);
       // on delete - move all shown indices down one if first shown index doesn't equal zero.
       if (shownIndices[0] !== 0) {
         let newShownIndices = shownIndices.map(idx => idx - 1);
@@ -121,7 +128,7 @@ const List = ({
             }
             onClickDetails={onClickDetails}
             onClickButton={onClickButton}
-            //avgRating={avgRating}
+            productReviews={filterForShownItems(productsReviews, shownIndices)[idx]}
           />
         );
       })}

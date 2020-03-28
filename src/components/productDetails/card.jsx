@@ -8,16 +8,16 @@ const Card = ({
   pageProduct,
   product,
   productImage,
+  productReviews,
   onClickDetails,
   onClickButton
-  // avgRating
 }) => {
   // local state needed to determine if modal will show
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div class="column is-2">
-      <div class="card">
+    <div className="column is-2">
+      <div className="card">
         <div>
           {showModal === true ? (
             <div>
@@ -34,9 +34,9 @@ const Card = ({
             <div></div>
           )}
         </div>
-        <div class="card-image">
+        <div className="card-image">
           <button
-            class="button is-small"
+            className="button is-small"
             value={listName}
             onClick={e => {
               if (listName === "Related") {
@@ -47,12 +47,12 @@ const Card = ({
             }}
           >
             {listName === "Outfit" ? (
-              <i class="fas fa-times-circle"></i>
+              <i className="fas fa-times-circle"></i>
             ) : (
-              <i class="fas fa-star"></i>
+              <i className="fas fa-star"></i>
             )}
           </button>
-          <figure class="image is-4by3">
+          <figure className="image is-4by3">
             <img
               name={product.id}
               onClick={onClickDetails}
@@ -65,15 +65,19 @@ const Card = ({
             />
           </figure>
         </div>
-        <div class="card-content">
-          <div class="media-content">
-            <p class="title is-4">{product.category}</p>
-            <p class="title is-5">{product.name}</p>
-            <p class="subtitle is-6">{product.slogan}</p>
-            <p class="subtitle is-6">${product.default_price}</p>
+        <div className="card-content">
+          <div className="media-content">
+            <p className="title is-4">{product.category}</p>
+            <p className="title is-5">{product.name}</p>
+            <p className="subtitle is-6">{product.slogan}</p>
+            <p className="subtitle is-6">${product.default_price}</p>
+            <p className="subtitle is-6">
+              1-Star Rating Count
+              {productReviews ? productReviews.ratings[1] : "None here yet"}
+            </p>
             <div>{/* <StarRating avgRating={avgRating}/> component */}</div>
           </div>
-          <div class="content"></div>
+          <div className="content"></div>
         </div>
       </div>
     </div>
