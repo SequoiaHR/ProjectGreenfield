@@ -23,10 +23,8 @@ function App() {
       </div>
 
       <div className="box">
-        <div className="container">
+        <div className="box">
 
-      <div className="box">
-        <div className="container">
           <div>
             <h1 class="title">Related Items</h1>
           </div>
