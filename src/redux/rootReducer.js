@@ -5,6 +5,7 @@ import reviewsReducer from "./reducers/reviewsReducer.js";
 import reviewsMetadataReducer from "./reducers/reviewMetadataReducer.js";
 import relatedProductReducer from "./reducers/relatedProductReducer.js";
 import relatedImagesReducer from "./reducers/relatedImagesReducer";
+import relatedReviewsReducer from "./reducers/relatedReviewsReducer";
 import productDetailsReducer from './reducers/overviewReducers/productDetailsReducer';
 import productStylesReducer from './reducers/overviewReducers/productStylesReducer';
 import questionListReducer from "./reducers/questionsReducers/questionListReducer";
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   dumdum: dumdumReducer,
   related: relatedProductReducer,
   relatedImages: relatedImagesReducer,
+  relatedReviews: relatedReviewsReducer,
   reviews: reviewsReducer,
   reviewsMetadata: reviewsMetadataReducer,
   product_details: productDetailsReducer,
