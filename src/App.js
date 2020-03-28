@@ -21,11 +21,20 @@ function App() {
       <div className="container">
         <QuestionListContainer />
       </div>
-      <div class="box">
-        <div className="container">
+
+      <div className="box">
+        <div className="box">
+
+          <div>
+            <h1 class="title">Related Items</h1>
+          </div>
+
           <ListContainer listName="Related" />
         </div>
-        <div className="container">
+        <div className="box">
+          <div>
+            <h1 class="title">Your Outfit</h1>
+          </div>
           <ListContainer listName="Outfit" />
         </div>
       </div>

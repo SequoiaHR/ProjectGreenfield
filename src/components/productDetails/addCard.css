@@ -1,0 +1,11 @@
+.is-vertical-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addCardButton {
+    padding: 0;
+    border: none;
+    background: none;
+}

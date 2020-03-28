@@ -1,6 +1,9 @@
 import axios from "axios";
 import { GET_QUESTIONS } from "../actionTypes.js";
 
+
+//REQUESTING QUESTION DATA FROM API AND DISPATCHING DATA AS AN ACTION CREATOR
+
 export function getProductQuestions(id) {
   return function(dispatch) {
     return axios

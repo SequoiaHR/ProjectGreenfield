@@ -32,4 +32,6 @@ let formatDate = function(date){
   return `${month} ${day}, ${year}`
 }
 
+formatDate(new Date());
+
 export default formatDate;

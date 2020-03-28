@@ -24,30 +24,45 @@ let orderNumbers = [
   20
 ];
 
+const containerStyle = {
+  marginTop: '20px',
+  marginBottom: '20px'
+};
+
 const AddToBag = function() {
   return (
-    <div>
-      <div>
-        <div class="select is-medium">
-          <select>
-            <option>choose size</option>
-            {sizeTypes.map(eachSize => {
-              return <option value={eachSize}>{eachSize}</option>;
-            })}
-          </select>
+    <div style={containerStyle}>
+      <div class="columns">
+        <div class="column">
+          <div class="select is-medium is-fullwidth">
+            <select>
+              <option>SELECT SIZE</option>
+              {sizeTypes.map(eachSize => {
+                return <option value={eachSize}>{eachSize}</option>;
+              })}
+            </select>
+          </div>
         </div>
-        <div class="select is-medium">
-          <select class="column is-one-third">
-            <option>number</option>
-            {orderNumbers.map(number => {
-              return <option value={number}>{number}</option>;
-            })}
-          </select>
+        <div class="column ">
+          <div class="select is-medium " style={{ width: '50%' }}>
+            <select>
+              <option>NUM</option>
+              {orderNumbers.map(number => {
+                return <option value={number}>{number}</option>;
+              })}
+            </select>
+          </div>
         </div>
       </div>
-      <div>
-        <button class="button is-medium">Add to cart</button>
-        <button class="button is-medium">fav</button>
+      <div class="columns">
+        <div class="column ">
+          <button class="button is-medium" style={{ width: '255px' }}>
+            ADD TO CART
+          </button>
+        </div>
+        <div class="column">
+          <button class="button is-medium">FAV</button>
+        </div>
       </div>
     </div>
   );
