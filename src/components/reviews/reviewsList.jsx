@@ -1,6 +1,8 @@
 import React from "react";
 import ReviewBreakdown from "./reviewBreakdown.jsx";
 import ReviewTile from "./reviewTile.jsx";
+import Modal from "../Modal.jsx";
+import AddReviewFormContainer from "../../containers/reviews/addReviewFormContainer.js";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -8,16 +10,19 @@ class ReviewsList extends React.Component {
 
     this.state = {
       reviewsShown: 2,
-      filters: new Set()
+      filters: new Set(),
+      modalOpen: false
     };
     this.changeLoadBound = this.changeLoad.bind(this);
     this.toggleFilterBound = this.toggleFilter.bind(this);
     this.clearFiltersBound = this.clearFilters.bind(this);
+    this.openModalBound = this.openModal.bind(this);
+    this.exitModalBound = this.exitModal.bind(this);
   }
 
   componentDidMount() {
     // fetch reviews and metadata from API
-    this.props.getData(3); // HARD-CODED FOR NOW
+    this.props.getData(27); // HARD-CODED FOR NOW
   }
 
   changeLoad(direction) {
@@ -28,7 +33,8 @@ class ReviewsList extends React.Component {
     });
   }
 
-  toggleFilter(stars) {
+  toggleFilter(event) {
+    const stars = Number(event.target.dataset.stars);
     let current = new Set(this.state.filters);
     if (current.has(stars)) {
       current.delete(stars);
@@ -38,11 +44,24 @@ class ReviewsList extends React.Component {
     this.setState({
       filters: current
     });
+    
   }
 
   clearFilters() {
     this.setState({
       filters: new Set()
+    });
+  }
+
+  openModal() {
+    this.setState({
+      modalOpen: true
+    })
+  }
+
+  exitModal() {
+    this.setState({
+      modalOpen: false
     });
   }
 
@@ -76,10 +95,16 @@ class ReviewsList extends React.Component {
             })}
             <div className="tile is-child">
               {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-                ? <div onClick={() => this.changeLoadBound("more")}>More Reviews</div>
+                ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
                 : reviews.length > 2 
-                  ? <div onClick={() => this.changeLoadBound("fewer")}>Collapse Reviews</div>
+                  ? <button className="button" onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
                   : null}
+              <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
+              {this.state.modalOpen
+                ? <Modal title="Add a Review" onExitClick={this.exitModalBound}>
+                  <AddReviewFormContainer characteristics={this.props.metadata.characteristics} />
+                  </Modal>
+                : null}
             </div>
           </div>
         </div>

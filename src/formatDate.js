@@ -5,7 +5,7 @@ let formatDate = function(date){
   let year = date.getFullYear();
 
   if (month===1){
-    month = "Janurary"
+    month = "January"
   } else if (month===2){
     month = "February"
   } else if (month===3){
