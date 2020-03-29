@@ -16,14 +16,14 @@ class CharacteristicsRadio extends React.Component {
 
 
   render() {
-    let { characteristic } = this.props;
+    let { characteristic, handler } = this.props;
     return (
       <div className="char-radio-row">
         <div>{characteristic}*</div>
         <div className="level">
           {[5, 4, 3, 2, 1].map((num) => {
             return (
-              <div className="level-item has-text-centered">
+              <div key={num} className="level-item has-text-centered">
                 <div className="heading">{MEANINGS[characteristic][num]}</div>
               </div>
             );
@@ -32,8 +32,8 @@ class CharacteristicsRadio extends React.Component {
         <div className="level">
           {[5, 4, 3, 2, 1].map((num) => {
             return (
-              <div className="level-item has-text-centered">
-                <input className="char-radio" type="radio" name={characteristic} value={num} />
+              <div key={num} className="level-item has-text-centered">
+                <input className="char-radio" type="radio" name={characteristic} value={num} onChange={handler} />
               </div>
             );
           })}

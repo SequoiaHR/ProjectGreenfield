@@ -7,14 +7,14 @@ const FeaturesBreakdown = ({ metadata }) => {
     metadata.characteristics
       ? Object.keys(metadata.characteristics).map((characteristic) => {
           return (
-            <div className="slider-section">
+            <div key={characteristic} className="slider-section">
               <div className="is-size-6">{characteristic}</div>
               <input 
                 type="range"
                 min="1" 
                 max="5" 
                 value={metadata.characteristics[characteristic].value} 
-                disabled="true" 
+                disabled={true} 
                 step=".5" 
                 style={{width:"100%"}} />
               <div className="level">

@@ -6,12 +6,13 @@ class AddReviewForm extends React.Component {
     super(props);
 
     this.state = {
-      recommend: false,
+      recommend: null,
       characteristics: {},
       summary: "",
       body: ""
     };
     this.onChangeBound = this.onChange.bind(this);
+    this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
   }
 
   onChange(event) {
@@ -19,6 +20,14 @@ class AddReviewForm extends React.Component {
     const value = event.target.value;
     this.setState({
       [name]: value
+    });
+  }
+
+  changeCharacteristic(event) {
+    const characteristic = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      characteristics: {...this.state.characteristics, [characteristic]: value}
     });
   }
 
@@ -35,20 +44,20 @@ class AddReviewForm extends React.Component {
           <label>
           <div className="add-input">Do you recommend this product?*</div>
             <div>
-              <input type="radio" name="recommend" value="true" /> Yes
-              <input type="radio" name="recommend" value="false" /> No
+              <input type="radio" name="recommend" value={true} onChange={this.onChangeBound} /> Yes
+              <input type="radio" name="recommend" value={false} onChange={this.onChangeBound} /> No
             </div>
           </label>
           <br />
           <div>
             {Object.keys(this.props.characteristics).map((charName) => {
-              return <CharacteristicsRadio characteristic={charName} />;
+              return <CharacteristicsRadio key={charName} characteristic={charName} handler={this.changeCharacteristicBound} />;
             })}
           </div>
           <label>
           <div className="add-input">Summary:</div>
             <br />
-            <input className="input" type="text" name="summary" maxlength="60" required="true" />
+            <input className="input" type="text" name="summary" maxLength="60" required={true} onChange={this.onChangeBound} />
           </label>
           <label>
           <div className="add-input">Your review:</div>
@@ -56,9 +65,9 @@ class AddReviewForm extends React.Component {
             <textarea 
               className="textarea"  
               name="body"
-              maxlength="1000"
-              minlength="50"
-              required="true"
+              maxLength="1000"
+              minLength="50"
+              required={true}
               rows="5"
               placeholder="Why did you like or not like the product?"
               value={this.state.body}
