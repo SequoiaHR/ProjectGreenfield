@@ -3,6 +3,7 @@ import ReviewBreakdown from "./reviewBreakdown.jsx";
 import ReviewTile from "./reviewTile.jsx";
 import Modal from "../Modal.jsx";
 import AddReviewFormContainer from "../../containers/reviews/addReviewFormContainer.js";
+import "./reviews.css";
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class ReviewsList extends React.Component {
 
   componentDidMount() {
     // fetch reviews and metadata from API
-    this.props.getData(27); // HARD-CODED FOR NOW
+    this.props.getData(3); // HARD-CODED FOR NOW
   }
 
   changeLoad(direction) {
@@ -80,31 +81,33 @@ class ReviewsList extends React.Component {
 
     return(
       <div>
-        <div>RATINGS & REVIEWS</div>
-        <div className="tile is-ancestor">
-          <div className="tile is-parent is-4">
-            <ReviewBreakdown
-              metadata={this.props.metadata}
-              filters={this.state.filters}
-              toggleHandler={this.toggleFilterBound}
-              clearHandler={this.clearFiltersBound} />
-          </div>
-          <div className="tile is-parent is-vertical">
-            {tiles.map((review) => { // map out tiles (currently showing)
-              return <ReviewTile key={review.review_id} review={review} />;
-            })}
-            <div className="tile is-child">
-              {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-                ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
-                : reviews.length > 2 
-                  ? <button className="button" onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
+        <div className="title">RATINGS & REVIEWS</div>
+        <div id="reviews-section">
+          <div className="tile is-ancestor">
+            <div className="tile is-parent is-4">
+              <ReviewBreakdown
+                metadata={this.props.metadata}
+                filters={this.state.filters}
+                toggleHandler={this.toggleFilterBound}
+                clearHandler={this.clearFiltersBound} />
+            </div>
+            <div className="tile is-parent is-vertical">
+              {tiles.map((review) => { // map out tiles (currently showing)
+                return <ReviewTile key={review.review_id} review={review} />;
+              })}
+              <div className="tile is-child">
+                {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
+                  ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
+                  : reviews.length > 2 
+                    ? <button className="button" onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
+                    : null}
+                <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
+                {this.state.modalOpen
+                  ? <Modal title="Add a Review" onExitClick={this.exitModalBound}>
+                    <AddReviewFormContainer characteristics={this.props.metadata.characteristics} />
+                    </Modal>
                   : null}
-              <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
-              {this.state.modalOpen
-                ? <Modal title="Add a Review" onExitClick={this.exitModalBound}>
-                  <AddReviewFormContainer characteristics={this.props.metadata.characteristics} />
-                  </Modal>
-                : null}
+              </div>
             </div>
           </div>
         </div>
