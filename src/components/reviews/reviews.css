@@ -10,3 +10,17 @@
 .slider-section {
   padding-top: 10px;
 }
+
+.char-radio-row {
+  margin-top: 10px;
+}
+
+.char-radio {
+  margin-top: -20px;
+}
+
+.add-input {
+  padding-top: 20px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}

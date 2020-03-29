@@ -6,12 +6,21 @@ class AddReviewForm extends React.Component {
     super(props);
 
     this.state = {
-
+      recommend: false,
+      characteristics: {},
+      summary: "",
+      body: ""
     };
-
+    this.onChangeBound = this.onChange.bind(this);
   }
 
-
+  onChange(event) {
+    const name = event.target.name;
+    const value = event.target.value;
+    this.setState({
+      [name]: value
+    });
+  }
 
   render() {
     return (
@@ -19,12 +28,12 @@ class AddReviewForm extends React.Component {
         <div className="subtitle">{`About the ${this.props.name}`}</div>
         <form>
           <label>
-            Overall rating*
+            <div className="add-input">Overall rating*</div>
             [rating selector goes here]
           </label>
           <br />
           <label>
-            Do you recommend this product?*
+          <div className="add-input">Do you recommend this product?*</div>
             <div>
               <input type="radio" name="recommend" value="true" /> Yes
               <input type="radio" name="recommend" value="false" /> No
@@ -36,6 +45,28 @@ class AddReviewForm extends React.Component {
               return <CharacteristicsRadio characteristic={charName} />;
             })}
           </div>
+          <label>
+          <div className="add-input">Summary:</div>
+            <br />
+            <input className="input" type="text" name="summary" maxlength="60" required="true" />
+          </label>
+          <label>
+          <div className="add-input">Your review:</div>
+            <br />
+            <textarea 
+              className="textarea"  
+              name="body"
+              maxlength="1000"
+              minlength="50"
+              required="true"
+              rows="5"
+              placeholder="Why did you like or not like the product?"
+              value={this.state.body}
+              onChange={this.onChangeBound} />
+              {this.state.body.length < 50 
+              ? `Please enter ${50 - this.state.body.length} more characters.`
+              : "Minimum reached!"}
+          </label>
         </form>
       </div>
     );
