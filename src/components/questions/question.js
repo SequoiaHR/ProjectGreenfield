@@ -11,8 +11,8 @@ class Question extends React.Component{
   render(){
     return (<div className="container">
       <div className="container">
-        <div className="title is-5">{`Q: ${this.props.question_body}`}</div>
-        <div>Helpful?({this.props.question_helpfulness}){" | "}Add Answer</div>
+        <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
+        <div className="is-pulled-right is-inline-block">Helpful?({this.props.question_helpfulness}){" | "}Add Answer</div>
         <br/>
       </div>
       {/* <div>

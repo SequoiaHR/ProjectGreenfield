@@ -7,12 +7,24 @@ constructor(props){
   this.state = {};
 }
 
+
 render(){
+  //BOLDEN IF SELLER IS ANSWERER
+  let name = "";
+  this.props.answerer_name === "Seller" ? name = <b>{this.props.answerer_name}</b> :
+                                          name = this.props.answerer_name
+  //CREATE INDIVIDUAL ANSWER TILE
   return (
     <div className="tile is-child box">
       <div className="title is-5">{`A: ${this.props.body}`}</div>
-      <div>{`by ${this.props.answerer_name}, ${formatDate(this.props.date)}`}</div>
-      <div>| Helpfulness:{" "}{this.props.helpfulness}</div>
+      <div className="is-inline-block">
+
+        by {name}{ `,
+            ${formatDate(this.props.date)} | Helpful?:
+            ${this.props.helpfulness}`
+        }
+  {/* MAP ANY EXISTING PHOTOS TO ANSWER */}
+      </div>
       {this.props.photos.map( (photo, index)=>(<img
       style={{maxHeight: 100, maxWidth: 100}}
       src={photo}
