@@ -1,0 +1,33 @@
+
+#reviews-section {
+  max-height: 80vh;
+  max-width: 90vw;
+  padding: 0 20px 20px 20px;
+  overflow: auto;
+  margin-bottom: 30px;
+}
+
+.slider-section {
+  padding-top: 10px;
+}
+
+.char-radio-row {
+  margin-top: 10px;
+}
+
+.char-radio {
+  margin-top: -20px;
+}
+
+.add-input {
+  margin-top: 20px;
+}
+
+.filter-option:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
+.actionable:hover {
+  cursor: pointer;
+}

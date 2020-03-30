@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ReviewsList from "../../components/reviews/reviewsList.jsx";
-import { fetchReviews, fetchMetadata } from "../../redux/actions/reviewsActionCreators.js";
+import { fetchReviews, fetchMetadata, changeSort } from "../../redux/actions/reviewsActionCreators.js";
 
 const mapStateToProps = (state) => {
   return {
@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
     getData: (id) => {
       dispatch(fetchReviews(id));
       dispatch(fetchMetadata(id));
+    },
+    sortReviews: (id, sort) => {
+      dispatch(changeSort(id, sort));
     }
   }
 };
