@@ -22,3 +22,8 @@
 .add-input {
   margin-top: 20px;
 }
+
+.filter-option:hover {
+  cursor: pointer;
+  background-color: yellow;
+}

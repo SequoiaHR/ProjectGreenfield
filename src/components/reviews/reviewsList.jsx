@@ -40,8 +40,10 @@ class ReviewsList extends React.Component {
     let current = new Set(this.state.filters);
     if (current.has(stars)) {
       current.delete(stars);
+      event.target.setAttribute("style", "font-weight:normal");
     } else {
       current.add(stars);
+      event.target.setAttribute("style", "font-weight:bold");
     }
     this.setState({
       filters: current
@@ -52,6 +54,10 @@ class ReviewsList extends React.Component {
   clearFilters() {
     this.setState({
       filters: new Set()
+    });
+    const filters = Array.from(document.getElementsByClassName("filter-option"));
+    filters.forEach((el) => {
+      el.setAttribute("style", "font-weight:normal");
     });
   }
 
