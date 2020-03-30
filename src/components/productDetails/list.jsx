@@ -104,7 +104,7 @@ const List = ({
         {shownIndices[0] !== 0 ? (
           <DirectionalButton
             arrowDirection={"left"}
-            icon={"fas fa-arrow-left"}
+            icon={"fas fa-chevron-left"}
             onArrowClick={onArrowClick}
           />
         ) : null}
@@ -144,7 +144,7 @@ const List = ({
         products.length > shownIndices.length ? (
           <DirectionalButton
             arrowDirection={"right"}
-            icon={"fas fa-arrow-right"}
+            icon={"fas fa-chevron-right"}
             onArrowClick={onArrowClick}
           />
         ) : null}
