@@ -7,7 +7,7 @@ import { GET_QUESTIONS } from "../actionTypes.js";
 export function getProductQuestions(id) {
   return function(dispatch) {
     return axios
-      .get(`http://3.134.102.30/qa/${id}`)
+      .get(`http://3.134.102.30/qa/${id}?count=100`)
       .then(data => {
         console.log("*** Sucessfully Get-ted Question Data From Server");
         // console.log(data);

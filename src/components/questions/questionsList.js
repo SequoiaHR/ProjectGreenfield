@@ -1,6 +1,8 @@
 import React from "react";
 import Question from "./question";
 import formatDate from "../../formatDate"
+import Modal from "../Modal.jsx"
+import AddQuestion from "./addQuestion.js"
 import "./questions.css"
 
 class QuestionList extends React.Component{
@@ -8,15 +10,21 @@ constructor(props){
   super(props);
   this.state = {
     questions: null,
+    showModal: false,
     display: 4
   };
   this.determineDisplayed = this.determineDisplayed.bind(this);
   this.seeMoreQuestionsClick = this.seeMoreQuestionsClick.bind(this);
+  this.addQuestionClick = this.addQuestionClick.bind(this);
 }
 
   //FETCHING INITIAL QUESTION DATA FROM STORE
   componentDidMount(){
     this.props.getProductQuestions(this.props.paramsId);
+  }
+
+  addQuestionClick(){
+    this.setState({showModal:!this.state.showModal});
   }
 
   //DETERMINES THE NUMBER OF QUESTIONS RENDERED
@@ -59,6 +67,7 @@ constructor(props){
         }) : <div>{" "}</div>)
         }
         </div><div>
+        <button className="button is-large" onClick={this.addQuestionClick}>Ask A New Question</button>
         {
         //IF DISPLAYED QUESTIONS IS LESS THAN TOTAL QUESTIONS THEN DISPLAY 'SHOW MORE' BUTTON
         (this.determineDisplayed(this.props.store.questions).length <
@@ -71,6 +80,15 @@ constructor(props){
         <div></div>
         }
       </div>
+      {this.state.showModal ?
+      <Modal title="Ask Your Question"
+             children={
+                       <AddQuestion getProductQuestions={this.props.getProductQuestions}
+                                    paramsId={this.props.paramsId}
+                                    exitClick={this.addQuestionClick}
+                       />}
+             onExitClick={this.addQuestionClick}/> :
+             <div></div>}
     </React.Fragment>
     );
   }
