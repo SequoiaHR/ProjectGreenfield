@@ -25,6 +25,16 @@ class AddReviewForm extends React.Component {
     this.validateBound = this.validate.bind(this);
   }
 
+  componentDidMount() {
+    let nullCharacteristics = {};
+    Object.keys(this.props.characteristics).forEach((char) => {
+      nullCharacteristics[this.props.characteristics[char].id] = null;
+    });
+    this.setState({
+      characteristics: nullCharacteristics
+    });
+  }
+
   onChange(event) {
     const name = event.target.name;
     const value = event.target.value;
@@ -159,6 +169,11 @@ class AddReviewForm extends React.Component {
           <br />
           <button className="button add-input" type="submit" onClick={this.validateBound}>Submit</button>
         </form>
+        <div id="errors">
+          {this.state.errors.map((err) => {
+            return <div>{err}</div>;
+          })}
+        </div>
       </div>
     );
   }
