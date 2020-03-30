@@ -9,10 +9,15 @@ class AddReviewForm extends React.Component {
       recommend: null,
       characteristics: {},
       summary: "",
-      body: ""
+      body: "",
+      photos: [],
+      nickname: "",
+      email: "",
+      valid: true
     };
     this.onChangeBound = this.onChange.bind(this);
     this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
+    this.submitBound = this.submit.bind(this);
   }
 
   onChange(event) {
@@ -29,6 +34,10 @@ class AddReviewForm extends React.Component {
     this.setState({
       characteristics: {...this.state.characteristics, [characteristic]: value}
     });
+  }
+
+  submit(event) {
+    event.preventDefault();
   }
 
   render() {
@@ -55,12 +64,19 @@ class AddReviewForm extends React.Component {
             })}
           </div>
           <label>
-          <div className="add-input">Summary:</div>
+          <div className="add-input">Summary:*</div>
             <br />
-            <input className="input" type="text" name="summary" maxLength="60" required={true} onChange={this.onChangeBound} />
+            <input
+              className="input" 
+              type="text" 
+              name="summary" 
+              value={this.state.summary} 
+              maxLength="60" 
+              required={true} 
+              onChange={this.onChangeBound} />
           </label>
           <label>
-          <div className="add-input">Your review:</div>
+          <div className="add-input">Your review:*</div>
             <br />
             <textarea 
               className="textarea"  
@@ -76,6 +92,40 @@ class AddReviewForm extends React.Component {
               ? `Please enter ${50 - this.state.body.length} more characters.`
               : "Minimum reached!"}
           </label>
+          <br />
+          <label>
+            What is your nickname?
+            <input 
+              className="input" 
+              type="text" 
+              name="nickname" 
+              value={this.state.nickname} 
+              maxLength="60" 
+              placeholder="Example: jackson11!"
+              required={true} 
+              onChange={this.onChangeBound} /> 
+              <br />
+            For privacy reasons, do not use your full name or email address
+          </label>
+          <br />
+          <label>
+            What is your email?
+            <input 
+              className="input" 
+              type="email" 
+              name="email" 
+              value={this.state.email} 
+              maxLength="60" 
+              placeholder="Example: jackson11@email.com"
+              required={true} 
+              onChange={this.onChangeBound} />
+              <br />
+              For authentication reasons, you will not be emailed
+          </label>
+          <br />
+          <button className="button add-input" type="button">Add your photos (max 5):</button>
+          <br />
+          <button className="button add-input" type="submit" onClick={this.submitBound}>Submit</button>
         </form>
       </div>
     );
