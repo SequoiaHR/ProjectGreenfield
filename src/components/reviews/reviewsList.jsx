@@ -112,7 +112,7 @@ class ReviewsList extends React.Component {
                 </select>
               </div>
               {tiles.map((review) => { // map out tiles (currently showing)
-                return <ReviewTile key={review.review_id} review={review} />;
+                return <ReviewTile key={review.review_id} review={review} id={this.props.id} />;
               })}
               <div className="tile is-child">
                 {reviews.length > this.state.reviewsShown // conditionally render show more or collapse

@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import axios from "axios";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -7,13 +8,43 @@ class ReviewTile extends React.Component {
 
     this.state = {
       expanded: false,
+      markedHelpful: false,
+      numHelpful: 0,
+      reported: false,
       verified: false
     };
     this.toggleExpandBound = this.toggleExpand.bind(this);
+    this.handleHelpfulBound = this.handleHelpful.bind(this);
+    this.handleReportBound = this.handleReport.bind(this);
   }
 
   componentDidMount() {
     // logic to check for verified user
+
+    let storage = window.localStorage;
+
+    let helpful = JSON.parse(storage.getItem("helpful"));
+    if (helpful) {
+      if (helpful.indexOf(this.props.review.review_id) >= 0) {
+        this.setState({
+          markedHelpful: true
+        });
+      }
+    }
+
+    let reported = JSON.parse(storage.getItem("reported"));
+    if (reported) {
+      if (reported.indexOf(this.props.review.review_id) >= 0) {
+        this.setState({
+          reported: true
+        });
+      }
+    }
+
+    this.setState({
+      numHelpful: this.props.review.helpfulness
+    });
+
   }
 
   toggleExpand() {
@@ -22,13 +53,45 @@ class ReviewTile extends React.Component {
     });
   }
 
+  handleHelpful() {
+    let arr = JSON.parse(window.localStorage.getItem("helpful"));
+    if (!arr || arr.indexOf(this.props.review.review_id) === -1) {
+      if (!arr) {
+        arr = [this.props.review.review_id];
+      } else if (arr.indexOf(this.props.review.review_id) === -1) {
+        arr.push(this.props.review.review_id);
+      }
+      window.localStorage.setItem("helpful", JSON.stringify(arr));
+      this.setState({
+        markedHelpful: true,
+        numHelpful: this.state.numHelpful + 1
+      });
+      axios()
+    }
+  }
+
+  handleReport() {
+    let arr = JSON.parse(window.localStorage.getItem("reported"));
+    if (arr) {
+      arr.push(this.props.review.review_id);
+    } else {
+      arr = [this.props.review.review_id];
+    }
+    window.localStorage.setItem("reported", JSON.stringify(arr));
+    this.setState({
+      reported: true
+    });
+    axios()
+  }
+
   render() {
     let { review } = this.props;
     return (
       <div className="tile is-child box">
         <div>{review.rating}-star rating goes here</div>
         {this.state.verified
-          ? <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>
+          ? <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
+            <br />&#10004; Verified user</div>
           : <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
         <div className="subtitle">{review.summary}</div>
         {this.state.expanded || review.body.length <= 250
@@ -44,9 +107,13 @@ class ReviewTile extends React.Component {
           ? <div>&#10004; I recommend this product</div>
           : null}
         {review.response !== undefined && review.response !== "null"
-          ? <div>Seller response:<br />{review.response}</div>
+          ? <div><strong>Seller response:</strong><br />{review.response}</div>
           : null}
-        <div className="is-size-7">Helpful? Yes({review.helpfulness}) | Report</div>
+        <div className="is-size-7">
+          Helpful? <span className="actionable" onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
+            ? <span>Reported</span>
+            : <span className="actionable" onClick={this.handleReportBound}>Report</span>}
+        </div>
       </div>
     );
   }

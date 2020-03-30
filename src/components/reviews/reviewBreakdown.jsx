@@ -40,7 +40,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
         </div>
         : null}
       {filters.size > 0
-        ? <div className="filter-option is-size-7" onClick={clearHandler}>Remove all filters</div>
+        ? <div className="actionable is-size-7" onClick={clearHandler}>Remove all filters</div>
         : null}
       <FeaturesBreakdown metadata={metadata} />
     </div>
