@@ -24,7 +24,7 @@ class ReviewsList extends React.Component {
 
   componentDidMount() {
     // fetch reviews and metadata from API
-    this.props.getData(3); // HARD-CODED FOR NOW
+    this.props.getData(this.props.id);
   }
 
   changeLoad(direction) {
@@ -123,7 +123,7 @@ class ReviewsList extends React.Component {
                 <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
                 {this.state.modalOpen
                   ? <Modal title="Write Your Review" onExitClick={this.exitModalBound}>
-                    <AddReviewFormContainer characteristics={this.props.metadata.characteristics} />
+                    <AddReviewFormContainer characteristics={this.props.metadata.characteristics} id={this.props.id} />
                     </Modal>
                   : null}
               </div>

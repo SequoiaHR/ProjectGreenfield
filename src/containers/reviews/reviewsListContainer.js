@@ -4,7 +4,6 @@ import { fetchReviews, fetchMetadata, changeSort } from "../../redux/actions/rev
 
 const mapStateToProps = (state) => {
   return {
-    id: state.product_details.id,
     reviews: state.reviews,
     metadata: state.reviewsMetadata
   }

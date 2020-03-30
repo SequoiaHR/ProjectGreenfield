@@ -3,6 +3,7 @@ import calculateRating from "../../calculateRating.js";
 import "./reviews.css";
 
 import FeaturesBreakdown from "./featuresBreakdown.jsx";
+import StarRating from "../starRating.jsx";
 
 const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => {
   var total = 0;
@@ -12,10 +13,17 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
   var percent = Math.round((metadata.recommended[1] / total) * 100);
   }
 
+  const overallRating = calculateRating(metadata);
+
   return (
     <div className="tile is-child">
-      <div className="title">
-        {calculateRating(metadata)}
+      <div className="level">
+        <div className="level-left">
+          <div className="level-item is-size-1">{overallRating}</div>
+        </div>
+        <div className="level-right">
+          <div className="level-item"><StarRating rating={overallRating} width="25" height="25" /></div>
+        </div>
       </div>
 
       {total
@@ -31,7 +39,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
                 : <span className="filter-option is-size-7" data-stars={num} onClick={toggleHandler}>{num} stars</span>}
               <progress // progress bar
                 className="progress is-small is-success"
-                value={metadata.ratings[num]}
+                value={metadata.ratings[num] || 0}
                 max={total}>{metadata.ratings[num]}
               </progress>
             </div>
