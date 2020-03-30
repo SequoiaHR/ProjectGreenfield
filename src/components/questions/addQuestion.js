@@ -1,15 +1,14 @@
 import React from "react";
 import axios from "axios";
 
-class AddAnswer extends React.Component {
+class AddQuestion extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      qID : this.props.qID,
-      answer:"",
+      question:"",
       nickname:"",
       email:"",
-      requiredAnswer: false,
+      requiredQuestion: false,
       requiredNickname: false,
       requiredEmail: false,
       validEmail: false
@@ -32,8 +31,8 @@ class AddAnswer extends React.Component {
 
   submitAnswer(event){
     // event.preventDefault()
-    if (this.state.answer.length === 0) {
-      this.setState({requiredAnswer : true});
+    if (this.state.question.length === 0) {
+      this.setState({requiredQuestion : true});
     } else if (this.state.nickname.length === 0) {
       this.setState({requiredNickname : true});
     } else if (this.state.email.length === 0) {
@@ -43,9 +42,9 @@ class AddAnswer extends React.Component {
     } else {
       axios({
         method: "POST",
-        url: `http://3.134.102.30/qa/${this.state.qID}/answers`,
+        url: `http://3.134.102.30/qa/${this.props.paramsId}?count=100`,
         data:{
-          body:this.state.answer,
+          body:this.state.question,
           name:this.state.nickname,
           email:this.state.email
         }
@@ -69,25 +68,25 @@ class AddAnswer extends React.Component {
     <React.Fragment>
 
 
-      <label>Your Answer*</label>
+      <label>Your Question*</label>
       <br/>
       <textarea type="text"
-                name="answer"
+                name="question"
                 rows="15"
                 cols="45"
                 maxLength="1000"
                 onChange={this.onChange}
-                placeholder="Your Answer"
+                placeholder="Your Question"
                 style={{fontSize:"18pt"}}
       ></textarea>
       <br/>
-      {/* DISPLAY WARNING IF ANSWER IS GETTING TOO LONG*/}
-      {this.state.answer.length > 998 ?
-      <React.Fragment><div>Your Answer is Too Long! Please Shorten</div><br/></React.Fragment> :
+      {/* DISPLAY WARNING IF QUESTION IS GETTING TOO LONG*/}
+      {this.state.question.length > 998 ?
+      <React.Fragment><div>Your Question is Too Long! Please Shorten</div><br/></React.Fragment> :
       <React.Fragment></React.Fragment>}
-      {/* DISPLAY WARNING IF ANSWER IS FIELD IS EMPTY*/}
-      {this.state.requiredAnswer ?
-      <React.Fragment><b>Answer is a Required Feild!!!</b><br/></React.Fragment> :
+      {/* DISPLAY WARNING IF QUESTION IS FIELD IS EMPTY*/}
+      {this.state.requiredQuestion ?
+      <React.Fragment><b>Question is a Required Feild!!!</b><br/></React.Fragment> :
       <React.Fragment/>}
 
 
@@ -98,7 +97,7 @@ class AddAnswer extends React.Component {
              size="70"
              maxLength="60"
              onChange={this.onChange}
-             placeholder="Jack543">
+             placeholder="Jackson11!">
       </input>
       {/* DISPLAY WARNING IF NICKNAME IS GETTING TOO LONG*/}
       {this.state.nickname.length > 58 ?
@@ -119,7 +118,7 @@ class AddAnswer extends React.Component {
              size="70"
              maxLength="60"
              onChange={this.onChange}
-             placeholder="Jack@email.com">
+             placeholder="Jackson11@email.com">
       </input>
       {/* DISPLAY WARNING IF EMAIL IS GETTING TOO LONG*/}
       {this.state.email.length > 58 ?
@@ -144,4 +143,4 @@ class AddAnswer extends React.Component {
   }
 }
 
-export default AddAnswer;
+export default AddQuestion;
