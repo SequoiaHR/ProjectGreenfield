@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Modal from "../Modal.jsx";
 import ComparisonTable from "./comparisonTable.jsx";
 import "./card.css";
+import StarRating from "../starRating.jsx";
+import calculateRating from "../../calculateRating.js";
 
 const Card = ({
   listName,
@@ -75,7 +77,15 @@ const Card = ({
               1-Star Rating Count
               {productReviews ? productReviews.ratings[1] : "None here yet"}
             </p>
-            <div>{/* <StarRating avgRating={avgRating}/> component */}</div>
+            <div>
+              {productReviews ? (
+                <StarRating
+                  rating={calculateRating(productReviews)}
+                  width={15}
+                  height={15}
+                />
+              ) : null}
+            </div>
           </div>
           <div className="content"></div>
         </div>
@@ -84,8 +94,7 @@ const Card = ({
   );
 };
 
-{
-  /* 
+/* 
 //Information Needed (CARD STATE NEEDED)
 // product <- Related Product Info Object ({id, name, slogan, description, category, default_price, features}) GET /products/:product_id
 // pageProduct <- Product Info Object (...)
@@ -99,6 +108,5 @@ const Card = ({
 //API CALLS NEEDED
 // NONE NEEDED AT THIS COMPONENT LEVEL
 // AT UPPER LEVEL, will need call to current page product ID's related products to grab their IDs and add their outfit data to store and outfit for user. */
-}
 
 export default Card;
