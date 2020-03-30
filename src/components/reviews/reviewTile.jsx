@@ -19,7 +19,10 @@ class ReviewTile extends React.Component {
   }
 
   componentDidMount() {
-    // logic to check for verified user
+
+    // *******************************************************
+    // ************TODO: logic to check for verified user*****
+    // *******************************************************
 
     let storage = window.localStorage;
 
@@ -31,7 +34,7 @@ class ReviewTile extends React.Component {
         });
       }
     }
-
+    // shouldn't be possible that it's reported, but accounting for changes in API
     let reported = JSON.parse(storage.getItem("reported"));
     if (reported) {
       if (reported.indexOf(this.props.review.review_id) >= 0) {
@@ -44,7 +47,6 @@ class ReviewTile extends React.Component {
     this.setState({
       numHelpful: this.props.review.helpfulness
     });
-
   }
 
   toggleExpand() {
@@ -66,7 +68,10 @@ class ReviewTile extends React.Component {
         markedHelpful: true,
         numHelpful: this.state.numHelpful + 1
       });
-      axios()
+      axios.put(`http://3.134.102.30/reviews/helpful/${this.props.review.review_id}`)
+        .catch((err) => {
+          console.log("Error marking helpful:", err);
+        });
     }
   }
 
@@ -81,7 +86,10 @@ class ReviewTile extends React.Component {
     this.setState({
       reported: true
     });
-    axios()
+    axios.put(`http://3.134.102.30/reviews/report/${this.props.review.review_id}`)
+      .catch((err) => {
+        console.log("Error reporting review:", err);
+      });
   }
 
   render() {
