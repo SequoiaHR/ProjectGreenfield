@@ -3,3 +3,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.directionalButton {
+  padding: 0;
+  border: none;
+  background: none;
+}

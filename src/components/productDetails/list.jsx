@@ -100,13 +100,15 @@ const List = ({
   }
   return (
     <div class="columns">
-      {shownIndices[0] !== 0 ? (
-        <DirectionalButton
-          arrowDirection={"left"}
-          icon={"fas fa-arrow-left"}
-          onArrowClick={onArrowClick}
-        />
-      ) : null}
+      <div className="column is-1 is-vertical-centered">
+        {shownIndices[0] !== 0 ? (
+          <DirectionalButton
+            arrowDirection={"left"}
+            icon={"fas fa-arrow-left"}
+            onArrowClick={onArrowClick}
+          />
+        ) : null}
+      </div>
       {listName === "Outfit" ? (
         <AddToOutfitCard
           pageProduct={pageProduct}
@@ -115,34 +117,41 @@ const List = ({
       ) : null}
       {filterForShownItems(products, shownIndices).map((product, idx) => {
         return (
-          <Card
-            key={idx}
-            listName={listName}
-            pageProduct={pageProduct}
-            product={product}
-            productImage={
-              filterForShownItems(productsImages, shownIndices)[idx] !==
-              undefined
-                ? filterForShownItems(productsImages, shownIndices)[idx]
-                    .results[0].photos[0].thumbnail_url
-                : null
-            }
-            onClickDetails={onClickDetails}
-            onClickButton={onClickButton}
-            productReviews={
-              filterForShownItems(productsReviews, shownIndices)[idx]
-            }
-          />
+          <div className="column is-one-fifth">
+            <Card
+              key={idx}
+              listName={listName}
+              pageProduct={pageProduct}
+              product={product}
+              productImage={
+                filterForShownItems(productsImages, shownIndices)[idx] !==
+                undefined
+                  ? filterForShownItems(productsImages, shownIndices)[idx]
+                      .results[0].photos[0].thumbnail_url
+                  : null
+              }
+              onClickDetails={onClickDetails}
+              onClickButton={onClickButton}
+              productReviews={
+                filterForShownItems(productsReviews, shownIndices)[idx]
+              }
+            />
+          </div>
         );
       })}
-      {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
-      products.length > shownIndices.length ? (
-        <DirectionalButton
-          arrowDirection={"right"}
-          icon={"fas fa-arrow-right"}
-          onArrowClick={onArrowClick}
-        />
-      ) : null}
+      <div className="column is-1 is-vertical-centered">
+        {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
+        products.length > shownIndices.length ? (
+          <DirectionalButton
+            arrowDirection={"right"}
+            icon={"fas fa-arrow-right"}
+            onArrowClick={onArrowClick}
+          />
+        ) : null}
+      </div>
+      <div className="column is-1">
+        <title>{listName}</title>
+      </div>
     </div>
   );
 };
