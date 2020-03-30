@@ -14,12 +14,25 @@ export function fetchReviews(id) {
   }
 }
 
+export function changeSort(id, sort) {
+  return function(dispatch) {
+    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
+      .then(({data}) => {
+        dispatch(setReviews(data.results));
+      })
+      .catch((err) => {
+        console.log("Error fetching sorted reviews:", err);
+      });
+  }
+}
+
 function setReviews(data) {
   return {
     type: GET_REVIEWS,
     payload: data
   };
 }
+
 
 
 export function fetchMetadata(id) {

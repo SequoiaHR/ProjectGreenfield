@@ -11,7 +11,7 @@ function App(props) {
     match: { params }
   } = props;
   return (
-    <div className="App" className="container">
+    <div className="App container">
       <h1 className="title is-1">Sequoia Shop</h1>
       {/* <DummyContainer />
       <DumdumContainer/> */}
