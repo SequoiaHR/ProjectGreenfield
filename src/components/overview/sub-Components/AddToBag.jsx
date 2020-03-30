@@ -32,9 +32,9 @@ const containerStyle = {
 const AddToBag = function() {
   return (
     <div style={containerStyle}>
-      <div class="columns">
-        <div class="column">
-          <div class="select is-medium is-fullwidth">
+      <div className="columns">
+        <div className="column">
+          <div className="select is-medium is-fullwidth">
             <select>
               <option>SELECT SIZE</option>
               {sizeTypes.map(eachSize => {
@@ -43,8 +43,8 @@ const AddToBag = function() {
             </select>
           </div>
         </div>
-        <div class="column ">
-          <div class="select is-medium " style={{ width: '50%' }}>
+        <div className="column ">
+          <div className="select is-medium " style={{ width: '50%' }}>
             <select>
               <option>NUM</option>
               {orderNumbers.map(number => {
@@ -54,14 +54,14 @@ const AddToBag = function() {
           </div>
         </div>
       </div>
-      <div class="columns">
-        <div class="column ">
-          <button class="button is-medium" style={{ width: '255px' }}>
+      <div className="columns">
+        <div className="column ">
+          <button className="button is-medium" style={{ width: '255px' }}>
             ADD TO CART
           </button>
         </div>
-        <div class="column">
-          <button class="button is-medium">FAV</button>
+        <div className="column">
+          <button className="button is-medium">FAV</button>
         </div>
       </div>
     </div>

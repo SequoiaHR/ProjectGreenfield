@@ -1,5 +1,5 @@
 import React from 'react';
-import ImagesViewer from './sub-Components/ImagesViewer';
+import ImageCarousel from './sub-Components/imageCarousel/carouselMain.jsx';
 import ProductRating from './sub-Components/ProductRating';
 import BasicDetails from './sub-Components/BasicDetails';
 import StyleSelection from './sub-Components/StyleSelection';
@@ -13,7 +13,8 @@ class overviewMain extends React.Component {
     this.state = {
       images: {
         currentImage: undefined,
-        thumbnailImages: [],
+        otherImagesInStyle: [],
+        currentThumbnailRow: undefined,
         maximized: false,
         zoomed: false
       },
@@ -43,6 +44,11 @@ class overviewMain extends React.Component {
     };
     this.componentDidMount = this.componentDidMount.bind(this);
     this.changeStyleOnClick = this.changeStyleOnClick.bind(this);
+    this.onImageArrowClick = this.onImageArrowClick.bind(this);
+    this.onNavArrowClick = this.onNavArrowClick.bind(this);
+    this.changeImageOnThumbnailClick = this.changeImageOnThumbnailClick.bind(
+      this
+    );
   }
 
   //this changes the style when you click it!
@@ -58,14 +64,79 @@ class overviewMain extends React.Component {
         });
         this.setState({
           images: {
-            currentImage: this.state.allStyles[i].photos[0],
-            thumbnailImages: this.state.allStyles[i].photos,
+            currentImage: 0,
+            otherImagesInStyle: this.state.allStyles[i].photos,
+            currentThumbnailRow: 0,
             maximized: false,
             zoomed: false
           }
         });
         break;
       }
+    }
+  }
+
+  //this function is attached to the thumbnail images in the image carousel and
+  //changes the selected image when these images are clicked.
+  //My logic is needlessly complex--I'm using an index for my current image when I should be
+  //using the url. Will change perhaps in the future
+  changeImageOnThumbnailClick(newThumbnailUrl) {
+    for (let i = 0; i < this.state.images.otherImagesInStyle.length; i++) {
+      if (
+        this.state.images.otherImagesInStyle[i].thumbnail_url ===
+        newThumbnailUrl
+      ) {
+        this.setState({
+          images: {
+            currentImage: i,
+            otherImagesInStyle: this.state.images.otherImagesInStyle,
+            currentThumbnailRow: this.state.images.currentThumbnailRow
+          }
+        });
+        break;
+      }
+    }
+  }
+
+  //this function changes the displayed image when you click the arrow
+  onImageArrowClick(direction) {
+    if (direction === 'left') {
+      this.setState({
+        images: {
+          currentImage: this.state.images.currentImage - 1,
+          otherImagesInStyle: this.state.images.otherImagesInStyle,
+          currentThumbnailRow: this.state.images.currentThumbnailRow
+        }
+      });
+    } else if (direction === 'right') {
+      this.setState({
+        images: {
+          currentImage: this.state.images.currentImage + 1,
+          otherImagesInStyle: this.state.images.otherImagesInStyle,
+          currentThumbnailRow: this.state.images.currentThumbnailRow
+        }
+      });
+    }
+  }
+
+  //this function changes the displayed thumbnail images when you click the arrow
+  onNavArrowClick(direction) {
+    if (direction === 'left') {
+      this.setState({
+        images: {
+          currentImage: this.state.images.currentImage,
+          otherImagesInStyle: this.state.images.otherImagesInStyle,
+          currentThumbnailRow: this.state.images.currentThumbnailRow - 1
+        }
+      });
+    } else if (direction === 'right') {
+      this.setState({
+        images: {
+          currentImage: this.state.images.currentImage,
+          otherImagesInStyle: this.state.images.otherImagesInStyle,
+          currentThumbnailRow: this.state.images.currentThumbnailRow + 1
+        }
+      });
     }
   }
 
@@ -107,12 +178,11 @@ class overviewMain extends React.Component {
         this.props.storeProductStyles(API_Styles.data);
         //input this data into currentView
         //set style data in state
-        console.log('API_Styles', API_Styles);
         this.setState({
           selectedStyle: {
-            selectedStyleId: API_Styles.data.results[2].style_id,
-            selectedStyleColor: API_Styles.data.results[2].name,
-            selectedReducedPrice: API_Styles.data.results[2].sale_price
+            selectedStyleId: API_Styles.data.results[0].style_id,
+            selectedStyleColor: API_Styles.data.results[0].name,
+            selectedReducedPrice: API_Styles.data.results[0].sale_price
           }
         });
         this.setState({
@@ -121,8 +191,9 @@ class overviewMain extends React.Component {
         //set state for images
         this.setState({
           images: {
-            currentImage: API_Styles.data.results[2].photos[0],
-            thumbnailImages: API_Styles.data.results[2].photos
+            currentImage: 0,
+            otherImagesInStyle: API_Styles.data.results[2].photos,
+            currentThumbnailRow: 0
           }
         });
       })
@@ -134,11 +205,16 @@ class overviewMain extends React.Component {
   render() {
     return (
       <div style={{ marginBottom: '30px' }}>
-        <div class="columns">
-          <span class="column is-half">
-            <ImagesViewer state={this.state} />
+        <div className="columns">
+          <span className="column is-half">
+            <ImageCarousel
+              state={this.state.images}
+              onImageArrowClick={this.onImageArrowClick}
+              onNavArrowClick={this.onNavArrowClick}
+              changeImageOnThumbnailClick={this.changeImageOnThumbnailClick}
+            />
           </span>
-          <span class="column is-half">
+          <span className="column is-half">
             <ProductRating state={this.state} />
             <BasicDetails state={this.state} />
             <StyleSelection

@@ -1,0 +1,30 @@
+.divStyle {
+  width: 400px;
+  height: 380px;
+  overflow: hidden;
+  background-color: black;
+  float: left;
+  display: block;
+  margin: auto;
+}
+
+.imgStyle {
+  max-width: 100%;
+  max-height: 100%;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  height: auto;
+  /* top: 50%;
+  left: 50%; */
+  vertical-align: middle;
+  /* transform: translate(-50%, -50%); */
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: auto;
+  margin-left: auto;
+}

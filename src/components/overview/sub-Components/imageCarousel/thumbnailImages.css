@@ -1,0 +1,11 @@
+.thumbStyle {
+  width: 60px;
+  height: auto;
+  float: left;
+  margin: 5px;
+}
+
+.arrowStyle {
+  float: left;
+  margin: 5px;
+}

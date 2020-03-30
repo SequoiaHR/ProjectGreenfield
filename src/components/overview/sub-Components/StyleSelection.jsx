@@ -70,8 +70,5 @@ const StyleSelection = function(props) {
     </div>
   );
 };
-// class="is-rounded has-ratio"
-
-//<div class="img" style="background-image:url({eachStyle.photos[0].thumbnail_url});"></div>
 
 export default StyleSelection;

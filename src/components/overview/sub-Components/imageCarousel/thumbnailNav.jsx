@@ -1,0 +1,49 @@
+import React from 'react';
+import ThumbnailImages from './thumbnailImages';
+import ArrowNav from './arrowNav';
+import './thumbnailImages.css';
+
+const ThumbnailNav = function(props) {
+  let arrowLeft = <div></div>;
+  let arrowRight = <div></div>;
+
+  if (props.state.currentThumbnailRow !== 0) {
+    arrowLeft = (
+      <div className="column">
+        <ArrowNav
+          arrowDirection={'left'}
+          icon={'fas fa-arrow-left'}
+          onNavArrowClick={props.onNavArrowClick}
+        />
+      </div>
+    );
+  }
+  //this isn't great logic, but because my variable with number of rows is in another
+  //component, I'm using a quick calculation to get the number of rows for my conditional logic
+  let numberOfImageRows = Math.ceil(props.state.otherImagesInStyle.length / 3);
+
+  if (props.state.currentThumbnailRow !== numberOfImageRows - 1) {
+    arrowRight = (
+      <div className="column">
+        <ArrowNav
+          arrowDirection={'right'}
+          icon={'fas fa-arrow-right'}
+          onNavArrowClick={props.onNavArrowClick}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {arrowLeft}
+      <ThumbnailImages
+        state={props.state}
+        changeImageOnThumbnailClick={props.changeImageOnThumbnailClick}
+      />
+      {arrowRight}
+    </div>
+  );
+};
+
+export default ThumbnailNav;
