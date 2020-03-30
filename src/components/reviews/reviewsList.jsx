@@ -123,7 +123,10 @@ class ReviewsList extends React.Component {
                 <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
                 {this.state.modalOpen
                   ? <Modal title="Write Your Review" onExitClick={this.exitModalBound}>
-                    <AddReviewFormContainer characteristics={this.props.metadata.characteristics} id={this.props.id} />
+                    <AddReviewFormContainer 
+                      characteristics={this.props.metadata.characteristics} 
+                      id={this.props.id} 
+                      exit={this.exitModalBound} />
                     </Modal>
                   : null}
               </div>

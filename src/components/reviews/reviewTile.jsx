@@ -2,6 +2,8 @@ import React from "react";
 import moment from "moment";
 import axios from "axios";
 
+import StarRating from "../starRating.jsx";
+
 class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
@@ -96,11 +98,17 @@ class ReviewTile extends React.Component {
     let { review } = this.props;
     return (
       <div className="tile is-child box">
-        <div>{review.rating}-star rating goes here</div>
-        {this.state.verified
-          ? <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
-            <br />&#10004; Verified user</div>
-          : <div className="has-text-right is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item"><StarRating rating={review.rating} width="15" height="15" /></div>
+          </div>
+          <div className="level-right">
+            {this.state.verified
+              ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
+                <br />&#10004; Verified user</div>
+              : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
+          </div>
+        </div>
         <div className="subtitle">{review.summary}</div>
         {this.state.expanded || review.body.length <= 250
           ? <div>{review.body}</div>
