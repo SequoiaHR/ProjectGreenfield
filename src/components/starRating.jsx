@@ -42,7 +42,7 @@ const StarRating = ({ rating, width, height }) => {
       {starArray.map((el, idx) => (
         <img
           width={width}
-          heght={height}
+          height={height}
           id={`star ${idx}`}
           alt="star"
           src={el}

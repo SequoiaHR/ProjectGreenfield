@@ -1,4 +1,7 @@
 import React from "react";
+import axios from "axios";
+
+import StarInput from "./starInput.jsx";
 import CharacteristicsRadio from "./characteristicsRadio.jsx";
 
 class AddReviewForm extends React.Component {
@@ -6,6 +9,7 @@ class AddReviewForm extends React.Component {
     super(props);
 
     this.state = {
+      rating: 5,
       recommend: null,
       characteristics: {},
       summary: "",
@@ -13,11 +17,22 @@ class AddReviewForm extends React.Component {
       photos: [],
       nickname: "",
       email: "",
-      valid: true
+      errors: []
     };
     this.onChangeBound = this.onChange.bind(this);
     this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
-    this.submitBound = this.submit.bind(this);
+    this.changeRatingBound = this.changeRating.bind(this);
+    this.validateBound = this.validate.bind(this);
+  }
+
+  componentDidMount() { // dynamically set characteristics object in state to all nulls for later validation
+    let nullCharacteristics = {};
+    Object.keys(this.props.characteristics).forEach((char) => {
+      nullCharacteristics[this.props.characteristics[char].id] = null;
+    });
+    this.setState({
+      characteristics: nullCharacteristics
+    });
   }
 
   onChange(event) {
@@ -29,15 +44,61 @@ class AddReviewForm extends React.Component {
   }
 
   changeCharacteristic(event) {
-    const characteristic = event.target.name;
+    const id = event.target.name;
     const value = event.target.value;
     this.setState({
-      characteristics: {...this.state.characteristics, [characteristic]: value}
+      characteristics: {...this.state.characteristics, [id]: value}
     });
   }
 
-  submit(event) {
+  changeRating(num) {
+    this.setState({
+      rating: num
+    });
+  }
+
+  validate(event) {
     event.preventDefault();
+    const errors = [];
+    // perform validation checks here
+    if (this.state.recommend === null) { // recommended radio buttons
+      errors.push(["Please choose whether to recommend this product.", 1]);
+    }
+    for (var charId in this.state.characteristics) { // characteristic radio buttons
+      if (this.state.characteristics[charId] === null) {
+        errors.push(["Please review all product characteristics.", 2]);
+        break;
+      }
+    }
+    if (!this.state.summary) { // summary
+      errors.push(["Please enter a review summary.", 3]);
+    }
+    if (this.state.body.length < 50) { // body
+      errors.push(["Please enter a review body of at least 50 characters.", 4]);
+    }
+    if (!this.state.nickname) { // nickname
+      errors.push(["Please enter your nickname.", 5]);
+    }
+    const emailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!this.state.email || !emailFormat.test(this.state.email)) { // email
+      errors.push(["Please enter a valid email address.", 6]);
+    }
+
+    if (errors.length > 0) {
+      this.setState({
+        errors: errors
+      });
+    } else {
+      this.setState({
+        errors: []
+      });
+      this.submit();
+      this.props.exit();
+    }
+  }
+
+  submit() {
+    axios.post();
   }
 
   render() {
@@ -46,8 +107,8 @@ class AddReviewForm extends React.Component {
         <div className="subtitle">{`About the ${this.props.name}`}</div>
         <form>
           <label>
-            <div className="add-input">Overall rating*</div>
-            [rating selector goes here]
+            <div className="add-input">Overall rating (select):*</div>
+            <StarInput width="25" height="25" update={this.changeRatingBound} />
           </label>
           <br />
           <label>
@@ -60,7 +121,11 @@ class AddReviewForm extends React.Component {
           <br />
           <div>
             {Object.keys(this.props.characteristics).map((charName) => {
-              return <CharacteristicsRadio key={charName} characteristic={charName} handler={this.changeCharacteristicBound} />;
+              return <CharacteristicsRadio 
+                key={charName} 
+                characteristic={charName} 
+                charId={this.props.characteristics[charName].id} 
+                handler={this.changeCharacteristicBound} />;
             })}
           </div>
           <label>
@@ -89,12 +154,12 @@ class AddReviewForm extends React.Component {
               value={this.state.body}
               onChange={this.onChangeBound} />
               {this.state.body.length < 50 
-              ? `Please enter ${50 - this.state.body.length} more characters.`
-              : "Minimum reached!"}
+              ? <span className="is-size-7">{`Please enter ${50 - this.state.body.length} more characters.`}</span>
+              : <span className="is-size-7">Minimum reached!</span>}
           </label>
-          <br />
+          <br />&nbsp;<br />
           <label>
-            What is your nickname?
+            What is your nickname?*
             <input 
               className="input" 
               type="text" 
@@ -105,11 +170,11 @@ class AddReviewForm extends React.Component {
               required={true} 
               onChange={this.onChangeBound} /> 
               <br />
-            For privacy reasons, do not use your full name or email address
+            <div className="is-size-7">For privacy reasons, do not use your full name or email address</div>
           </label>
           <br />
           <label>
-            What is your email?
+            What is your email?*
             <input 
               className="input" 
               type="email" 
@@ -120,13 +185,18 @@ class AddReviewForm extends React.Component {
               required={true} 
               onChange={this.onChangeBound} />
               <br />
-              For authentication reasons, you will not be emailed
+              <div className="is-size-7">For authentication reasons, you will not be emailed</div>
           </label>
           <br />
-          <button className="button add-input" type="button">Add your photos (max 5):</button>
+          <button className="button add-input" type="button">+ Add your photos (max 5)</button>
           <br />
-          <button className="button add-input" type="submit" onClick={this.submitBound}>Submit</button>
+          <button className="button add-input" type="submit" onClick={this.validateBound}>Submit</button>
         </form>
+        <div id="errors">
+          {this.state.errors.map((err) => {
+            return <div key={err[1]}>{err[0]}</div>;
+          })}
+        </div>
       </div>
     );
   }
