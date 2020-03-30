@@ -19,44 +19,43 @@ const Card = ({
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="column is-2">
-      <div className="card">
-        <div>
-          {showModal === true ? (
-            <div>
-              <Modal
-                onExitClick={() => {
-                  setShowModal(false);
-                }}
-                title="Comparing"
-              >
-                <ComparisonTable product={product} pageProduct={pageProduct} />
-              </Modal>
-            </div>
+    <div className="card">
+      <div>
+        {showModal === true ? (
+          <div>
+            <Modal
+              onExitClick={() => {
+                setShowModal(false);
+              }}
+              title="Comparing"
+            >
+              <ComparisonTable product={product} pageProduct={pageProduct} />
+            </Modal>
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      <div className="card-image actionButtonDiv">
+        <button
+          className="button is-small actionButton"
+          value={listName}
+          onClick={e => {
+            if (listName === "Related") {
+              setShowModal(true);
+            } else {
+              onClickButton(listName, product.id);
+            }
+          }}
+        >
+          {listName === "Outfit" ? (
+            <i className="fas fa-times-circle"></i>
           ) : (
-            <div></div>
+            <i className="fas fa-star"></i>
           )}
-        </div>
-        <div className="card-image">
-          <button
-            className="button is-small"
-            value={listName}
-            onClick={e => {
-              if (listName === "Related") {
-                setShowModal(true);
-              } else {
-                onClickButton(listName, product.id);
-              }
-            }}
-          >
-            {listName === "Outfit" ? (
-              <i className="fas fa-times-circle"></i>
-            ) : (
-              <i className="fas fa-star"></i>
-            )}
-          </button>
-          <figure className="image is-4by3">
-            <AttachProductLink listName={listName} productId={product.id}>
+        </button>
+        <figure className="image is-4by3">
+          <AttachProductLink listName={listName} productId={product.id}>
               <img
                 name={product.id}
                 onClick={onClickDetails}
@@ -68,29 +67,21 @@ const Card = ({
                 alt="Related-Product Item"
               />
             </AttachProductLink>
-          </figure>
-        </div>
-        <div className="card-content">
-          <div className="media-content">
-            <p className="title is-4">{product.category}</p>
-            <p className="title is-5">{product.name}</p>
-            <p className="subtitle is-6">{product.slogan}</p>
-            <p className="subtitle is-6">${product.default_price}</p>
-            <p className="subtitle is-6">
-              1-Star Rating Count
-              {productReviews ? productReviews.ratings[1] : "None here yet"}
-            </p>
-            <div>
-              {productReviews ? (
-                <StarRating
-                  rating={calculateRating(productReviews)}
-                  width={15}
-                  height={15}
-                />
-              ) : null}
-            </div>
-          </div>
-          <div className="content"></div>
+        </figure>
+      </div>
+      <div className="card-content">
+        <div className="media-content">
+          <p className="title is-3">{product.category}</p>
+          <p className="title is-6">{product.name}</p>
+          <p>{product.slogan}</p>
+          <p className="subtitle is-6">${product.default_price}</p>
+          {productReviews ? (
+            <StarRating
+              rating={calculateRating(productReviews)}
+              width={20}
+              height={20}
+            />
+          ) : null}
         </div>
       </div>
     </div>

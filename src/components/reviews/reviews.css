@@ -31,3 +31,7 @@
 .actionable:hover {
   cursor: pointer;
 }
+
+#errors {
+  color: red;
+}

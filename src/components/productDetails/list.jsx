@@ -78,6 +78,20 @@ const List = ({
     }
   }
 
+  function checkForMissingShownImage(productsImages, shownIndices, idx) {
+    // checks to see if results have come in yet and whether or not there are actual results to work with
+    if (filterForShownItems(productsImages, shownIndices)[idx] !== undefined) {
+      if (
+        filterForShownItems(productsImages, shownIndices)[idx].results.length >
+        0
+      ) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   function onClickButton(action, id) {
     if (action === "Add") {
       addToOutfit(id);
@@ -100,13 +114,15 @@ const List = ({
   }
   return (
     <div class="columns">
-      {shownIndices[0] !== 0 ? (
-        <DirectionalButton
-          arrowDirection={"left"}
-          icon={"fas fa-arrow-left"}
-          onArrowClick={onArrowClick}
-        />
-      ) : null}
+      <div className="column is-1 is-vertical-centered">
+        {shownIndices[0] !== 0 ? (
+          <DirectionalButton
+            arrowDirection={"left"}
+            icon={"fas fa-chevron-left"}
+            onArrowClick={onArrowClick}
+          />
+        ) : null}
+      </div>
       {listName === "Outfit" ? (
         <AddToOutfitCard
           pageProduct={pageProduct}
@@ -115,34 +131,41 @@ const List = ({
       ) : null}
       {filterForShownItems(products, shownIndices).map((product, idx) => {
         return (
-          <Card
-            key={idx}
-            listName={listName}
-            pageProduct={pageProduct}
-            product={product}
-            productImage={
-              filterForShownItems(productsImages, shownIndices)[idx] !==
-              undefined
-                ? filterForShownItems(productsImages, shownIndices)[idx]
-                    .results[0].photos[0].thumbnail_url
-                : null
-            }
-            onClickDetails={onClickDetails}
-            onClickButton={onClickButton}
-            productReviews={
-              filterForShownItems(productsReviews, shownIndices)[idx]
-            }
-          />
+          <div className="column is-one-fifth">
+            <Card
+              key={idx}
+              listName={listName}
+              pageProduct={pageProduct}
+              product={product}
+              productImage={
+                filterForShownItems(productsImages, shownIndices)[idx] !==
+                undefined
+                  ? filterForShownItems(productsImages, shownIndices)[idx]
+                      .results[0].photos[0].thumbnail_url
+                  : null
+              }
+              onClickDetails={onClickDetails}
+              onClickButton={onClickButton}
+              productReviews={
+                filterForShownItems(productsReviews, shownIndices)[idx]
+              }
+            />
+          </div>
         );
       })}
-      {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
-      products.length > shownIndices.length ? (
-        <DirectionalButton
-          arrowDirection={"right"}
-          icon={"fas fa-arrow-right"}
-          onArrowClick={onArrowClick}
-        />
-      ) : null}
+      <div className="column is-1 is-vertical-centered">
+        {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
+        products.length > shownIndices.length ? (
+          <DirectionalButton
+            arrowDirection={"right"}
+            icon={"fas fa-chevron-right"}
+            onArrowClick={onArrowClick}
+          />
+        ) : null}
+      </div>
+      <div className="column is-1">
+        <title>{listName}</title>
+      </div>
     </div>
   );
 };

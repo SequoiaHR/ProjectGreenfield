@@ -3,11 +3,14 @@ import "./directionalButton.css";
 
 function DirectionalButton({ arrowDirection, icon, onArrowClick }) {
   return (
-    <div class="column is-narrow is-vertical-centered">
-      <button onClick={() => {onArrowClick(arrowDirection)}} class="button is-small">
-        <i class={icon}></i>
-      </button>
-    </div>
+    <button
+      onClick={() => {
+        onArrowClick(arrowDirection);
+      }}
+      class="button is-medium directionalButton"
+    >
+      <i class={icon}></i>
+    </button>
   );
 }
 
