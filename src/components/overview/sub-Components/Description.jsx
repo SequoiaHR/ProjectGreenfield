@@ -3,8 +3,8 @@ import React from 'react';
 const Description = function(props) {
   if (props.state.description.slogan !== undefined) {
     return (
-      <div class="columns">
-        <div class="column">
+      <div className="columns">
+        <div className="column">
           <div
             style={{
               fontWeight: 'bold'
@@ -16,7 +16,7 @@ const Description = function(props) {
             {props.state.description.productDescription}
           </div>
         </div>
-        <div class="column" style={{ marginTop: '23px' }}>
+        <div className="column" style={{ marginTop: '23px' }}>
           {props.state.description.features.map(eachFeature => {
             return (
               <div>
