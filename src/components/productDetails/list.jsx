@@ -78,6 +78,20 @@ const List = ({
     }
   }
 
+  function checkForMissingShownImage(productsImages, shownIndices, idx) {
+    // checks to see if results have come in yet and whether or not there are actual results to work with
+    if (filterForShownItems(productsImages, shownIndices)[idx] !== undefined) {
+      if (
+        filterForShownItems(productsImages, shownIndices)[idx].results.length >
+        0
+      ) {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
   function onClickButton(action, id) {
     if (action === "Add") {
       addToOutfit(id);
@@ -121,8 +135,7 @@ const List = ({
             pageProduct={pageProduct}
             product={product}
             productImage={
-              filterForShownItems(productsImages, shownIndices)[idx] !==
-              undefined
+              checkForMissingShownImage(productsImages, shownIndices, idx)
                 ? filterForShownItems(productsImages, shownIndices)[idx]
                     .results[0].photos[0].thumbnail_url
                 : null
