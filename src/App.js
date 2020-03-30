@@ -6,7 +6,10 @@ import QuestionListContainer from "./containers/questions/questionListContainer"
 import ListContainer from "./containers/productDetails/listContainer.js";
 import OverviewContainer from "./containers/overview/overviewContainer";
 
-function App() {
+function App(props) {
+  const {
+    match: { params }
+  } = props;
   return (
     <div className="App container">
       <h1 className="title is-1">Sequoia Shop</h1>
@@ -24,18 +27,17 @@ function App() {
 
       <div className="box">
         <div className="box">
-
           <div>
             <h1 class="title">Related Items</h1>
           </div>
 
-          <ListContainer listName="Related" />
+          <ListContainer paramsId={params.id} listName="Related" />
         </div>
         <div className="box">
           <div>
             <h1 class="title">Your Outfit</h1>
           </div>
-          <ListContainer listName="Outfit" />
+          <ListContainer paramsId={params.id} listName="Outfit" />
         </div>
       </div>
     </div>

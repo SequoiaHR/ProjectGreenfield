@@ -18,7 +18,8 @@ const List = ({
   productsImages,
   onClickDetails,
   fetchRelatedDataAsync,
-  productsReviews
+  productsReviews,
+  paramsId
 }) => {
   // Set Local State For Outfits
   var [outfits, setOutfits] = useState([]);
@@ -39,7 +40,7 @@ const List = ({
   //HANDLE FETCHING DATA ON AFTER FIRST RENDER
   useEffect(() => {
     if (listName === "Related") {
-      fetchRelatedDataAsync(4);
+      fetchRelatedDataAsync(paramsId);
     }
   }, []);
 
@@ -128,7 +129,9 @@ const List = ({
             }
             onClickDetails={onClickDetails}
             onClickButton={onClickButton}
-            productReviews={filterForShownItems(productsReviews, shownIndices)[idx]}
+            productReviews={
+              filterForShownItems(productsReviews, shownIndices)[idx]
+            }
           />
         );
       })}
