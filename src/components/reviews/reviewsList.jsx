@@ -19,6 +19,7 @@ class ReviewsList extends React.Component {
     this.clearFiltersBound = this.clearFilters.bind(this);
     this.openModalBound = this.openModal.bind(this);
     this.exitModalBound = this.exitModal.bind(this);
+    this.sortBound = this.sort.bind(this);
   }
 
   componentDidMount() {
@@ -52,6 +53,10 @@ class ReviewsList extends React.Component {
     this.setState({
       filters: new Set()
     });
+  }
+
+  sort(event) {
+    this.props.sortReviews(this.props.id, event.target.value);
   }
 
   openModal() {
@@ -92,6 +97,14 @@ class ReviewsList extends React.Component {
                 clearHandler={this.clearFiltersBound} />
             </div>
             <div className="tile is-parent is-vertical">
+              <div>
+                {reviews.length} reviews, sorted by{" "}
+                <select className="select" defaultValue="relevant" onChange={this.sortBound}>
+                  <option value="relevant">relevance</option>
+                  <option value="newest">recent</option>
+                  <option value="helpful">helpfulness</option>
+                </select>
+              </div>
               {tiles.map((review) => { // map out tiles (currently showing)
                 return <ReviewTile key={review.review_id} review={review} />;
               })}
