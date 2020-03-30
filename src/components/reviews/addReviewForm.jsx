@@ -25,7 +25,7 @@ class AddReviewForm extends React.Component {
     this.validateBound = this.validate.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount() { // dynamically set characteristics object in state to all nulls for later validation
     let nullCharacteristics = {};
     Object.keys(this.props.characteristics).forEach((char) => {
       nullCharacteristics[this.props.characteristics[char].id] = null;
@@ -44,10 +44,10 @@ class AddReviewForm extends React.Component {
   }
 
   changeCharacteristic(event) {
-    const characteristic = event.target.name;
+    const id = event.target.name;
     const value = event.target.value;
     this.setState({
-      characteristics: {...this.state.characteristics, [characteristic]: value}
+      characteristics: {...this.state.characteristics, [id]: value}
     });
   }
 
@@ -60,7 +60,30 @@ class AddReviewForm extends React.Component {
   validate(event) {
     event.preventDefault();
     const errors = [];
-    // perform checks here
+    // perform validation checks here
+    if (this.state.recommend === null) { // recommended radio buttons
+      errors.push(["Please choose whether to recommend this product.", 1]);
+    }
+    for (var charId in this.state.characteristics) { // characteristic radio buttons
+      if (this.state.characteristics[charId] === null) {
+        errors.push(["Please review all product characteristics.", 2]);
+        break;
+      }
+    }
+    if (!this.state.summary) { // summary
+      errors.push(["Please enter a review summary.", 3]);
+    }
+    if (this.state.body.length < 50) { // body
+      errors.push(["Please enter a review body of at least 50 characters.", 4]);
+    }
+    if (!this.state.nickname) { // nickname
+      errors.push(["Please enter your nickname.", 5]);
+    }
+    const emailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (!this.state.email || !emailFormat.test(this.state.email)) { // email
+      errors.push(["Please enter a valid email address.", 6]);
+    }
+
     if (errors.length > 0) {
       this.setState({
         errors: errors
@@ -171,7 +194,7 @@ class AddReviewForm extends React.Component {
         </form>
         <div id="errors">
           {this.state.errors.map((err) => {
-            return <div>{err}</div>;
+            return <div key={err[1]}>{err[0]}</div>;
           })}
         </div>
       </div>
