@@ -40,9 +40,9 @@ const List = ({
   //HANDLE FETCHING DATA ON AFTER FIRST RENDER
   useEffect(() => {
     if (listName === "Related") {
-      fetchRelatedDataAsync(Number(paramsId));
+      fetchRelatedDataAsync(paramsId);
     }
-  }, [paramsId]);
+  }, []);
 
   useEffect(() => {
     if (listName === "Outfit") {
@@ -129,7 +129,9 @@ const List = ({
             }
             onClickDetails={onClickDetails}
             onClickButton={onClickButton}
-            productReviews={filterForShownItems(productsReviews, shownIndices)[idx]}
+            productReviews={
+              filterForShownItems(productsReviews, shownIndices)[idx]
+            }
           />
         );
       })}
