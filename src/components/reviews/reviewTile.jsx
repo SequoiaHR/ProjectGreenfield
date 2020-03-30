@@ -114,7 +114,7 @@ class ReviewTile extends React.Component {
         {review.recommend
           ? <div>&#10004; I recommend this product</div>
           : null}
-        {review.response !== undefined && review.response !== "null"
+        {review.response !== undefined && review.response !== null
           ? <div><strong>Seller response:</strong><br />{review.response}</div>
           : null}
         <div className="is-size-7">
