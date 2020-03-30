@@ -51,8 +51,7 @@ class AddAnswer extends React.Component {
         }
       })
       .then(data=>{
-        console.log(data);
-        console.log(this.state.qID);
+        // console.log(data);
         console.log("*** Successfully Posted Answer to Question ***")
         this.props.getProductQuestions(this.props.paramsId);
         this.props.exitClick()
