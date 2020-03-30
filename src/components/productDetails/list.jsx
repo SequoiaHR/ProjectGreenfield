@@ -42,7 +42,7 @@ const List = ({
     if (listName === "Related") {
       fetchRelatedDataAsync(paramsId);
     }
-  }, []);
+  }, [paramsId]);
 
   useEffect(() => {
     if (listName === "Outfit") {
@@ -50,7 +50,7 @@ const List = ({
       fetchOutfitsImages(setOutfitsImages);
       fetchOutfitsReviews(setOutfitsReviews);
     }
-  }, []);
+  }, [paramsId]);
 
   useEffect(() => {
     if (listName === "Outfit") {

@@ -4,6 +4,7 @@ import ComparisonTable from "./comparisonTable.jsx";
 import "./card.css";
 import StarRating from "../starRating.jsx";
 import calculateRating from "../../calculateRating.js";
+import AttachProductLink from "./attachProductLink.jsx";
 
 const Card = ({
   listName,
@@ -54,16 +55,18 @@ const Card = ({
           )}
         </button>
         <figure className="image is-4by3">
-          <img
-            name={product.id}
-            onClick={onClickDetails}
-            src={
-              productImage === null
-                ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
-                : productImage
-            }
-            alt="Related-Product Item"
-          />
+          <AttachProductLink listName={listName} productId={product.id}>
+              <img
+                name={product.id}
+                onClick={onClickDetails}
+                src={
+                  productImage === null
+                    ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+                    : productImage
+                }
+                alt="Related-Product Item"
+              />
+            </AttachProductLink>
         </figure>
       </div>
       <div className="card-content">
@@ -80,7 +83,6 @@ const Card = ({
             />
           ) : null}
         </div>
-        <div className="content"></div>
       </div>
     </div>
   );
