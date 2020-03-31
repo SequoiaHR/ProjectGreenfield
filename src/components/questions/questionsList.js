@@ -17,6 +17,7 @@ constructor(props){
   this.determineDisplayed = this.determineDisplayed.bind(this);
   this.seeMoreQuestionsClick = this.seeMoreQuestionsClick.bind(this);
   this.addQuestionClick = this.addQuestionClick.bind(this);
+  this.sortQuestions = this.sortQuestions.bind(this);
 }
 
   //FETCHING INITIAL QUESTION DATA FROM STORE
@@ -49,6 +50,13 @@ constructor(props){
     return questions;
   }
 
+  //SORT QUESTIONS BY HELPFULNESS
+  sortQuestions(questionsArray){
+    questionsArray = Array.from(questionsArray) || [];
+    let sortedQuestionsArray = questionsArray.sort((a,b)=> b.question_helpfulness - a.question_helpfulness)
+    return sortedQuestionsArray;
+  }
+
   //SETS NUMBER OF QUESTIONS DISPLAYED TO CURRENT DISPLAY+2 ON CLICK
   seeMoreQuestionsClick(event){
     event.preventDefault();
@@ -56,13 +64,14 @@ constructor(props){
   }
 
   render(){
+    let sortedQuestions = this.sortQuestions(this.props.store.questions);
     return (
     <React.Fragment>
       <h1 className="title">QUESTIONS & ANSWERS</h1>
       <div className="container questionsExpand">
         {
         (this.props.store.questions[0] ?
-          this.determineDisplayed(this.props.store.questions).map( (question, index) => {
+          this.determineDisplayed(sortedQuestions).map( (question, index) => {
           return (
           <Question key={index}
                     question_id={question.question_id}
