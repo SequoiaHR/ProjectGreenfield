@@ -27,7 +27,8 @@ const List = ({
   var [outfitsReviews, setOutfitsReviews] = useState([]);
 
   // Set Local State For Conditionally Rendered Products
-  let initialShownIndices = listName === "Outfit" ? [0, 1, 2] : [0, 1, 2, 3];
+  let initialShownIndices =
+    listName === "Outfit" ? [0, 1, 2, 3] : [0, 1, 2, 3];
   var [shownIndices, setShownIndices] = useState(initialShownIndices);
 
   //conditionally set outfits to Outfit data if this list represents outfits
@@ -112,59 +113,104 @@ const List = ({
       }
     }
   }
+
+  var wrapperStyle = {
+    width: "100%",
+    overflow: "hidden"
+    // display: "flex",
+    // "flex-wrap": "nowrap",
+    // "overflow-x": "auto"
+  };
+  var innerStyle = {
+    width: "100%"
+  };
+
   return (
-    <div class="columns">
-      <div className="column is-1 is-vertical-centered">
-        {shownIndices[0] !== 0 ? (
-          <DirectionalButton
-            arrowDirection={"left"}
-            icon={"fas fa-chevron-left"}
-            onArrowClick={onArrowClick}
-          />
-        ) : null}
-      </div>
-      {listName === "Outfit" ? (
-        <AddToOutfitCard
-          pageProduct={pageProduct}
-          onClickButton={onClickButton}
-        />
-      ) : null}
-      {filterForShownItems(products, shownIndices).map((product, idx) => {
-        return (
-          <div className="column is-one-fifth">
-            <Card
-              key={idx}
-              listName={listName}
+    <div class="outer">
+      <div class="box" style={wrapperStyle}>
+        <div class="columns" style={innerStyle}>
+          {listName === "Outfit" ? (
+            <AddToOutfitCard
               pageProduct={pageProduct}
-              product={product}
-              productImage={
-                filterForShownItems(productsImages, shownIndices)[idx] !==
-                undefined
-                  ? filterForShownItems(productsImages, shownIndices)[idx]
-                      .results[0].photos[0].thumbnail_url
-                  : null
-              }
-              onClickDetails={onClickDetails}
               onClickButton={onClickButton}
-              productReviews={
-                filterForShownItems(productsReviews, shownIndices)[idx]
-              }
             />
-          </div>
-        );
-      })}
-      <div className="column is-1 is-vertical-centered">
-        {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
-        products.length > shownIndices.length ? (
-          <DirectionalButton
-            arrowDirection={"right"}
-            icon={"fas fa-chevron-right"}
-            onArrowClick={onArrowClick}
-          />
-        ) : null}
+          ) : null}
+          {filterForShownItems(products, shownIndices).map((product, idx) => {
+            return (
+              <div className="column is-3">
+                <Card
+                  key={idx}
+                  listName={listName}
+                  pageProduct={pageProduct}
+                  product={product}
+                  productImage={
+                    filterForShownItems(productsImages, shownIndices)[idx] !==
+                    undefined
+                      ? filterForShownItems(productsImages, shownIndices)[idx]
+                          .results[0].photos[0].thumbnail_url
+                      : null
+                  }
+                  onClickDetails={onClickDetails}
+                  onClickButton={onClickButton}
+                  productReviews={
+                    filterForShownItems(productsReviews, shownIndices)[idx]
+                  }
+                />
+              </div>
+            );
+          })}
+          {
+            shownIndices[shownIndices.length - 1] !== products.length - 1 
+            ? filterForShownItems(products, [shownIndices[shownIndices.length - 1] + 1]).map((product) => {
+              var nextIndex = shownIndices[shownIndices.length - 1] + 1;
+              return (
+                <div className="column is-3">
+                  <Card
+                    key={nextIndex}
+                    listName={listName}
+                    pageProduct={pageProduct}
+                    product={product}
+                    productImage={
+                      filterForShownItems(productsImages, [nextIndex])[0] !==
+                      undefined
+                        ? filterForShownItems(productsImages, [nextIndex])[0]
+                            .results[0].photos[0].thumbnail_url
+                        : null
+                    }
+                    onClickDetails={onClickDetails}
+                    onClickButton={onClickButton}
+                    productReviews={
+                      filterForShownItems(productsReviews, [nextIndex])[0]
+                    }
+                  />
+                </div>
+              );
+            })
+            :
+            null
+          }
+        </div>
       </div>
-      <div className="column is-1">
-        <title>{listName}</title>
+      <div>
+        <span>
+          {shownIndices[0] !== 0 ? (
+            <DirectionalButton
+              arrowDirection={"left"}
+              icon={"fas fa-chevron-left"}
+              onArrowClick={onArrowClick}
+            />
+          ) : null}
+        </span>
+        <span>
+          {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
+          products.length > shownIndices.length ? (
+            <DirectionalButton
+              arrowDirection={"right"}
+              icon={"fas fa-chevron-right"}
+              onArrowClick={onArrowClick}
+            />
+          ) : null}
+        </span>
       </div>
     </div>
   );
