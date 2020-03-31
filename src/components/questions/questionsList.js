@@ -11,6 +11,7 @@ constructor(props){
   this.state = {
     questions: null,
     showModal: false,
+    currentID: null,
     display: 4
   };
   this.determineDisplayed = this.determineDisplayed.bind(this);
@@ -20,9 +21,19 @@ constructor(props){
 
   //FETCHING INITIAL QUESTION DATA FROM STORE
   componentDidMount(){
+    this.setState({currentID:this.props.paramsId});
     this.props.getProductQuestions(this.props.paramsId);
   }
 
+  //RERENDERS COMPONENTS IF THE PRODUCT ID IN THE NAV BAR HAS CHANGED
+  componentDidUpdate(){
+    if(this.state.currentID !== this.props.paramsId){
+      this.props.getProductQuestions(this.props.paramsId);
+      this.setState({currentID:this.props.paramsId});
+    }
+  }
+
+  //SHOWS THE MODAL FOR SUBMITTING A QUESTION
   addQuestionClick(){
     this.setState({showModal:!this.state.showModal});
   }
@@ -67,18 +78,19 @@ constructor(props){
         }) : <div>{" "}</div>)
         }
         </div><div>
-        <button className="button is-large" onClick={this.addQuestionClick}>Ask A New Question</button>
         {
         //IF DISPLAYED QUESTIONS IS LESS THAN TOTAL QUESTIONS THEN DISPLAY 'SHOW MORE' BUTTON
         (this.determineDisplayed(this.props.store.questions).length <
         this.props.store.questions.length) ?
-        <button className="button is-medium" onClick={this.seeMoreQuestionsClick}>Show More Questions</button> :
+        <button className="button is-medium" onClick={this.seeMoreQuestionsClick}>SHOW MORE QUESTIONS</button> :
         //ELSE IF DISPLAYED QUESTIONS IS EQUAL TO TOTAL QUESTIONS SHOW 'COLLAPSE' BUTTON
         (this.determineDisplayed(this.props.store.questions).length ===
         this.props.store.questions.length && this.props.store.questions.length > 4) ?
-        <button className="button is-medium" onClick={()=>{this.setState({display:4})}}>Collapse Questions</button> :
+        <button className="button is-medium" onClick={()=>{this.setState({display:4})}}>COLLAPSE QUESTIONS</button> :
         <div></div>
         }
+        <br/><br/>
+        <button className="button is-large" onClick={this.addQuestionClick}>ASK A NEW QUESTION</button>
       </div>
       {this.state.showModal ?
       <Modal title="Ask Your Question"

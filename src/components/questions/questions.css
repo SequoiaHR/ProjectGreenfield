@@ -1,11 +1,11 @@
 .answersExpand {
-  max-width: 100vh;
+  /* max-width: 100vh; */
   max-height: 50vh;
   overflow: auto;
 }
 
 .questionsExpand {
-  max-width: 100vh;
+  /* max-width: 100vh; */
   max-height: 90vh;
   overflow: auto;
 }

@@ -58,7 +58,7 @@ class AddAnswer extends React.Component {
       })
       .catch(err=>{
         // console.error(err);
-        console.error("*** Error Posting Answer to Question ***")
+        console.error("!!! Error Posting Answer to Question !!!")
       })
     }
   }
@@ -86,7 +86,7 @@ class AddAnswer extends React.Component {
       <React.Fragment></React.Fragment>}
       {/* DISPLAY WARNING IF ANSWER IS FIELD IS EMPTY*/}
       {this.state.requiredAnswer ?
-      <React.Fragment><b>Answer is a Required Feild!!!</b><br/></React.Fragment> :
+      <React.Fragment><b>Answer is a Required Field!!!</b><br/></React.Fragment> :
       <React.Fragment/>}
 
 
@@ -105,7 +105,7 @@ class AddAnswer extends React.Component {
       <React.Fragment></React.Fragment>}
       {/* DISPLAY WARNING IF NICKNAME FEILD IS EMPTY*/}
       {this.state.requiredNickname ?
-      <React.Fragment><b>Nickname is a Required Feild!!!</b><br/></React.Fragment> :
+      <React.Fragment><b>Nickname is a Required Field!!!</b><br/></React.Fragment> :
       <React.Fragment/>}
       <div>For Privacy Reasons, Do Not Use Your Full Name Or Email Address</div>
       <br/>
@@ -126,7 +126,7 @@ class AddAnswer extends React.Component {
       <React.Fragment></React.Fragment>}
       {/* DISPLAY WARNING IF EMAIL FEILD IS EMPTY*/}
       {this.state.requiredEmail ?
-      <React.Fragment><b>Email is a Required Feild!!!</b><br/></React.Fragment> :
+      <React.Fragment><b>Email is a Required Field!!!</b><br/></React.Fragment> :
       <React.Fragment/>}
       {/* DISPLAY WARNING IF ENTERED EMAIL IS INVALID*/}
       {this.state.validEmail ?
@@ -134,7 +134,7 @@ class AddAnswer extends React.Component {
       <React.Fragment/>}
       <div>For Authentication Reasons, You Will Not Be Emailed</div>
       <br/>
-      <button className="button is-medium" onClick={this.submitAnswer}>Submit Answer</button>
+      <button className="button is-medium" onClick={this.submitAnswer}>SUBMIT ANSWER</button>
       <br/>
 
 

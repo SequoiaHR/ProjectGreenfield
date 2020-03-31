@@ -57,7 +57,7 @@ class AddQuestion extends React.Component {
       })
       .catch(err=>{
         // console.error(err);
-        console.error("*** Error Posting Answer to Question ***")
+        console.error("!!! Error Posting Answer to Question !!!")
       })
     }
   }
@@ -133,7 +133,7 @@ class AddQuestion extends React.Component {
       <React.Fragment/>}
       <div>For Authentication Reasons, You Will Not Be Emailed</div>
       <br/>
-      <button className="button is-medium" onClick={this.submitAnswer}>Submit Answer</button>
+      <button className="button is-medium" onClick={this.submitAnswer}>SUBMIT ANSWER</button>
       <br/>
 
 

@@ -21,7 +21,7 @@ function App(props) {
       <div className="container">
         <ReviewsListContainer id={params.id} />
       </div>
-      <div className="container">
+      <div className="box">
         <QuestionListContainer paramsId={params.id} />
       </div>
 

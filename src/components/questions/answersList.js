@@ -11,13 +11,38 @@ class AnswerList extends React.Component{
     };
     this.determineDisplayed = this.determineDisplayed.bind(this);
     this.seeMoreAnswersClick = this.seeMoreAnswersClick.bind(this);
+    this.getAnswerArray = this.getAnswerArray.bind(this);
   }
 
+  //TRANSFORMS THE OBJECT OF ANSWERS INTO A SORTED ARRAY OF ANSWERS
+  //FIST SORTS BY HELPFULNESS AND THEN BRINGS ANY SELLER ANSWERS TO TOP
+
+  getAnswerArray(answerObject){
+    let answerKeys = Object.keys(answerObject);
+    let answerArray = []
+    for (let i = 0; i < answerKeys.length; i++){
+      answerArray.push(answerObject[answerKeys[i]]);
+    }
+    answerArray.sort((a,b)=>b.helpfulness - a.helpfulness);
+    answerArray.sort((a,b)=> {
+      if (b.answerer_name === "Seller" && a.answerer_name === "Seller") {
+        return 0;
+      }
+      if (b.answerer_name === "Seller") {
+        return 1;
+      }
+      if (a.answerer_name === "Seller") {
+        return -1;
+      }
+    });
+    return answerArray;
+  }
+
+
   //DETERMINES NUMBER OF ANSWERS RENDERED
-  determineDisplayed(propsAnswers){
-    let keys = Object.keys(propsAnswers);
-    keys = keys.slice(0, this.state.display);
-    return keys;
+  determineDisplayed(sortedAnswers){
+    let displayAnswers = sortedAnswers.slice(0, this.state.display);
+    return displayAnswers;
   }
 
   //SETS NUMBER OF ANSWERS DISPLAYED TO ALL ON CLICK
@@ -27,22 +52,25 @@ class AnswerList extends React.Component{
   }
 
   render(){
-    let keys = this.determineDisplayed(this.props.answers);
+    let answers = this.getAnswerArray(this.props.answers)
+    answers = this.determineDisplayed(answers)
 
     return (
       <React.Fragment>
         <div className="container answersExpand">
           {
-          keys[0] ?
-          (keys.map( (key, index) => {
+          answers[0] ?
+          (answers.map( (answer, index) => {
             return (
             <Answer key={index}
-                    id={this.props.answers[key].id}
-                    body={this.props.answers[key].body}
-                    date={this.props.answers[key].date}
-                    answerer_name= {this.props.answers[key].answerer_name}
-                    helpfulness={this.props.answers[key].helpfulness}
-                    photos={this.props.answers[key].photos}
+                    id={answer.id}
+                    body={answer.body}
+                    date={answer.date}
+                    answerer_name={answer.answerer_name}
+                    helpfulness={answer.helpfulness}
+                    photos={answer.photos}
+                    getProductQuestions={this.props.getProductQuestions}
+                    paramsId={this.props.paramsId}
             />)
           })) : <div>{" "}</div>
           }
@@ -50,17 +78,18 @@ class AnswerList extends React.Component{
           <div>
           {
           //IF DISPLAYED ANSWERS IS LESS THAN TOTAL ANSWERS THEN DISPLAY 'SHOW MORE' BUTTON
-          (keys.length < Object.keys(this.props.answers).length) ?
-          <button className="button is-medium" onClick={this.seeMoreAnswersClick}>Show More Answers</button> :
+          (answers.length < Object.keys(this.props.answers).length) ?
+          <button className="button is-medium" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
           //ELSE IF TOTAL ANSWERS IS MORE THAN TWO SHOW 'COLLAPSE ANSWERS' BUTTON
           (Object.keys(this.props.answers).length > 2) ?
-          <button className="button is-medium" onClick={ (event)=>{ this.setState( {display:2} ) } }>Collapse Answers</button> :
+          <button className="button is-medium" onClick={ (event)=>{ this.setState( {display:2} ) } }>COLLAPSE ANSWERS</button> :
           <div></div>
           }
         </div>
       </React.Fragment>
     );
   }
+
 }
 
 export default AnswerList;
