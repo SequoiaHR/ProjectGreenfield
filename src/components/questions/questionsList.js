@@ -12,12 +12,15 @@ constructor(props){
     questions: null,
     showModal: false,
     currentID: null,
+    filterContent: "",
     display: 4
   };
   this.determineDisplayed = this.determineDisplayed.bind(this);
   this.seeMoreQuestionsClick = this.seeMoreQuestionsClick.bind(this);
   this.addQuestionClick = this.addQuestionClick.bind(this);
   this.sortQuestions = this.sortQuestions.bind(this);
+  this.filterQuestions = this.filterQuestions.bind(this);
+  this.searchChangeHandler = this.searchChangeHandler.bind(this);
 }
 
   //FETCHING INITIAL QUESTION DATA FROM STORE
@@ -63,15 +66,41 @@ constructor(props){
     this.setState({display: this.state.display+2})
   }
 
+  //FILTERS DISPLAYED QUESTIONS IF THERE ARE MORE THAN THREE CHARS INPUTTED
+  filterQuestions(questionsArray){
+    var filteredArray = [];
+    if (this.state.filterContent.length >= 3) {
+      for(let i = 0; i < questionsArray.length; i++){
+        if (questionsArray[i].question_body.toLowerCase().includes(this.state.filterContent.toLowerCase())) {
+          filteredArray.push(questionsArray[i]);
+        }
+      }
+      return filteredArray;
+    }
+    return questionsArray;
+  }
+
+  //ADDS SEARCH TERM TO LOCAL STATE VARIABLE
+  searchChangeHandler(event){
+    this.setState({filterContent:event.target.value})
+  }
+
   render(){
     let sortedQuestions = this.sortQuestions(this.props.store.questions);
+    let filteredSortedQuestions = this.filterQuestions(sortedQuestions);
     return (
     <React.Fragment>
       <h1 className="title">QUESTIONS & ANSWERS</h1>
+      <textarea className="textarea is-medium"
+                placeholder="Have A Question?"
+                name="search"
+                rows="1"
+                onChange={this.searchChangeHandler}
+                ></textarea><br/>
       <div className="container questionsExpand">
         {
         (this.props.store.questions[0] ?
-          this.determineDisplayed(sortedQuestions).map( (question, index) => {
+          this.determineDisplayed(filteredSortedQuestions).map( (question, index) => {
           return (
           <Question key={index}
                     question_id={question.question_id}
@@ -89,12 +118,12 @@ constructor(props){
         </div><div>
         {
         //IF DISPLAYED QUESTIONS IS LESS THAN TOTAL QUESTIONS THEN DISPLAY 'SHOW MORE' BUTTON
-        (this.determineDisplayed(this.props.store.questions).length <
-        this.props.store.questions.length) ?
+        (this.determineDisplayed(filteredSortedQuestions).length <
+        filteredSortedQuestions.length) ?
         <button className="button is-medium" onClick={this.seeMoreQuestionsClick}>SHOW MORE QUESTIONS</button> :
         //ELSE IF DISPLAYED QUESTIONS IS EQUAL TO TOTAL QUESTIONS SHOW 'COLLAPSE' BUTTON
-        (this.determineDisplayed(this.props.store.questions).length ===
-        this.props.store.questions.length && this.props.store.questions.length > 4) ?
+        (this.determineDisplayed(filteredSortedQuestions).length ===
+        filteredSortedQuestions.length && filteredSortedQuestions.length > 4) ?
         <button className="button is-medium" onClick={()=>{this.setState({display:4})}}>COLLAPSE QUESTIONS</button> :
         <div></div>
         }
