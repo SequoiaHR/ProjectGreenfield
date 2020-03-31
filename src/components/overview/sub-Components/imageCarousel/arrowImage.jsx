@@ -8,9 +8,9 @@ function DirectionalButton({ arrowDirection, icon, onImageArrowClick }) {
         onClick={() => {
           onImageArrowClick(arrowDirection);
         }}
-        class="button is-small"
+        className="button is-small"
       >
-        <i class={icon}></i>
+        <i className={icon}></i>
       </button>
     </div>
   );

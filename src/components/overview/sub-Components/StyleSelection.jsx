@@ -40,7 +40,8 @@ const StyleSelection = function(props) {
     let row = props.state.allStyles.slice(index, index + 4);
     styleRows.push(row);
   }
-
+  var outerkey = 0;
+  var innerkey = 0;
   return (
     <div>
       <div style={{ fontSize: '15pt' }}>
@@ -48,11 +49,13 @@ const StyleSelection = function(props) {
       </div>
       <div style={containerStyle}>
         {styleRows.map(eachStyleRow => {
+          outerkey++;
           return (
-            <div style={rowStyle}>
+            <div style={rowStyle} key={outerkey}>
               {eachStyleRow.map(eachStyle => {
+                innerkey++;
                 return (
-                  <div style={circleStyling}>
+                  <div style={circleStyling} key={innerkey}>
                     <img
                       style={imgStyling}
                       src={eachStyle.photos[0].thumbnail_url}

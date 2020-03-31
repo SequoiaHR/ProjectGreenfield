@@ -13,14 +13,17 @@ const ThumbnailImages = function(props) {
     thumbnailRows.push(row);
   }
 
+  //this is just to give me a random key to stop console warnings
+  let keycounter = 0;
+  //conditional logic to render page
   if (props.state.currentThumbnailRow !== undefined) {
     return (
       <div>
         {thumbnailRows[props.state.currentThumbnailRow].map(
           eachThumbnailImage => {
-            console.log('eachThumbnailImage', eachThumbnailImage);
+            keycounter++;
             return (
-              <div className="column">
+              <div className="column" key={keycounter}>
                 <img
                   className="thumbStyle"
                   src={eachThumbnailImage.thumbnail_url}

@@ -140,12 +140,8 @@ class overviewMain extends React.Component {
     }
   }
 
-  componentDidMount() {
-    //when the component mounts, this gets the API data, sets it as the store, and
-    //then organizes it and saves it as the state
-    let product_id = 3; //filler
-    //componentDidMount, grab the API data for the product info
-    Axios.get(`http://3.134.102.30/products/${product_id}`)
+  getData(page_id) {
+    Axios.get(`http://3.134.102.30/products/${page_id}`)
       .then(API_details => {
         //input data into store
         this.props.storeProductDetails(API_details.data);
@@ -171,8 +167,7 @@ class overviewMain extends React.Component {
         console.log(err);
       });
 
-    //componentDidMount, grab the API data for styles
-    Axios.get(`http://3.134.102.30/products/${product_id}/styles`)
+    Axios.get(`http://3.134.102.30/products/${page_id}/styles`)
       .then(API_Styles => {
         //input data into store
         this.props.storeProductStyles(API_Styles.data);
@@ -200,6 +195,19 @@ class overviewMain extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.paramsId !== prevProps.paramsId) {
+      this.getData(this.props.paramsId);
+    }
+  }
+
+  componentDidMount() {
+    //when the component mounts, this gets the API data, sets it as the store, and
+    //then organizes it and saves it as the state
+    //componentDidMount, grab the API data for the product info
+    this.getData(this.props.paramsId);
   }
 
   render() {

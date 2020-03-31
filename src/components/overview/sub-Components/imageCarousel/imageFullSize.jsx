@@ -8,6 +8,7 @@ const ImageFullSize = function(props) {
 
     return (
       <div className="divStyle">
+        <div></div>
         <span className="helper"></span>
         <img className="imgStyle" src={imageURL} />
       </div>
