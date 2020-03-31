@@ -15,7 +15,12 @@ const calculateRating = function(metadata) {
     reviewers += metadata.ratings[rating]; // number of users choosing that rating
   }
 
-  const overallRating = (totalStars / reviewers).toFixed(1);
+  let overallRating;
+  if (reviewers === 0) {
+    overallRating = 0;
+  } else {
+    overallRating = (totalStars / reviewers).toFixed(1);
+  }
 
   return overallRating;
 }

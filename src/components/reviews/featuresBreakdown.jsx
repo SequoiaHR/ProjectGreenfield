@@ -8,7 +8,7 @@ const FeaturesBreakdown = ({ metadata }) => {
       ? Object.keys(metadata.characteristics).map((characteristic) => {
           return (
             <div key={characteristic} className="slider-section">
-              <div className="is-size-6">{characteristic}</div>
+              <div className="is-size-6 char-name">{characteristic}</div>
               <input 
                 type="range"
                 min="1" 
@@ -19,10 +19,10 @@ const FeaturesBreakdown = ({ metadata }) => {
                 style={{width:"100%"}} />
               <div className="level">
                 <div className="level-left">
-                  <span className="level-item is-size-7">{MEANINGS[characteristic][1]}</span>
+                  <span className="level-item is-size-7 meaning">{MEANINGS[characteristic][1]}</span>
                 </div>
                 <div className="level-right">
-                  <span className="level-item is-size-7">{MEANINGS[characteristic][5]}</span>
+                  <span className="level-item is-size-7 meaning">{MEANINGS[characteristic][5]}</span>
                 </div>
               </div>
             </div>

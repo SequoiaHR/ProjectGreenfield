@@ -1,15 +1,43 @@
 
 #reviews-section {
-  max-height: 80vh;
-  max-width: 90vw;
-  padding: 0 20px 20px 20px;
-  overflow: auto;
   margin-bottom: 30px;
 }
 
-.slider-section {
-  padding-top: 10px;
+#review-tiles {
+  max-height: 90vh;
+  max-width: 60vw;
+  padding: 0 20px 20px 20px;
+  overflow: auto;
 }
+
+#recommend {
+  padding: 5px 0;
+}
+
+/* #review-tiles::-webkit-scrollbar {
+  display: none;
+} */
+
+
+/*** features breakdown ***/
+
+#features-breakdown {
+  margin-top: 20px;
+}
+
+.slider-section {
+  padding-top: 7px;
+}
+
+.char-name {
+  margin-bottom: -4px;
+}
+
+.meaning {
+  margin-top: -7px;
+}
+
+/******/
 
 .char-radio-row {
   margin-top: 10px;

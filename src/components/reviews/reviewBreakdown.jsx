@@ -9,6 +9,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
   var total = 0;
   var percent = 0;
 
+  // logic for avoiding errors or NaN percent displays
   if (metadata.recommended !== undefined && !(metadata.recommended[0] === 0 && metadata.recommended[1] === 0)) {
   total = (metadata.recommended[0] || 0) + (metadata.recommended[1] || 0);
   percent = Math.round(((metadata.recommended[1] || 0) / total) * 100);
@@ -20,14 +21,16 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
     <div className="tile is-child">
       <div className="level">
         <div className="level-left">
-          <div className="level-item is-size-1">{overallRating}</div>
+          {overallRating === 0
+            ? <div className="level-item is-size-4">No ratings</div>
+            : <div className="level-item is-size-1">{overallRating}</div>}
         </div>
         <div className="level-right">
           <div className="level-item"><StarRating rating={overallRating} width="25" height="25" /></div>
         </div>
       </div>
 
-      {metadata.recommended !== undefined
+      {metadata.recommended !== undefined && Object.keys(metadata.recommended).length !== 0
         ? <div className="subtitle">{percent}% of reviewers recommend this product</div>
         : null}
       {metadata.ratings
@@ -51,7 +54,9 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
       {filters.size > 0
         ? <div className="actionable is-size-7" onClick={clearHandler}>Remove all filters</div>
         : null}
-      <FeaturesBreakdown metadata={metadata} />
+      <div id="features-breakdown">
+        <FeaturesBreakdown metadata={metadata} />
+      </div>
     </div>
   );
 };

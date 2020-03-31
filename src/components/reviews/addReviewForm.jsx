@@ -98,7 +98,23 @@ class AddReviewForm extends React.Component {
   }
 
   submit() {
-    axios.post();
+    axios.post(`http://3.134.102.30/reviews/${this.props.id}`, {
+      rating: this.state.rating,
+      summary: this.state.summary,
+      body: this.state.body,
+      recommend: this.state.recommend ? 1 : 0,
+      name: this.state.nickname,
+      email: this.state.email,
+      photos: [],
+      characteristics: this.state.characteristics
+    })
+      .then((res) => {
+        console.log("Review posted, received", res);
+        this.props.fetch(this.props.id, this.props.sort)
+      })
+      .catch((err) => {
+        console.log("Error posting review:", err);
+      });
   }
 
   render() {
@@ -114,8 +130,8 @@ class AddReviewForm extends React.Component {
           <label>
           <div className="add-input">Do you recommend this product?*</div>
             <div>
-              <input type="radio" name="recommend" value={true} onChange={this.onChangeBound} /> Yes
-              <input type="radio" name="recommend" value={false} onChange={this.onChangeBound} /> No
+              <input type="radio" name="recommend" value={1} onChange={this.onChangeBound} /> Yes
+              <input type="radio" name="recommend" value={0} onChange={this.onChangeBound} /> No
             </div>
           </label>
           <br />

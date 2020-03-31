@@ -11,6 +11,7 @@ class ReviewsList extends React.Component {
 
     this.state = {
       reviewsShown: 2,
+      sort: "relevant",
       filters: new Set(),
       modalOpen: false
     };
@@ -24,12 +25,18 @@ class ReviewsList extends React.Component {
 
   componentDidMount() {
     // fetch reviews and metadata from API
-    this.props.getData(this.props.id);
+    this.props.getData(this.props.id, "relevant");
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.id !== prevProps.id) {
-      this.props.getData(this.props.id);
+      this.props.getData(this.props.id, "relevant");
+      this.setState({
+        reviewsShown: 2,
+        sort: "relevant",
+        filters: new Set(),
+        modalOpen: false
+      });
     }
   }
 
@@ -68,7 +75,11 @@ class ReviewsList extends React.Component {
   }
 
   sort(event) {
-    this.props.sortReviews(this.props.id, event.target.value);
+    this.setState({
+      sort: event.target.value
+    }, () => {
+      this.props.sortReviews(this.props.id, this.state.sort);
+    });
   }
 
   openModal() {
@@ -111,15 +122,17 @@ class ReviewsList extends React.Component {
             <div className="tile is-parent is-vertical">
               <div>
                 {reviews.length} reviews, sorted by{" "}
-                <select className="select" defaultValue="relevant" onChange={this.sortBound}>
+                <select className="select" name="sort" defaultValue="relevant" value={this.state.sort} onChange={this.sortBound}>
                   <option value="relevant">relevance</option>
                   <option value="newest">recent</option>
                   <option value="helpful">helpfulness</option>
                 </select>
               </div>
-              {tiles.map((review) => { // map out tiles (currently showing)
-                return <ReviewTile key={review.review_id} review={review} id={this.props.id} />;
-              })}
+              <div id="review-tiles">
+                {tiles.map((review) => { // map out tiles (currently showing)
+                  return <ReviewTile key={review.review_id} review={review} id={this.props.id} />;
+                })}
+              </div>
               <div className="tile is-child">
                 {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
                   ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
@@ -132,7 +145,9 @@ class ReviewsList extends React.Component {
                     <AddReviewFormContainer 
                       characteristics={this.props.metadata.characteristics} 
                       id={this.props.id} 
-                      exit={this.exitModalBound} />
+                      exit={this.exitModalBound}
+                      fetch={this.props.getData}
+                      sort={this.state.sort} />
                     </Modal>
                   : null}
               </div>
