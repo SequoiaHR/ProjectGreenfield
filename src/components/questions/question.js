@@ -18,8 +18,14 @@ class Question extends React.Component{
 
 //INITIALIZES LOCAL STORAGE OBJECTS FOR QUESTIONS ON MOUNT
   componentDidMount(){
-    localStorage.setItem("helpfulQuestions",JSON.stringify([]));
-    localStorage.setItem("reportedQuestions",JSON.stringify([]));
+    let reportedQuestions = localStorage.getItem("reportedQuestions");
+    let helpfulQuestions = localStorage.getItem("helpfulQuestions");
+    if (helpfulQuestions===null) {
+      localStorage.setItem("helpfulQuestions",JSON.stringify([]));
+    }
+    if (reportedQuestions===null){
+      localStorage.setItem("reportedQuestions",JSON.stringify([]));
+    }
   }
 
 //CHECKS LOCAL STORAGE FOR PREVIOUSE QUESTIONS MARKED HELPFUL AND IF HELPFUL CLICK

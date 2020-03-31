@@ -16,8 +16,14 @@ constructor(props){
 
 //INITIALIZES LOCAL STORAGE OBJECTS FOR ANSWERS ON MOUNT
 componentDidMount(){
-  localStorage.setItem("helpfulAnswers",JSON.stringify([]));
-  localStorage.setItem("reportedAnswers",JSON.stringify([]));
+  let helpfulAnswers = localStorage.getItem("helpfulAnswers");
+  let reportedAnswers = localStorage.getItem("reportedAnswers");
+  if (helpfulAnswers===null) {
+    localStorage.setItem("helpfulAnswers",JSON.stringify([]));
+  }
+  if (reportedAnswers===null){
+    localStorage.setItem("reportedAnswers",JSON.stringify([]));
+  }
 }
 
 
