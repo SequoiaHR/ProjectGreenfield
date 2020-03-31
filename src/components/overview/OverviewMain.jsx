@@ -15,8 +15,7 @@ class overviewMain extends React.Component {
         currentImage: undefined,
         otherImagesInStyle: [],
         currentThumbnailRow: undefined,
-        maximized: false,
-        zoomed: false
+        maximized: false
       },
       starRating: undefined,
       basicDetails: {
@@ -31,6 +30,7 @@ class overviewMain extends React.Component {
         selectedReducedPrice: undefined
       },
       allStyles: [],
+      zoom: false,
       cart: {
         cartSize: undefined,
         cartNumber: undefined,
@@ -49,6 +49,7 @@ class overviewMain extends React.Component {
     this.changeImageOnThumbnailClick = this.changeImageOnThumbnailClick.bind(
       this
     );
+    this.zoomImage = this.zoomImage.bind(this);
   }
 
   //this changes the style when you click it!
@@ -119,6 +120,16 @@ class overviewMain extends React.Component {
     }
   }
 
+  //this function zooms the entire image to fill the screen
+  zoomImage() {
+    if (this.state.zoom) {
+      this.setState({ zoom: false });
+    } else if (!this.state.zoom) {
+      this.setState({ zoom: true });
+    }
+    console.log('clicked and state is ', this.state.zoom);
+  }
+
   //this function changes the displayed thumbnail images when you click the arrow
   onNavArrowClick(direction) {
     if (direction === 'left') {
@@ -162,6 +173,7 @@ class overviewMain extends React.Component {
             features: API_details.data.features
           }
         });
+        console.log('Tristan is a cottonheaded ninnymuggins');
       })
       .catch(err => {
         console.log(err);
@@ -211,28 +223,45 @@ class overviewMain extends React.Component {
   }
 
   render() {
-    return (
-      <div style={{ marginBottom: '30px' }}>
-        <div className="columns">
-          <span className="column is-half">
-            <ImageCarousel
-              state={this.state.images}
-              onImageArrowClick={this.onImageArrowClick}
-              onNavArrowClick={this.onNavArrowClick}
-              changeImageOnThumbnailClick={this.changeImageOnThumbnailClick}
-            />
-          </span>
-          <span className="column is-half">
-            <ProductRating state={this.state} />
-            <BasicDetails state={this.state} />
-            <StyleSelection
-              state={this.state}
-              changeStyleOnClick={this.changeStyleOnClick}
-            />
-            <AddToBag state={this.state} />
-          </span>
+    //conditional rendering for zoom view
+    let zoomStyling;
+    if (this.state.zoom === true) {
+      zoomStyling = <div></div>;
+    } else if (this.state.zoom === false) {
+      zoomStyling = (
+        <div className="tile is-child">
+          <ProductRating state={this.state} />
+          <BasicDetails state={this.state} />
+          <StyleSelection
+            state={this.state}
+            changeStyleOnClick={this.changeStyleOnClick}
+          />
+          <AddToBag state={this.state} />
         </div>
-        <Description state={this.state} />
+      );
+    }
+
+    return (
+      <div className="tile is-ancestor " style={{ marginBottom: '30px' }}>
+        <div className="tile is-vertical is-parent">
+          <div className="tile is-child">
+            <div className="tile is-parent">
+              <div className="tile is-child">
+                <ImageCarousel
+                  state={this.state.images}
+                  onImageArrowClick={this.onImageArrowClick}
+                  onNavArrowClick={this.onNavArrowClick}
+                  changeImageOnThumbnailClick={this.changeImageOnThumbnailClick}
+                  zoomImage={this.zoomImage}
+                />
+              </div>
+              {zoomStyling}
+            </div>
+          </div>
+          <div className="tile is-child description">
+            <Description state={this.state} />
+          </div>
+        </div>
       </div>
     );
   }

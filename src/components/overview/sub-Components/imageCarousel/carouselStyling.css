@@ -1,0 +1,139 @@
+/************** carousel style **********************  */
+.entireImageCarouselStyling {
+  position: relative;
+  margin-right: 20px;
+}
+
+/************* images ******************************** */
+
+/* bucket styling */
+.largeImageBucket {
+  width: 100%;
+  height: 405px;
+  position: relative;
+  overflow: hidden;
+  float: left;
+}
+
+/* image styling */
+.imgStyle {
+  max-width: 80%;
+  max-height: 100%;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+
+/* arrow styling */
+.prevArrowImg,
+.nextArrowImg {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 10px;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.nextArrowImg {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prevArrowImg {
+  left: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prevArrowImg:hover,
+.nextArrowImg:hover {
+  background-color: black;
+  color: white;
+}
+
+/* zoom changer */
+.zoom {
+  height: 22px;
+  width: 22px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.zoom:hover {
+  background-color: black;
+  color: white;
+}
+
+/****************** thumbnails *******************************  */
+
+/* thumbnail navigation bucket */
+.navigationOverallBucket {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  overflow: hidden;
+  float: left;
+  margin: 5px;
+}
+
+/* thumbnail images bucket */
+.imagesNavBucket {
+  max-width: 90%;
+  max-height: 100%;
+  position: absolute;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+}
+
+/* image thumbnails styling */
+.thumbStyle {
+  width: 50px;
+  height: auto;
+  float: left;
+  margin: 3px;
+  vertical-align: middle;
+}
+
+/********* arrow styling ****************/
+.prevArrowNav,
+.nextArrowNav {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 10px;
+  margin-top: -22px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.3s ease;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.nextArrowNav {
+  right: 40px;
+  border-radius: 3px 0 0 3px;
+}
+
+.prevArrowNav {
+  left: 40px;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prevArrowNav:hover,
+.nextArrowNav:hover {
+  background-color: black;
+  color: white;
+}

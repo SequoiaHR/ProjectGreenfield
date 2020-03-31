@@ -1,17 +1,21 @@
 import React from 'react';
-import './thumbnailImages.css';
+import './carouselStyling.css';
 
 function ArrowNav({ arrowDirection, icon, onNavArrowClick }) {
+  let arrowStyle;
+  if (arrowDirection === 'left') {
+    arrowStyle = 'prevArrowNav';
+  } else if (arrowDirection === 'right') {
+    arrowStyle = 'nextArrowNav';
+  }
   return (
-    <div className="column is-narrow is-vertical-centered arrowStyle">
-      <button
-        onClick={() => {
-          onNavArrowClick(arrowDirection);
-        }}
-        class="button is-small"
-      >
-        <i class={icon}></i>
-      </button>
+    <div
+      onClick={() => {
+        onNavArrowClick(arrowDirection);
+      }}
+      className={arrowStyle}
+    >
+      <i className={icon}></i>
     </div>
   );
 }
