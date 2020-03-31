@@ -9,3 +9,7 @@
   border: none;
   background: none;
 }
+
+.transparent-icon {
+  opacity: 0.00;
+}
