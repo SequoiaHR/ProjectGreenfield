@@ -28,7 +28,7 @@ const List = ({
   var [outfitsReviews, setOutfitsReviews] = useState([]);
 
   // Set Local State For Conditionally Rendered Products
-  let initialShownIndices = listName === "Outfit" ? [0, 1, 2, 3] : [0, 1, 2, 3];
+  let initialShownIndices = listName === "Outfit" ? [0, 1, 2] : [0, 1, 2, 3];
   var [shownIndices, setShownIndices] = useState(initialShownIndices);
 
   //conditionally set outfits to Outfit data if this list represents outfits
@@ -163,9 +163,11 @@ const List = ({
                         pageProduct={pageProduct}
                         product={product}
                         productImage={
-                          filterForShownItems(productsImages, shownIndices)[
+                          checkForMissingShownImage(
+                            productsImages,
+                            shownIndices,
                             idx
-                          ] !== undefined
+                          )
                             ? filterForShownItems(productsImages, shownIndices)[
                                 idx
                               ].results[0].photos[0].thumbnail_url
@@ -196,9 +198,11 @@ const List = ({
                           pageProduct={pageProduct}
                           product={product}
                           productImage={
-                            filterForShownItems(productsImages, [
-                              nextIndex
-                            ])[0] !== undefined
+                            checkForMissingShownImage(
+                              productsImages,
+                              [nextIndex],
+                              0
+                            )
                               ? filterForShownItems(productsImages, [
                                   nextIndex
                                 ])[0].results[0].photos[0].thumbnail_url
