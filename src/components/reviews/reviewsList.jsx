@@ -40,6 +40,12 @@ class ReviewsList extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+      this.props.getData(this.props.id);
+    }
+  }
+
   changeLoad(direction) {
     this.setState({
       reviewsShown: direction === "more"

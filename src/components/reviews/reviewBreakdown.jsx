@@ -30,6 +30,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
         </div>
       </div>
 
+
       {metadata.recommended !== undefined && Object.keys(metadata.recommended).length !== 0
         ? <div className="subtitle">{percent}% of reviewers recommend this product</div>
         : null}
