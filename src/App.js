@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 // import {DummyContainer, DumdumContainer} from "./containers/dummyContainer.js";
-import ReviewsListContainer from "./containers/reviews/reviewsListContainer.js";
-import QuestionListContainer from "./containers/questions/questionListContainer";
-import ListContainer from "./containers/productDetails/listContainer.js";
-import OverviewContainer from "./containers/overview/overviewContainer";
+import ReviewsListContainer from './containers/reviews/reviewsListContainer.js';
+import QuestionListContainer from './containers/questions/questionListContainer';
+import ListContainer from './containers/productDetails/listContainer.js';
+import OverviewContainer from './containers/overview/overviewContainer';
 
 function App(props) {
   const {
@@ -16,7 +16,7 @@ function App(props) {
       {/* <DummyContainer />
       <DumdumContainer/> */}
       <div className="container">
-        <OverviewContainer />
+        <OverviewContainer paramsId={params.id} />
       </div>
       <div className="container">
         <ReviewsListContainer id={params.id} />
