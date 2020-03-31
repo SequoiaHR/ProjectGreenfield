@@ -3,7 +3,7 @@ import "./addCard.css";
 
 const AddToOutfitCard = ({ onClickButton, pageProduct }) => {
   return (
-    <div class="column is-2">
+    <div class="column is-3">
       <div class="card is-vertical-centered has-background-grey-lighter">
         <button
           class="button is-medium is-vertical-centered addCardButton"

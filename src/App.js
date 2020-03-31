@@ -26,19 +26,10 @@ function App(props) {
       </div>
 
       <div className="box">
-        <div className="box">
-          <div>
-            <h1 class="title">Related Items</h1>
-          </div>
-
-          <ListContainer paramsId={params.id} listName="Related" />
-        </div>
-        <div className="box">
-          <div>
-            <h1 class="title">Your Outfit</h1>
-          </div>
-          <ListContainer paramsId={params.id} listName="Outfit" />
-        </div>
+        <ListContainer paramsId={params.id} listName="Related" />
+      </div>
+      <div className="box">
+        <ListContainer paramsId={params.id} listName="Outfit" />
       </div>
     </div>
   );
