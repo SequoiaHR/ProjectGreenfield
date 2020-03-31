@@ -17,7 +17,7 @@ const calculateRating = function(metadata) {
 
   const overallRating = (totalStars / reviewers).toFixed(1);
 
-  return Number(overallRating);
+  return overallRating;
 }
 
 export default calculateRating;
