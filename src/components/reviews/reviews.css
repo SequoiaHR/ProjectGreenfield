@@ -1,4 +1,8 @@
 
+.actionable:hover {
+  cursor: pointer;
+}
+
 #reviews-section {
   margin-bottom: 30px;
 }
@@ -74,10 +78,6 @@
 .filter-option:hover {
   cursor: pointer;
   background-color: yellow;
-}
-
-.actionable:hover {
-  cursor: pointer;
 }
 
 #errors {
