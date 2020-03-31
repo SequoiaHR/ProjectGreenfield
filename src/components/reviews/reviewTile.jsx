@@ -123,6 +123,13 @@ class ReviewTile extends React.Component {
         {review.recommend
           ? <div id="recommend"><i className="fas fa-check"></i> I recommend this product</div>
           : null}
+        <div id="photo-row">
+        {review.photos !== undefined && review.photos.length > 0
+          ? review.photos.map((photo) => {
+            return <img key={photo.id} className="review-photo" src={photo.url} alt="product shown by user"></img>;
+            })
+          : null}
+        </div>
         {review.response !== undefined && review.response !== null && review.response !== ""
           ? <div><strong>Seller response:</strong><br />{review.response}</div>
           : null}
