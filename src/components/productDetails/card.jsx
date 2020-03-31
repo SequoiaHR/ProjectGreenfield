@@ -55,7 +55,7 @@ const Card = ({
           )}
         </button>
         <figure className="image is-4by3">
-          <AttachProductLink listName={listName} productId={product.id}>
+          <AttachProductLink productId={product.id}>
               <img
                 name={product.id}
                 onClick={onClickDetails}
@@ -64,7 +64,7 @@ const Card = ({
                     ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
                     : productImage
                 }
-                alt="Related-Product Item"
+                alt={`${listName}-Product Item`}
               />
             </AttachProductLink>
         </figure>

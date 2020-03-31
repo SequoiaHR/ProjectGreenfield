@@ -28,7 +28,7 @@ const List = ({
   var [outfitsReviews, setOutfitsReviews] = useState([]);
 
   // Set Local State For Conditionally Rendered Products
-  let initialShownIndices = listName === "Outfit" ? [0, 1, 2, 3] : [0, 1, 2, 3];
+  let initialShownIndices = listName === "Outfit" ? [0, 1, 2] : [0, 1, 2, 3];
   var [shownIndices, setShownIndices] = useState(initialShownIndices);
 
   //conditionally set outfits to Outfit data if this list represents outfits
