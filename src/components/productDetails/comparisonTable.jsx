@@ -1,7 +1,7 @@
 import React from "react";
+import "./comparisonTable.css";
 
 const ComparisonTable = ({ product, pageProduct }) => {
-
   var getUniqueFeatures = (features, pageFeatures) => {
     let productFeatureNames = features.map(item => item.feature);
     let pageFeatureNames = pageFeatures.map(item => item.feature);
@@ -33,9 +33,21 @@ const ComparisonTable = ({ product, pageProduct }) => {
     let [feat, pageItem, compareItem] = feature;
     return (
       <tr key={idx}>
-        <td>{pageItem}</td>
-        <td>{feat}</td>
-        <td>{compareItem}</td>
+        {pageItem === "null" ? (
+          <td className="has-text-centered">
+            <i class="fas fa-check"></i>
+          </td>
+        ) : (
+          <td className="has-text-centered">{pageItem}</td>
+        )}
+        <td className="has-text-centered is-feature">{feat}</td>
+        {compareItem === "null" ? (
+          <td className="has-text-centered">
+            <i class="fas fa-check"></i>
+          </td>
+        ) : (
+          <td className="has-text-centered">{compareItem}</td>
+        )}
       </tr>
     );
   };
@@ -44,12 +56,12 @@ const ComparisonTable = ({ product, pageProduct }) => {
     <table class="table">
       <thead>
         <tr>
-          <th>{pageProduct.name}</th>
-          <th>Features</th>
-          <th>{product.name}</th>
+          <th align="center">{pageProduct.name}</th>
+          <th align="center"></th>
+          <th align="center">{product.name}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="scroll">
         {Object.values(comparison).map((feature, idx) => {
           return renderTableData(feature, idx);
         })}
