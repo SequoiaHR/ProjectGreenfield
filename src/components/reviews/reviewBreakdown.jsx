@@ -7,10 +7,11 @@ import StarRating from "../starRating.jsx";
 
 const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => {
   var total = 0;
+  var percent = 0;
 
-  if (metadata.recommended) {
-  total = metadata.recommended[0] + metadata.recommended[1];
-  var percent = Math.round((metadata.recommended[1] / total) * 100);
+  if (metadata.recommended !== undefined && !(metadata.recommended[0] === 0 && metadata.recommended[1] === 0)) {
+  total = (metadata.recommended[0] || 0) + (metadata.recommended[1] || 0);
+  percent = Math.round(((metadata.recommended[1] || 0) / total) * 100);
   }
 
   const overallRating = calculateRating(metadata);
@@ -26,7 +27,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
         </div>
       </div>
 
-      {total
+      {metadata.recommended !== undefined
         ? <div className="subtitle">{percent}% of reviewers recommend this product</div>
         : null}
       {metadata.ratings
@@ -40,7 +41,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
               <progress // progress bar
                 className="progress is-small is-success"
                 value={metadata.ratings[num] || 0}
-                max={total}>{metadata.ratings[num]}
+                max={total}>
               </progress>
             </div>
           );
