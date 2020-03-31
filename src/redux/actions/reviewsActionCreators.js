@@ -2,9 +2,9 @@ import { GET_REVIEWS, GET_REVIEW_METADATA } from "./actionTypes.js";
 import axios from "axios";
 
 
-export function fetchReviews(id) {
+export function fetchReviews(id, sort) {
   return function(dispatch) {
-    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=relevant`)
+    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
       .then(({data}) => {
         dispatch(setReviews(data.results));
       })
@@ -14,17 +14,17 @@ export function fetchReviews(id) {
   }
 }
 
-export function changeSort(id, sort) {
-  return function(dispatch) {
-    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
-      .then(({data}) => {
-        dispatch(setReviews(data.results));
-      })
-      .catch((err) => {
-        console.log("Error fetching sorted reviews:", err);
-      });
-  }
-}
+// export function changeSort(id, sort) {
+//   return function(dispatch) {
+//     axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
+//       .then(({data}) => {
+//         dispatch(setReviews(data.results));
+//       })
+//       .catch((err) => {
+//         console.log("Error fetching sorted reviews:", err);
+//       });
+//   }
+// }
 
 function setReviews(data) {
   return {

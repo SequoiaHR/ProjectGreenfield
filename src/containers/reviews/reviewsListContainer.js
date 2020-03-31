@@ -11,12 +11,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getData: (id) => {
-      dispatch(fetchReviews(id));
+    getData: (id, sort) => {
+      dispatch(fetchReviews(id, sort));
       dispatch(fetchMetadata(id));
     },
     sortReviews: (id, sort) => {
-      dispatch(changeSort(id, sort));
+      dispatch(fetchReviews(id, sort));
     }
   }
 };

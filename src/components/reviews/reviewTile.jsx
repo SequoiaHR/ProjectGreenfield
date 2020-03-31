@@ -3,6 +3,7 @@ import moment from "moment";
 import axios from "axios";
 
 import StarRating from "../starRating.jsx";
+import "./reviews.css";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -105,7 +106,7 @@ class ReviewTile extends React.Component {
           <div className="level-right">
             {this.state.verified
               ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
-                <br />&#10004; Verified user</div>
+                <br /><i className="fas fa-check-circle"></i> Verified user</div>
               : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
           </div>
         </div>
@@ -114,14 +115,21 @@ class ReviewTile extends React.Component {
           ? <div>{review.body}</div>
           : <div>{review.body.slice(0, 250)}...</div>}
         {review.body.length > 250 && !this.state.expanded
-          ? <div className="is-size-7" onClick={this.toggleExpandBound}>Show more</div>
+          ? <div className="actionable is-size-7" onClick={this.toggleExpandBound}>Show more</div>
           : null}
         {this.state.expanded
-          ? <div className="is-size-7" onClick={this.toggleExpandBound}>Show less</div>
+          ? <div className="actionable is-size-7" onClick={this.toggleExpandBound}>Show less</div>
           : null}
         {review.recommend
-          ? <div>&#10004; I recommend this product</div>
+          ? <div id="recommend"><i className="fas fa-check"></i> I recommend this product</div>
           : null}
+        <div id="photo-row">
+        {review.photos !== undefined && review.photos.length > 0
+          ? review.photos.map((photo) => {
+            return <img key={photo.id} className="review-photo" src={photo.url} alt="product shown by user"></img>;
+            })
+          : null}
+        </div>
         {review.response !== undefined && review.response !== null && review.response !== ""
           ? <div><strong>Seller response:</strong><br />{review.response}</div>
           : null}
