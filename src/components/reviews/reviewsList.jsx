@@ -40,12 +40,6 @@ class ReviewsList extends React.Component {
     }
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.id !== prevProps.id) {
-      this.props.getData(this.props.id);
-    }
-  }
-
   changeLoad(direction) {
     this.setState({
       reviewsShown: direction === "more"
@@ -128,7 +122,7 @@ class ReviewsList extends React.Component {
             <div className="tile is-parent is-vertical">
               <div>
                 {reviews.length} reviews, sorted by{" "}
-                <select className="select" name="sort" defaultValue="relevant" value={this.state.sort} onChange={this.sortBound}>
+                <select className="select" name="sort" value={this.state.sort} onChange={this.sortBound}>
                   <option value="relevant">relevance</option>
                   <option value="newest">recent</option>
                   <option value="helpful">helpfulness</option>
