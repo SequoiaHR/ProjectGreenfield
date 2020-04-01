@@ -137,3 +137,14 @@
   background-color: black;
   color: white;
 }
+
+/* thumbnail  border styling*/
+.regularStyleBorder {
+  border: white;
+}
+
+.selectedStyleBorder {
+  border-color: rgb(30, 144, 255);
+  border-style: solid;
+  border-width: 2px;
+}

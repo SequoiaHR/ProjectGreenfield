@@ -16,13 +16,23 @@ const ThumbnailImages = function(props) {
   //this is just to give me a random key to stop console warnings
   //conditional logic to render page
   if (props.state.currentThumbnailRow !== undefined) {
+    //variables for my thumbnail border logic
+    let indexImage = props.state.currentImage;
+    let imageURL = props.state.otherImagesInStyle[indexImage].url;
     return (
       <div className="imagesNavBucket">
         {thumbnailRows[props.state.currentThumbnailRow].map(
           (eachThumbnailImage, index) => {
+            //conditional logic for highlight thumbnail
+            let selectedThumbnail;
+            if (eachThumbnailImage.url === imageURL) {
+              selectedThumbnail = 'thumbStyle selectedStyleBorder';
+            } else {
+              selectedThumbnail = 'thumbStyle regularStyleBorder';
+            }
             return (
               <img
-                className="thumbStyle"
+                className={selectedThumbnail}
                 src={eachThumbnailImage.thumbnail_url}
                 onClick={() => {
                   props.changeImageOnThumbnailClick(

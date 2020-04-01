@@ -1,4 +1,6 @@
 import React from 'react';
+import SocialMedia from './SocialMedia.jsx';
+import './componentStyle.css';
 
 const productNameStyle = {
   fontSize: '32pt',
@@ -26,7 +28,10 @@ const BasicDetails = function(props) {
       <div>
         <div>{props.state.basicDetails.category}</div>
         <div style={productNameStyle}>{props.state.basicDetails.name}</div>
-        <div style={{ fontSize: '15pt' }}>{prices}</div>
+        <div className="flexContainer">
+          <div style={{ fontSize: '15pt' }}>{prices}</div>
+          <SocialMedia state={props.state} />
+        </div>
       </div>
     );
   } else {
