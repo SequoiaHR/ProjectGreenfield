@@ -3,18 +3,18 @@ import React from "react";
 const Modal = ({title, children, onExitClick}) => {
   return (
     <div>
-      <div class="modal is-active">
+      <div className="modal is-active">
         <div onClick={onExitClick} class="modal-background"></div>
-        <div class="modal-card">
+        <div className="modal-card">
           <header class="modal-card-head">
-            <p class="modal-card-title">{title}</p>
+            <p className="modal-card-title">{title}</p>
           </header>
-          <section class="modal-card-body">
+          <section className="modal-card-body">
             {children}
           </section>
         </div>
         <button
-          class="modal-close is-large"
+          className="modal-close is-large"
           aria-label="close"
           onClick={onExitClick}
         ></button>
