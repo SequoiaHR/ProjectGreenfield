@@ -83,8 +83,8 @@ const Card = ({
           <p style={{ "border-bottom": ".5px solid black" }} className="">
             {product.category}
           </p>
-          <p className="title is-6">{product.name}</p>
-          <p className="">{product.slogan}</p>
+          <p className="title is-5">{product.name}</p>
+          {/* <p className="">{product.slogan}</p> */}
           <p className="">${product.default_price}</p>
           {productReviews ? (
             <StarRating
