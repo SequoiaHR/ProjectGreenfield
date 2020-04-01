@@ -5,6 +5,7 @@ import "./card.css";
 import StarRating from "../starRating.jsx";
 import calculateRating from "../../calculateRating.js";
 import AttachProductLink from "./attachProductLink.jsx";
+import recordInteraction from "../../interactionsHelper.js";
 
 const Card = ({
   listName,
@@ -19,7 +20,7 @@ const Card = ({
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div style={{"max-height": "100%"}} className="card">
+    <div style={{ "max-height": "100%" }} className="card">
       <div>
         {showModal === true ? (
           <div>
@@ -38,13 +39,21 @@ const Card = ({
       </div>
       <div className="card-image actionButtonDiv">
         <button
-          className="button is-small actionButton"
+          className={`button is-small actionButton product-${product.id} ${listName}`}
           value={listName}
           onClick={e => {
             if (listName === "Related") {
               setShowModal(true);
+              recordInteraction(
+                `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                "related-items-comparison"
+              );
             } else {
               onClickButton(listName, product.id);
+              recordInteraction(
+                `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                "related-items-comparison"
+              );
             }
           }}
         >
@@ -56,22 +65,24 @@ const Card = ({
         </button>
         <figure className="image is-square">
           <AttachProductLink productId={product.id}>
-              <img
-                name={product.id}
-                onClick={onClickDetails}
-                src={
-                  productImage === null
-                    ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
-                    : productImage
-                }
-                alt={`${listName}-Product Item`}
-              />
-            </AttachProductLink>
+            <img
+              name={product.id}
+              onClick={onClickDetails}
+              src={
+                productImage === null
+                  ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+                  : productImage
+              }
+              alt={`${listName}-Product Item`}
+            />
+          </AttachProductLink>
         </figure>
       </div>
       <div className="card-content">
         <div className="media-content">
-          <p style={{"border-bottom": ".5px solid black"}} className="">{product.category}</p>
+          <p style={{ "border-bottom": ".5px solid black" }} className="">
+            {product.category}
+          </p>
           <p className="title is-6">{product.name}</p>
           <p className="">{product.slogan}</p>
           <p className="">${product.default_price}</p>

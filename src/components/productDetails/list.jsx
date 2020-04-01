@@ -121,6 +121,7 @@ const List = ({
         setShownIndices(newShownIndices);
       }
     }
+    console.log('action and id: ', action, id)
   }
 
   var wrapperStyle = {
