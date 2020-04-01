@@ -61,10 +61,10 @@ class ReviewTile extends React.Component {
   }
 
   handleHelpful(event) {
-    recordInteraction(`#${event.target.id}`, "Reviews");
 
     let arr = JSON.parse(window.localStorage.getItem("helpful"));
     if (!arr || arr.indexOf(this.props.review.review_id) === -1) {
+      recordInteraction(`#${event.target.id}`, "Reviews");
       if (!arr) {
         arr = [this.props.review.review_id];
       } else if (arr.indexOf(this.props.review.review_id) === -1) {

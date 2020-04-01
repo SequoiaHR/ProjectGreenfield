@@ -130,14 +130,14 @@ class ReviewsList extends React.Component {
                 clearHandler={this.clearFiltersBound} />
             </div>
             <div className="tile is-parent is-vertical">
-              <div>
+              <label>
                 {reviews.length} reviews, sorted by{" "}
                 <select className="select" id={`${this.props.id}-change-sort`} name="sort" value={this.state.sort} onChange={this.sortBound}>
                   <option value="relevant">relevance</option>
                   <option value="newest">recent</option>
                   <option value="helpful">helpfulness</option>
                 </select>
-              </div>
+              </label>
               <div id="review-tiles">
                 {tiles.map((review) => { // map out tiles (currently showing)
                   return <ReviewTile key={review.review_id} review={review} id={this.props.id} />;
