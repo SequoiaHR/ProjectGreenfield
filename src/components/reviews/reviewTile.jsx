@@ -3,6 +3,7 @@ import moment from "moment";
 import axios from "axios";
 
 import StarRating from "../starRating.jsx";
+import ReviewPhoto from "./reviewPhoto.jsx";
 import "./reviews.css";
 
 class ReviewTile extends React.Component {
@@ -14,7 +15,7 @@ class ReviewTile extends React.Component {
       markedHelpful: false,
       numHelpful: 0,
       reported: false,
-      verified: false
+      verified: false,
     };
     this.toggleExpandBound = this.toggleExpand.bind(this);
     this.handleHelpfulBound = this.handleHelpful.bind(this);
@@ -121,13 +122,13 @@ class ReviewTile extends React.Component {
           ? <div className="actionable is-size-7" onClick={this.toggleExpandBound}>Show less</div>
           : null}
         {review.recommend
-          ? <div id="recommend"><i className="fas fa-check"></i> I recommend this product</div>
+          ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
           : null}
-        <div id="photo-row">
+        <div className="photos-wrapper">
         {review.photos !== undefined && review.photos.length > 0
           ? review.photos.map((photo) => {
-            return <img key={photo.id} className="review-photo" src={photo.url} alt="product shown by user"></img>;
-            })
+            return <ReviewPhoto key={photo.id} photo={photo} />;
+          })
           : null}
         </div>
         {review.response !== undefined && review.response !== null && review.response !== ""

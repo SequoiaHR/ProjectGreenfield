@@ -1,4 +1,8 @@
 
+.actionable:hover {
+  cursor: pointer;
+}
+
 #reviews-section {
   margin-bottom: 30px;
 }
@@ -10,14 +14,28 @@
   overflow: auto;
 }
 
-#recommend {
+.recommend {
   padding: 5px 0;
+}
+
+.photos-wrapper {
+  display: flex;
+  flex-direction: row;
 }
 
 .review-photo {
   max-width: 100px;
   max-height: 100px;
   padding: 5px;
+}
+
+.full-size-parent {
+  text-align: center;
+}
+
+.full-size-photo {
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 /* #review-tiles::-webkit-scrollbar {
@@ -60,10 +78,6 @@
 .filter-option:hover {
   cursor: pointer;
   background-color: yellow;
-}
-
-.actionable:hover {
-  cursor: pointer;
 }
 
 #errors {
