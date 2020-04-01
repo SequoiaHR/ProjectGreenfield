@@ -19,7 +19,7 @@ const Card = ({
   let [showModal, setShowModal] = useState(false);
 
   return (
-    <div className="card">
+    <div style={{"max-height": "100%"}} className="card">
       <div>
         {showModal === true ? (
           <div>
@@ -54,7 +54,7 @@ const Card = ({
             <i className="fas fa-star"></i>
           )}
         </button>
-        <figure className="image is-4by3">
+        <figure className="image is-square">
           <AttachProductLink productId={product.id}>
               <img
                 name={product.id}
@@ -71,10 +71,10 @@ const Card = ({
       </div>
       <div className="card-content">
         <div className="media-content">
-          <p className="title is-3">{product.category}</p>
+          <p style={{"border-bottom": ".5px solid black"}} className="">{product.category}</p>
           <p className="title is-6">{product.name}</p>
-          <p>{product.slogan}</p>
-          <p className="subtitle is-6">${product.default_price}</p>
+          <p className="">{product.slogan}</p>
+          <p className="">${product.default_price}</p>
           {productReviews ? (
             <StarRating
               rating={calculateRating(productReviews)}
