@@ -1,12 +1,11 @@
 import React from "react";
-import AnswerList from "./answersList"
-import Modal from "../Modal.jsx"
-import AddAnswer from "./addAnswer.js"
+import AnswerList from "./answersList";
+import Modal from "../Modal.jsx";
+import AddAnswer from "./addAnswer.js";
 import axios from "axios";
 
-
-class Question extends React.Component{
-  constructor(props){
+class Question extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       showModal: false
@@ -16,23 +15,23 @@ class Question extends React.Component{
     this.sendHelpful = this.sendHelpful.bind(this);
   }
 
-//INITIALIZES LOCAL STORAGE OBJECTS FOR QUESTIONS ON MOUNT
-  componentDidMount(){
+  //INITIALIZES LOCAL STORAGE OBJECTS FOR QUESTIONS ON MOUNT
+  componentDidMount() {
     let reportedQuestions = localStorage.getItem("reportedQuestions");
     let helpfulQuestions = localStorage.getItem("helpfulQuestions");
-    if (helpfulQuestions===null) {
-      localStorage.setItem("helpfulQuestions",JSON.stringify([]));
+    if (helpfulQuestions === null) {
+      localStorage.setItem("helpfulQuestions", JSON.stringify([]));
     }
-    if (reportedQuestions===null){
-      localStorage.setItem("reportedQuestions",JSON.stringify([]));
+    if (reportedQuestions === null) {
+      localStorage.setItem("reportedQuestions", JSON.stringify([]));
     }
   }
 
-//CHECKS LOCAL STORAGE FOR PREVIOUSE QUESTIONS MARKED HELPFUL AND IF HELPFUL CLICK
-//CORROSPONDS TO A QUESTION NOT CONTAINED ON LOCAL STORAGE LIST THEN IT SENDS A PUT REQUEST
-//TO THE API AND RELOADS THE QUESTIONS
+  //CHECKS LOCAL STORAGE FOR PREVIOUSE QUESTIONS MARKED HELPFUL AND IF HELPFUL CLICK
+  //CORROSPONDS TO A QUESTION NOT CONTAINED ON LOCAL STORAGE LIST THEN IT SENDS A PUT REQUEST
+  //TO THE API AND RELOADS THE QUESTIONS
 
-  helpfulClick(event){
+  helpfulClick(event) {
     let helpfulQuestions = localStorage.getItem("helpfulQuestions");
     helpfulQuestions = JSON.parse(helpfulQuestions);
     if (helpfulQuestions.indexOf(event.target.id) === -1) {
@@ -40,7 +39,6 @@ class Question extends React.Component{
       localStorage.setItem("helpfulQuestions", JSON.stringify(helpfulQuestions));
       this.sendHelpful(event.target.id);
     }
-
   }
 
   //UPDATES HELPFUL RATING ON API AND GETS ALL QUESTION DATA UPON COMPLETION
@@ -49,49 +47,65 @@ class Question extends React.Component{
       method: "PUT",
       url: `http://3.134.102.30/qa/question/${id}/helpful`
     })
-    .then(data=>{
-      // console.log(data);
-      console.log("*** Successfully Putted Helpfulness to Question ***")
-      this.props.getProductQuestions(this.props.paramsId);
-    })
-    .catch(err=>{
-      // console.error(err);
-      console.error("!!! Error Putting Helpfulness to Question !!!")
-    })
+      .then(data => {
+        // console.log(data);
+        console.log("*** Successfully Putted Helpfulness to Question ***");
+        this.props.getProductQuestions(this.props.paramsId);
+      })
+      .catch(err => {
+        // console.error(err);
+        console.error("!!! Error Putting Helpfulness to Question !!!");
+      });
   }
 
   //DISPLAYS MODAL FOR INPUTTING AN ANSWER
-  addAnswerClick(event){
-    this.setState({showModal:!this.state.showModal})
+  addAnswerClick(event) {
+    this.setState({ showModal: !this.state.showModal });
   }
 
-  render(){
-    return (<div className="container">
+  render() {
+    return (
       <div className="container">
-        <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
-        <div className="is-pulled-right is-inline-block">
-          <div className="is-inline-block" id={this.props.question_id} onClick={this.helpfulClick}>Helpful? Yes({this.props.question_helpfulness})</div>
-          <div className="is-inline-block" onClick={this.addAnswerClick} >{" | "}Add Answer</div>
+        <div className="container">
+          <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
+          <div className="is-pulled-right is-inline-block">
+            <div className="is-inline-block" id={this.props.question_id} onClick={this.helpfulClick}>
+              <u id={this.props.question_id}>Helpful?</u> Yes({this.props.question_helpfulness})
+            </div>
+            <div className="is-inline-block" onClick={this.addAnswerClick}>
+              {" | "}
+              <u>Add Answer</u>
+            </div>
+          </div>
+          <br />
         </div>
-        <br/>
+        <AnswerList
+          getProductQuestions={this.props.getProductQuestions}
+          paramsId={this.props.paramsId}
+          answers={this.props.answers}
+        />
+        <br />
+        <br />
+        {this.state.showModal ? (
+          <Modal
+            title="Submit Your Answer"
+            children={
+              <AddAnswer
+                question_body={this.props.question_body}
+                product_name={this.props.product_name}
+                getProductQuestions={this.props.getProductQuestions}
+                paramsId={this.props.paramsId}
+                qID={this.props.question_id}
+                exitClick={this.addAnswerClick}
+              />
+            }
+            onExitClick={this.addAnswerClick}
+          />
+        ) : (
+          <div></div>
+        )}
       </div>
-      <AnswerList getProductQuestions={this.props.getProductQuestions}
-                  paramsId={this.props.paramsId}
-                  answers={this.props.answers}
-      />
-      <br/>
-      <br/>
-      {this.state.showModal ?
-      <Modal title="Submit Your Answer"
-             children={
-                       <AddAnswer getProductQuestions={this.props.getProductQuestions}
-                                  paramsId={this.props.paramsId}
-                                  qID={this.props.question_id}
-                                  exitClick={this.addAnswerClick}
-                       />}
-             onExitClick={this.addAnswerClick}/> :
-             <div></div>}
-      </div>);
+    );
   }
 }
 
