@@ -116,19 +116,22 @@ const List = ({
 
   var wrapperStyle = {
     width: "100%",
-    overflow: "hidden"
-    // display: "flex",
-    // "flex-wrap": "nowrap",
-    // "overflow-x": "auto"
+    overflow: "hidden",
+    "max-height": "100%"
   };
-  var innerStyle = {
-    width: "100%"
+  var outerWrapperStyle = {
+    width: "100%",
+    "max-height": "100%"
+  };
+  var innerWrapperStyle = {
+    width: "100%",
+    "max-height": "100%"
   };
 
   return (
-    <>
-      <h1 className="title">{listName} Items</h1>
-      <div className="columns">
+    <div style={outerWrapperStyle}>
+      <h1 className="title is-4">{listName === "Related" ? "Related Products" : "Your Outfit"}</h1>
+      <div style={outerWrapperStyle} className="columns">
         <div className="column is-narrow is-vertical-centered">
           <span>
             {shownIndices[0] !== 0 ? (
@@ -146,7 +149,7 @@ const List = ({
         </div>
         <div class="column outer">
           <div class="box has-background-light" style={wrapperStyle}>
-            <div class="columns" style={innerStyle}>
+            <div class="columns" style={innerWrapperStyle}>
               {listName === "Outfit" ? (
                 <AddToOutfitCard
                   pageProduct={pageProduct}
@@ -236,7 +239,7 @@ const List = ({
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
