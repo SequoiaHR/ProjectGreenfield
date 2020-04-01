@@ -17,11 +17,13 @@ class AddReviewForm extends React.Component {
       photos: [],
       nickname: "",
       email: "",
-      errors: []
+      errors: [],
+      imageError: ""
     };
     this.onChangeBound = this.onChange.bind(this);
     this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
     this.changeRatingBound = this.changeRating.bind(this);
+    this.uploadChangeBound = this.uploadChange.bind(this);
     this.validateBound = this.validate.bind(this);
   }
 
@@ -55,6 +57,55 @@ class AddReviewForm extends React.Component {
     this.setState({
       rating: num
     });
+  }
+
+  readFileAsync(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => { resolve(reader.result) };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  uploadChange(event) {
+
+    if (!event.target.files || !event.target.files[0]) { return; }
+
+    const file = event.target.files[0];
+
+    if (!file.type.startsWith("image/")) {
+      this.setState({
+        imageError: "You may only upload images."
+      });
+    } else if (this.state.photos.length >= 5) {
+      this.setState({
+        imageError: "Photo limit reached."
+      });
+    } else {
+
+      this.setState({
+        imageError: ""
+      });
+
+      this.readFileAsync(file)
+        .then((data) => {
+          axios.post("https://api.cloudinary.com/v1_1/greenfield/image/upload", {
+            file: data,
+            upload_preset: "mqk58mpg"
+          })
+            .then((res) => {
+              this.setState({
+                photos: [...this.state.photos, res.data.url]
+              });
+            })
+            .catch((err) => {
+              console.log("Error posting photo:", err);
+            });
+        })
+        .catch((err) => {
+          console.log("Could not read file:", err);
+        });
+    }
   }
 
   validate(event) {
@@ -105,7 +156,7 @@ class AddReviewForm extends React.Component {
       recommend: this.state.recommend ? 1 : 0,
       name: this.state.nickname,
       email: this.state.email,
-      photos: [],
+      photos: this.state.photos,
       characteristics: this.state.characteristics
     })
       .then((res) => {
@@ -203,15 +254,26 @@ class AddReviewForm extends React.Component {
               <br />
               <div className="is-size-7">For authentication reasons, you will not be emailed</div>
           </label>
+          <input type="file" id="file-input" style={{display:"none"}} onChange={this.uploadChangeBound} />
+          <button 
+            className="button add-input" 
+            type="button" 
+            onClick={() => document.getElementById("file-input").click()}>
+            + Add your photos (max 5)
+          </button>
           <br />
-          <button className="button add-input" type="button">+ Add your photos (max 5)</button>
-          <br />
+          <div className="photos-wrapper">
+            {this.state.photos.map((url, idx) => {
+              return <img key={idx} src={url} alt="your uploaded content" className="review-photo"></img>
+            })}
+          </div>
           <button className="button add-input" type="submit" onClick={this.validateBound}>Submit</button>
         </form>
         <div id="errors">
           {this.state.errors.map((err) => {
             return <div key={err[1]}>{err[0]}</div>;
           })}
+          {this.state.imageError}
         </div>
       </div>
     );
