@@ -67,7 +67,7 @@ class AddAnswer extends React.Component {
     return (
     <React.Fragment>
 
-
+      <div className="subtitle is-5">{this.props.product_name}{" : "}{this.props.question_body}</div>
       <label>Your Answer*</label>
       <br/>
       <textarea type="text"
