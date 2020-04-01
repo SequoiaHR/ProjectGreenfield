@@ -1,0 +1,55 @@
+.flexContainerSocial {
+  display: flex;
+  margin-left: 20px;
+}
+
+.socialMediaButtons {
+  margin: 3px;
+}
+
+.flexContainer {
+  display: flex;
+}
+
+.imgStyling {
+  position: absolute;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.circleStyling {
+  float: left;
+  position: relative;
+  border-radius: 50%;
+  background-color: black;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.rowStyle {
+  width: 380px;
+  height: 80px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.containerStyle {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.regularStyleBorder {
+  border: white;
+}
+
+.selectedStyleBorder {
+  border-color: rgb(30, 144, 255);
+  border-style: solid;
+  border-width: 2px;
+}

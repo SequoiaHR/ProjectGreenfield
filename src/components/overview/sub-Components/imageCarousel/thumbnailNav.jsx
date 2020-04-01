@@ -1,7 +1,7 @@
 import React from 'react';
 import ThumbnailImages from './thumbnailImages';
 import ArrowNav from './arrowNav';
-import './thumbnailImages.css';
+import './carouselStyling.css';
 
 const ThumbnailNav = function(props) {
   let arrowLeft = <div></div>;
@@ -9,10 +9,10 @@ const ThumbnailNav = function(props) {
 
   if (props.state.currentThumbnailRow !== 0) {
     arrowLeft = (
-      <div className="column">
+      <div>
         <ArrowNav
           arrowDirection={'left'}
-          icon={'fas fa-arrow-left'}
+          icon={'fas fa-angle-left'}
           onNavArrowClick={props.onNavArrowClick}
         />
       </div>
@@ -20,14 +20,14 @@ const ThumbnailNav = function(props) {
   }
   //this isn't great logic, but because my variable with number of rows is in another
   //component, I'm using a quick calculation to get the number of rows for my conditional logic
-  let numberOfImageRows = Math.ceil(props.state.otherImagesInStyle.length / 3);
+  let numberOfImageRows = Math.ceil(props.state.otherImagesInStyle.length / 4);
 
   if (props.state.currentThumbnailRow !== numberOfImageRows - 1) {
     arrowRight = (
-      <div className="column">
+      <div>
         <ArrowNav
           arrowDirection={'right'}
-          icon={'fas fa-arrow-right'}
+          icon={'fas fa-angle-right'}
           onNavArrowClick={props.onNavArrowClick}
         />
       </div>
@@ -35,7 +35,7 @@ const ThumbnailNav = function(props) {
   }
 
   return (
-    <div>
+    <div className="navigationOverallBucket">
       {arrowLeft}
       <ThumbnailImages
         state={props.state}

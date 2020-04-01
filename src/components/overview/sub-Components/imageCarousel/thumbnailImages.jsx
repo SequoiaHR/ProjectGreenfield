@@ -1,5 +1,5 @@
 import React from 'react';
-import './thumbnailImages.css';
+import './carouselStyling.css';
 
 const ThumbnailImages = function(props) {
   //divide into rows to make easier to manipulate
@@ -7,33 +7,40 @@ const ThumbnailImages = function(props) {
   for (
     let index = 0;
     index < props.state.otherImagesInStyle.length;
-    index += 3
+    index += 4
   ) {
-    let row = props.state.otherImagesInStyle.slice(index, index + 3);
+    let row = props.state.otherImagesInStyle.slice(index, index + 4);
     thumbnailRows.push(row);
   }
 
   //this is just to give me a random key to stop console warnings
-  let keycounter = 0;
   //conditional logic to render page
   if (props.state.currentThumbnailRow !== undefined) {
+    //variables for my thumbnail border logic
+    let indexImage = props.state.currentImage;
+    let imageURL = props.state.otherImagesInStyle[indexImage].url;
     return (
-      <div>
+      <div className="imagesNavBucket">
         {thumbnailRows[props.state.currentThumbnailRow].map(
-          eachThumbnailImage => {
-            keycounter++;
+          (eachThumbnailImage, index) => {
+            //conditional logic for highlight thumbnail
+            let selectedThumbnail;
+            if (eachThumbnailImage.url === imageURL) {
+              selectedThumbnail = 'thumbStyle selectedStyleBorder';
+            } else {
+              selectedThumbnail = 'thumbStyle regularStyleBorder';
+            }
             return (
-              <div className="column" key={keycounter}>
-                <img
-                  className="thumbStyle"
-                  src={eachThumbnailImage.thumbnail_url}
-                  onClick={() => {
-                    props.changeImageOnThumbnailClick(
-                      eachThumbnailImage.thumbnail_url
-                    );
-                  }}
-                />
-              </div>
+              <img
+                className={selectedThumbnail}
+                src={eachThumbnailImage.thumbnail_url}
+                onClick={() => {
+                  props.changeImageOnThumbnailClick(
+                    eachThumbnailImage.thumbnail_url
+                  );
+                }}
+                key={index}
+              />
             );
           }
         )}

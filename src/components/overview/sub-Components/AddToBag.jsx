@@ -37,8 +37,12 @@ const AddToBag = function() {
           <div className="select is-medium is-fullwidth">
             <select>
               <option>SELECT SIZE</option>
-              {sizeTypes.map(eachSize => {
-                return <option value={eachSize}>{eachSize}</option>;
+              {sizeTypes.map((eachSize, index) => {
+                return (
+                  <option value={eachSize} key={index}>
+                    {eachSize}
+                  </option>
+                );
               })}
             </select>
           </div>
@@ -47,8 +51,12 @@ const AddToBag = function() {
           <div className="select is-medium " style={{ width: '50%' }}>
             <select>
               <option>NUM</option>
-              {orderNumbers.map(number => {
-                return <option value={number}>{number}</option>;
+              {orderNumbers.map((number, index) => {
+                return (
+                  <option key={index} value={number}>
+                    {number}
+                  </option>
+                );
               })}
             </select>
           </div>

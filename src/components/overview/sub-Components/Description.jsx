@@ -17,9 +17,9 @@ const Description = function(props) {
           </div>
         </div>
         <div className="column" style={{ marginTop: '23px' }}>
-          {props.state.description.features.map(eachFeature => {
+          {props.state.description.features.map((eachFeature, index) => {
             return (
-              <div>
+              <div key={index}>
                 {eachFeature.feature}: {eachFeature.value}
               </div>
             );
