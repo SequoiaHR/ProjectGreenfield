@@ -70,7 +70,7 @@ const Card = ({
               onClick={onClickDetails}
               src={
                 productImage === null
-                  ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+                  ? "https://vectorified.com/images/default-image-icon-14.png"
                   : productImage
               }
               alt={`${listName}-Product Item`}
