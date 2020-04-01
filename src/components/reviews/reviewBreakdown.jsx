@@ -40,8 +40,8 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
           return (
             <div key={num}>
               {num === 1 // handle singular or plural and display star rating toggle link
-                ? <span className="filter-option is-size-7" data-stars={num} onClick={toggleHandler}>{num} star</span>
-                : <span className="filter-option is-size-7" data-stars={num} onClick={toggleHandler}>{num} stars</span>}
+                ? <span className="filter-option is-size-7" id={`${num}-star-filter`} data-stars={num} onClick={toggleHandler}>{num} star</span>
+                : <span className="filter-option is-size-7" id={`${num}-star-filter`} data-stars={num} onClick={toggleHandler}>{num} stars</span>}
               <progress // progress bar
                 className="progress is-small is-success"
                 value={metadata.ratings[num] || 0}
@@ -53,7 +53,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
         </div>
         : null}
       {filters.size > 0
-        ? <div className="actionable is-size-7" onClick={clearHandler}>Remove all filters</div>
+        ? <div className="actionable is-size-7" id="clear-filters" onClick={clearHandler}>Remove all filters</div>
         : null}
       <div id="features-breakdown">
         <FeaturesBreakdown metadata={metadata} />

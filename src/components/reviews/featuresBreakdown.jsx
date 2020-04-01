@@ -13,7 +13,7 @@ const FeaturesBreakdown = ({ metadata }) => {
                 type="range"
                 min="1" 
                 max="5" 
-                value={metadata.characteristics[characteristic].value} 
+                value={metadata.characteristics[characteristic].value === null ? 3 : metadata.characteristics[characteristic].value} 
                 disabled={true} 
                 step=".5" 
                 style={{width:"100%"}} />

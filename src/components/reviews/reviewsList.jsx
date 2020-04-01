@@ -3,6 +3,8 @@ import ReviewBreakdown from "./reviewBreakdown.jsx";
 import ReviewTile from "./reviewTile.jsx";
 import Modal from "../Modal.jsx";
 import AddReviewFormContainer from "../../containers/reviews/addReviewFormContainer.js";
+
+import recordInteraction from "../../interactionsHelper.js";
 import "./reviews.css";
 
 class ReviewsList extends React.Component {
@@ -46,6 +48,11 @@ class ReviewsList extends React.Component {
       ? this.state.reviewsShown + 2
       : 2
     });
+    if (direction === "more") {
+      recordInteraction(`button#${this.props.id}-show-more`, "Reviews")
+    } else {
+      recordInteraction(`button#${this.props.id}-show-fewer`, "Reviews")
+    }
   }
 
   toggleFilter(event) {
@@ -61,10 +68,10 @@ class ReviewsList extends React.Component {
     this.setState({
       filters: current
     });
-    
+    recordInteraction(`#${event.target.id}`, "Reviews");
   }
 
-  clearFilters() {
+  clearFilters(event) {
     this.setState({
       filters: new Set()
     });
@@ -72,6 +79,7 @@ class ReviewsList extends React.Component {
     filters.forEach((el) => {
       el.setAttribute("style", "font-weight:normal");
     });
+    recordInteraction(`#${event.target.id}`, "Reviews");
   }
 
   sort(event) {
@@ -80,12 +88,14 @@ class ReviewsList extends React.Component {
     }, () => {
       this.props.sortReviews(this.props.id, this.state.sort);
     });
+    recordInteraction(`#${event.target.id}`, "Reviews");
   }
 
-  openModal() {
+  openModal(event) {
     this.setState({
       modalOpen: true
-    })
+    });
+    recordInteraction(`button#${event.target.id}`, "Reviews");
   }
 
   exitModal() {
@@ -122,7 +132,7 @@ class ReviewsList extends React.Component {
             <div className="tile is-parent is-vertical">
               <div>
                 {reviews.length} reviews, sorted by{" "}
-                <select className="select" name="sort" value={this.state.sort} onChange={this.sortBound}>
+                <select className="select" id={`${this.props.id}-change-sort`} name="sort" value={this.state.sort} onChange={this.sortBound}>
                   <option value="relevant">relevance</option>
                   <option value="newest">recent</option>
                   <option value="helpful">helpfulness</option>
@@ -135,11 +145,11 @@ class ReviewsList extends React.Component {
               </div>
               <div className="tile is-child">
                 {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-                  ? <button className="button" onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
+                  ? <button className="button" id={`${this.props.id}-show-more`} onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
                   : reviews.length > 2 
-                    ? <button className="button" onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
+                    ? <button className="button" id={`${this.props.id}-show-fewer`} onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
                     : null}
-                <button className="button" onClick={this.openModalBound}>ADD A REVIEW</button>
+                <button className="button" id={`${this.props.id}-add-review`} onClick={this.openModalBound}>ADD A REVIEW</button>
                 {this.state.modalOpen
                   ? <Modal title="Write Your Review" onExitClick={this.exitModalBound}>
                     <AddReviewFormContainer 
