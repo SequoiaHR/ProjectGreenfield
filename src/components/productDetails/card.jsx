@@ -123,10 +123,10 @@ const Card = ({
             <p>${product.default_price}</p>
           ) : (
             <p>
-              <strike style={{ color: "red", "font-size": "20px" }}>
-                ${product.default_price}
-              </strike>{" "}
-              <span>${salesPrice}</span>
+              <span style={{ color: "red", "font-size": "20px" }}>
+                ${salesPrice}
+              </span>{" "}
+              <strike>${product.default_price}</strike>
             </p>
           )}
           {showAverageReview(productReviews) ? (
