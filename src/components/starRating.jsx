@@ -43,8 +43,9 @@ const StarRating = ({ rating, width, height }) => {
         <img
           width={width}
           height={height}
+          key={`star ${idx}`}
           id={`star ${idx}`}
-          alt="star"
+          alt={`star ${idx + 1}`}
           src={el}
         />
       ))}{" "}
