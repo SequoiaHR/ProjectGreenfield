@@ -62,8 +62,8 @@ class Question extends React.Component {
 
   //DISPLAYS MODAL FOR INPUTTING AN ANSWER
   addAnswerClick(event) {
-    recordInteraction(event.target.className, "Q&A");
     this.setState({ showModal: !this.state.showModal });
+    recordInteraction(event.target.className, "Q&A");
   }
 
   render() {
@@ -81,7 +81,7 @@ class Question extends React.Component {
             </div>
             <div className="is-inline-block" onClick={this.addAnswerClick}>
               {" | "}
-              <u className={`addAnswerToQuestion${this.props.question_id}`}>Add Answer</u>
+              <u className={`addAnswerToQuestion${this.props.question_id} addAnswer`}>Add Answer</u>
             </div>
           </div>
           <br />
