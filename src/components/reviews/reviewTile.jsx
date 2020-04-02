@@ -133,7 +133,7 @@ class ReviewTile extends React.Component {
           <div className="photos-wrapper">
           {review.photos !== undefined && review.photos.length > 0
             ? review.photos.map((photo) => {
-              return <ReviewPhoto key={photo.id} photo={photo} />;
+              return <ReviewPhoto key={photo.id} photo={photo} id={review.review_id} />;
             })
             : null}
           </div>
