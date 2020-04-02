@@ -73,10 +73,11 @@ class Question extends React.Component {
           <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
           <div className="is-pulled-right is-inline-block">
             <div className="is-inline-block" id={this.props.question_id} onClick={this.helpfulClick}>
+              Helpful?{" "}
               <u id={this.props.question_id} className={`question${this.props.question_id}isHelpful`}>
-                Helpful?
-              </u>{" "}
-              Yes({this.props.question_helpfulness})
+                Yes
+              </u>
+              ({this.props.question_helpfulness})
             </div>
             <div className="is-inline-block" onClick={this.addAnswerClick}>
               {" | "}
