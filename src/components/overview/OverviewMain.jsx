@@ -173,7 +173,7 @@ class overviewMain extends React.Component {
   handleSeeAllReviewsClick = e => {
     e.preventDefault();
     window.scrollTo({
-      top: 850,
+      top: 2250,
       left: 0,
       behavior: 'instant'
     });

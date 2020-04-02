@@ -108,10 +108,11 @@ class Answer extends React.Component {
             ${formatDate(this.props.date)} |`}
           </div>
           <div className="is-inline-block" id={this.props.id} onClick={this.helpfulClick}>
+            Helpful?{" "}
             <u id={this.props.id} className={`answer${this.props.id}isHelpful`}>
-              Helpful?
-            </u>{" "}
-            Yes({this.props.helpfulness}) | {"\u00A0"}
+              Yes
+            </u>
+            ({this.props.helpfulness}) | {"\u00A0"}
           </div>
           {!this.state.isReported ? (
             <div className="is-inline-block" id={this.props.id} onClick={this.reportedClick}>

@@ -106,6 +106,12 @@
   vertical-align: middle;
 }
 
+.thumbStyle:hover {
+  border-color: #00004d;
+  border-style: solid;
+  border-width: 2px;
+}
+
 /********* arrow styling ****************/
 .prevArrowNav,
 .nextArrowNav {
