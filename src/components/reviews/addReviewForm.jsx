@@ -3,6 +3,7 @@ import axios from "axios";
 
 import StarInput from "./starInput.jsx";
 import CharacteristicsRadio from "./characteristicsRadio.jsx";
+import recordInteraction from "../../interactionsHelper.js";
 
 class AddReviewForm extends React.Component {
   constructor(props) {
@@ -110,6 +111,7 @@ class AddReviewForm extends React.Component {
 
   validate(event) {
     event.preventDefault();
+    recordInteraction(`button#${event.target.id}`, "Reviews");
     const errors = [];
     // perform validation checks here
     if (this.state.recommend === null) { // recommended radio buttons
@@ -256,7 +258,8 @@ class AddReviewForm extends React.Component {
           </label>
           <input type="file" id="file-input" style={{display:"none"}} onChange={this.uploadChangeBound} />
           <button 
-            className="button add-input" 
+            className="button add-input"
+            id="add-photos" 
             type="button" 
             onClick={() => document.getElementById("file-input").click()}>
             + Add your photos (max 5)
@@ -267,7 +270,7 @@ class AddReviewForm extends React.Component {
               return <img key={idx} src={url} alt="your uploaded content" className="review-photo"></img>
             })}
           </div>
-          <button className="button add-input" type="submit" onClick={this.validateBound}>Submit</button>
+          <button className="button add-input" type="submit" id={`${this.props.id}-submit-review`} onClick={this.validateBound}>Submit</button>
         </form>
         <div id="errors">
           {this.state.errors.map((err) => {
