@@ -76,15 +76,11 @@ const Card = ({
               if (listName === "Related") {
                 setShowModal(true);
                 recordInteraction(
-                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                  `button.${listName}.product-${product.id}`,
                   "related-items-comparison"
                 );
               } else {
                 onClickButton(listName, product.id);
-                recordInteraction(
-                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
-                  "related-items-comparison"
-                );
               }
             }}
           >

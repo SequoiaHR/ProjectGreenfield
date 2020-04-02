@@ -120,20 +120,26 @@ const List = ({
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
       fetchOutfitsReviews(setOutfitsReviews);
-      // <- No update of shownIndices when you add one to the end ->
+      recordInteraction(
+        "button.addCardButton",
+        "related-items-comparison"
+      );
     }
     if (action === "Outfit") {
       removeFromOutfit(id);
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
       fetchOutfitsReviews(setOutfitsReviews);
+      recordInteraction(
+        `button.Outfit.product-${id}`,
+        "related-items-comparison"
+      )
       // on delete - move all shown indices down one if first shown index doesn't equal zero.
       if (shownIndices[0] !== 0) {
         let newShownIndices = shownIndices.map(idx => idx - 1);
         setShownIndices(newShownIndices);
       }
     }
-    console.log("action and id: ", action, id);
   }
 
   var wrapperStyle = {
