@@ -13,11 +13,40 @@ const Card = ({
   product,
   productImage,
   productReviews,
+  productSalesData,
   onClickDetails,
   onClickButton
 }) => {
   // local state needed to determine if modal will show
   let [showModal, setShowModal] = useState(false);
+
+  // Sales Price Value Calculation
+  let salesPrice = productSalesData
+    ? getSalesPriceIfAvailable(productSalesData)
+    : null;
+
+  function getSalesPriceIfAvailable(data) {
+    if (data.hasOwnProperty("results")) {
+      if (data.results[0] !== undefined) {
+        if (data.results[0].hasOwnProperty("sale_price")) {
+          return Number(data.results[0]["sale_price"]);
+        }
+      }
+    }
+    return null;
+  }
+
+  function showAverageReview(productReviews) {
+    // check if ProductReviews exists and if the ratings property exists.
+    if (
+      productReviews &&
+      calculateRating(productReviews) !== null
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   return (
     <div style={{ "max-height": "100%" }} className="card">
@@ -83,10 +112,18 @@ const Card = ({
           <p style={{ "border-bottom": ".5px solid black" }} className="">
             {product.category}
           </p>
-          <p className="title is-5">{product.name}</p>
-          {/* <p className="">{product.slogan}</p> */}
-          <p className="">${product.default_price}</p>
-          {productReviews ? (
+          <p className="title is-6">{product.name}</p>
+          {salesPrice === null || salesPrice === 0 ? (
+            <p>${product.default_price}</p>
+          ) : (
+            <p>
+              <strike style={{ color: "red", "font-size": "20px" }}>
+                ${product.default_price}
+              </strike>{" "}
+              <span>${salesPrice}</span>
+            </p>
+          )}
+          {showAverageReview(productReviews) ? (
             <StarRating
               rating={calculateRating(productReviews)}
               width={20}

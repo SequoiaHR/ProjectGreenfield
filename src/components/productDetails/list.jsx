@@ -121,7 +121,7 @@ const List = ({
         setShownIndices(newShownIndices);
       }
     }
-    console.log('action and id: ', action, id)
+    console.log("action and id: ", action, id);
   }
 
   var wrapperStyle = {
@@ -188,12 +188,19 @@ const List = ({
                               ].results[0].photos[0].thumbnail_url
                             : null
                         }
-                        onClickDetails={onClickDetails}
-                        onClickButton={onClickButton}
                         productReviews={
                           filterForShownItems(productsReviews, shownIndices)[
                             idx
                           ]
+                        }
+                        onClickDetails={onClickDetails}
+                        onClickButton={onClickButton}
+                        productSalesData={
+                          productsImages
+                            ? filterForShownItems(productsImages, shownIndices)[
+                                idx
+                              ]
+                            : null
                         }
                       />
                     </div>
