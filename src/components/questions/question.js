@@ -2,6 +2,7 @@ import React from "react";
 import AnswerList from "./answersList";
 import Modal from "../Modal.jsx";
 import AddAnswer from "./addAnswer.js";
+import recordInteraction from "../../interactionsHelper.js";
 import axios from "axios";
 
 class Question extends React.Component {
@@ -35,6 +36,7 @@ class Question extends React.Component {
     let helpfulQuestions = localStorage.getItem("helpfulQuestions");
     helpfulQuestions = JSON.parse(helpfulQuestions);
     if (helpfulQuestions.indexOf(event.target.id) === -1) {
+      recordInteraction(event.target.className, "Q&A");
       helpfulQuestions.push(event.target.id);
       localStorage.setItem("helpfulQuestions", JSON.stringify(helpfulQuestions));
       this.sendHelpful(event.target.id);
@@ -60,6 +62,7 @@ class Question extends React.Component {
 
   //DISPLAYS MODAL FOR INPUTTING AN ANSWER
   addAnswerClick(event) {
+    recordInteraction(event.target.className, "Q&A");
     this.setState({ showModal: !this.state.showModal });
   }
 
@@ -70,11 +73,14 @@ class Question extends React.Component {
           <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
           <div className="is-pulled-right is-inline-block">
             <div className="is-inline-block" id={this.props.question_id} onClick={this.helpfulClick}>
-              <u id={this.props.question_id}>Helpful?</u> Yes({this.props.question_helpfulness})
+              <u id={this.props.question_id} className={`question${this.props.question_id}isHelpful`}>
+                Helpful?
+              </u>{" "}
+              Yes({this.props.question_helpfulness})
             </div>
             <div className="is-inline-block" onClick={this.addAnswerClick}>
               {" | "}
-              <u>Add Answer</u>
+              <u className={`addAnswerToQuestion${this.props.question_id}`}>Add Answer</u>
             </div>
           </div>
           <br />

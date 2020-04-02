@@ -3,6 +3,7 @@ import Question from "./question";
 import formatDate from "../../formatDate";
 import Modal from "../Modal.jsx";
 import AddQuestion from "./addQuestion.js";
+import recordInteraction from "../../interactionsHelper.js";
 import "./questions.css";
 
 class QuestionList extends React.Component {
@@ -39,7 +40,8 @@ class QuestionList extends React.Component {
   }
 
   //SHOWS THE MODAL FOR SUBMITTING A QUESTION
-  addQuestionClick() {
+  addQuestionClick(event) {
+    recordInteraction(event.target.className, "Q&A");
     this.setState({ showModal: !this.state.showModal });
   }
 
@@ -63,6 +65,7 @@ class QuestionList extends React.Component {
 
   //SETS NUMBER OF QUESTIONS DISPLAYED TO CURRENT DISPLAY+2 ON CLICK
   seeMoreQuestionsClick(event) {
+    recordInteraction(event.target.className, "Q&A");
     event.preventDefault();
     this.setState({ display: this.state.display + 2 });
   }
@@ -126,7 +129,7 @@ class QuestionList extends React.Component {
         <div>
           {//IF DISPLAYED QUESTIONS IS LESS THAN TOTAL QUESTIONS THEN DISPLAY 'SHOW MORE' BUTTON
           this.determineDisplayed(filteredSortedQuestions).length < filteredSortedQuestions.length ? (
-            <button className="button is-medium" onClick={this.seeMoreQuestionsClick}>
+            <button className="button is-medium showMoreQuestions" onClick={this.seeMoreQuestionsClick}>
               SHOW MORE QUESTIONS
             </button>
           ) : //ELSE IF DISPLAYED QUESTIONS IS EQUAL TO TOTAL QUESTIONS SHOW 'COLLAPSE' BUTTON
@@ -145,7 +148,7 @@ class QuestionList extends React.Component {
           )}
           <br />
           <br />
-          <button className="button is-large" onClick={this.addQuestionClick}>
+          <button className="button is-large askQuestionButton" onClick={this.addQuestionClick}>
             ASK A NEW QUESTION
           </button>
         </div>

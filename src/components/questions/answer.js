@@ -1,5 +1,6 @@
 import React from "react";
 import formatDate from "../../formatDate";
+import recordInteraction from "../../interactionsHelper.js";
 import axios from "axios";
 
 class Answer extends React.Component {
@@ -34,6 +35,7 @@ class Answer extends React.Component {
     let helpfulAnswers = localStorage.getItem("helpfulAnswers");
     helpfulAnswers = JSON.parse(helpfulAnswers);
     if (helpfulAnswers.indexOf(event.target.id) === -1) {
+      recordInteraction(event.target.className, "Q&A");
       helpfulAnswers.push(event.target.id);
       localStorage.setItem("helpfulAnswers", JSON.stringify(helpfulAnswers));
       this.sendHelpful(event.target.id);
@@ -65,6 +67,7 @@ class Answer extends React.Component {
     let reportedAnswers = localStorage.getItem("reportedAnswers");
     reportedAnswers = JSON.parse(reportedAnswers);
     if (reportedAnswers.indexOf(event.target.id) === -1) {
+      recordInteraction(event.target.className, "Q&A");
       reportedAnswers.push(event.target.id);
       localStorage.setItem("reportedAnswers", JSON.stringify(reportedAnswers));
       this.sendReported(event.target.id);
@@ -105,11 +108,16 @@ class Answer extends React.Component {
             ${formatDate(this.props.date)} |`}
           </div>
           <div className="is-inline-block" id={this.props.id} onClick={this.helpfulClick}>
-            <u id={this.props.id}>Helpful?</u> Yes({this.props.helpfulness}) | {"\u00A0"}
+            <u id={this.props.id} className={`answer${this.props.id}isHelpful`}>
+              Helpful?
+            </u>{" "}
+            Yes({this.props.helpfulness}) | {"\u00A0"}
           </div>
           {!this.state.isReported ? (
             <div className="is-inline-block" id={this.props.id} onClick={this.reportedClick}>
-              <u id={this.props.id}>Report</u>
+              <u id={this.props.id} className={`answer${this.props.id}isReported`}>
+                Report
+              </u>
             </div>
           ) : (
             <div className="is-inline-block">Reported</div>
