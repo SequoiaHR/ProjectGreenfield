@@ -104,45 +104,47 @@ class ReviewTile extends React.Component {
   render() {
     let { review } = this.props;
     return (
-      <div className="tile is-child box">
-        <div className="level">
-          <div className="level-left">
-            <div className="level-item"><StarRating rating={review.rating} width="15" height="15" /></div>
+      <div className="tile is-parent">
+        <div className="tile is-child box">
+          <div className="level">
+            <div className="level-left">
+              <div className="level-item"><StarRating rating={review.rating} width="15" height="15" /></div>
+            </div>
+            <div className="level-right">
+              {this.state.verified
+                ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
+                  <br /><i className="fas fa-check-circle"></i> Verified user</div>
+                : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
+            </div>
           </div>
-          <div className="level-right">
-            {this.state.verified
-              ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
-                <br /><i className="fas fa-check-circle"></i> Verified user</div>
-              : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
+          <div className="subtitle">{review.summary}</div>
+          {this.state.expanded || review.body.length <= 250
+            ? <div>{review.body}</div>
+            : <div>{review.body.slice(0, 250)}...</div>}
+          {review.body.length > 250 && !this.state.expanded
+            ? <div className="actionable is-size-7" id={`${review.review_id}-show-more`} onClick={this.toggleExpandBound}>Show more</div>
+            : null}
+          {this.state.expanded
+            ? <div className="actionable is-size-7" id={`${review.review_id}-show-less`} onClick={this.toggleExpandBound}>Show less</div>
+            : null}
+          {review.recommend
+            ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
+            : null}
+          <div className="photos-wrapper">
+          {review.photos !== undefined && review.photos.length > 0
+            ? review.photos.map((photo) => {
+              return <ReviewPhoto key={photo.id} photo={photo} id={review.review_id} />;
+            })
+            : null}
           </div>
-        </div>
-        <div className="subtitle">{review.summary}</div>
-        {this.state.expanded || review.body.length <= 250
-          ? <div>{review.body}</div>
-          : <div>{review.body.slice(0, 250)}...</div>}
-        {review.body.length > 250 && !this.state.expanded
-          ? <div className="actionable is-size-7" id={`${review.review_id}-show-more`} onClick={this.toggleExpandBound}>Show more</div>
-          : null}
-        {this.state.expanded
-          ? <div className="actionable is-size-7" id={`${review.review_id}-show-less`} onClick={this.toggleExpandBound}>Show less</div>
-          : null}
-        {review.recommend
-          ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
-          : null}
-        <div className="photos-wrapper">
-        {review.photos !== undefined && review.photos.length > 0
-          ? review.photos.map((photo) => {
-            return <ReviewPhoto key={photo.id} photo={photo} />;
-          })
-          : null}
-        </div>
-        {review.response !== undefined && review.response !== null && review.response !== "" && review.response !== "null"
-          ? <div><strong>Seller response:</strong><br />{review.response}</div>
-          : null}
-        <div className="is-size-7">
-          Helpful? <span className="actionable" id={`${review.review_id}-helpful`} onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
-            ? <span>Reported</span>
-            : <span className="actionable" id={`${review.review_id}-report`} onClick={this.handleReportBound}>Report</span>}
+          {review.response !== undefined && review.response !== null && review.response !== "" && review.response !== "null"
+            ? <div><strong>Seller response:</strong><br />{review.response}</div>
+            : null}
+          <div className="is-size-7">
+            Helpful? <span className="actionable underline" id={`${review.review_id}-helpful`} onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
+              ? <span>Reported</span>
+              : <span className="actionable underline" id={`${review.review_id}-report`} onClick={this.handleReportBound}>Report</span>}
+          </div>
         </div>
       </div>
     );

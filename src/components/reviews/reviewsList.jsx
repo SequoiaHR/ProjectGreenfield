@@ -118,9 +118,9 @@ class ReviewsList extends React.Component {
     var tiles = reviews.slice(0, this.state.reviewsShown); // select only num to be shown
 
     return(
-      <div>
+      <div id="reviews-section">
         <div className="title">RATINGS & REVIEWS</div>
-        <div id="reviews-section">
+        <div>
           <div className="tile is-ancestor">
             <div className="tile is-parent is-4">
               <ReviewBreakdown

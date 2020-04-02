@@ -1,21 +1,21 @@
 import React from "react";
 var Banner = () => {
   return (
-    <section class="hero is-success is-small">
-      <div class="hero-head">
-        <nav class="navbar">
+    <section className="hero is-success is-small">
+      <div className="hero-head">
+        <nav className="navbar">
           <div className="container">
             <div className="navbar-menu">
-              <a class="navbar-item">
+              <a className="navbar-item">
                 <em className="title is-2">SEQUIOA</em>
               </a>
-              <div class="navbar-end">
-                <a class="navbar-item is-active">
+              <div className="navbar-end">
+                <a className="navbar-item is-active">
                   <input type="text" className="input"></input>
                 </a>
-                <a class="navbar-item is-active">
+                <a className="navbar-item is-active">
                   <button onClick={e => e.preventDefault()} className="button">
-                    <i class="fas fa-tree"></i>
+                    <i className="fas fa-tree"></i>
                   </button>
                 </a>
               </div>

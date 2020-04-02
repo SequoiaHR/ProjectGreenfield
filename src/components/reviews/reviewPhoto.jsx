@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "../Modal.jsx";
 
+import recordInteraction from "../../interactionsHelper.js";
 import "./reviews.css";
 
 class ReviewPhoto extends React.Component {
@@ -14,7 +15,8 @@ class ReviewPhoto extends React.Component {
     this.exitModalBound = this.exitModal.bind(this);
   }
 
-  openModal() {
+  openModal(event) {
+    recordInteraction(`#${event.target.id}`, "Reviews");
     this.setState({
       modalOpen: true
     })
@@ -30,7 +32,12 @@ class ReviewPhoto extends React.Component {
     return(
       <div>
         <div>
-          <img src={this.props.photo.url} className="actionable review-photo" alt="product shown by reviewer" onClick={this.openModalBound}></img>
+          <img 
+            src={this.props.photo.url} 
+            id={`${this.props.id}-${this.props.photo.id}-photo-expand`} 
+            className="actionable review-photo" 
+            alt="product shown by reviewer" 
+            onClick={this.openModalBound}></img>
           {this.state.modalOpen
             ? <Modal title="Photo" onExitClick={this.exitModalBound}>
               <div className="full-size-parent">
