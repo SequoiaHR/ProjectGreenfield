@@ -19,7 +19,6 @@ const List = ({
   pageProduct,
   products,
   productsImages,
-  onClickDetails,
   fetchRelatedDataAsync,
   productsReviews,
   paramsId
@@ -216,7 +215,6 @@ const List = ({
                               idx
                             ]
                           }
-                          onClickDetails={onClickDetails}
                           onClickButton={onClickButton}
                           productSalesData={
                             productsImages
@@ -255,7 +253,6 @@ const List = ({
                                   ])[0].results[0].photos[0].thumbnail_url
                                 : null
                             }
-                            onClickDetails={onClickDetails}
                             onClickButton={onClickButton}
                             productReviews={
                               filterForShownItems(productsReviews, [
