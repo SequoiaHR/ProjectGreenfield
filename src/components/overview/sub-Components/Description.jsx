@@ -3,7 +3,7 @@ import React from 'react';
 const Description = function(props) {
   if (props.state.description.slogan !== undefined) {
     return (
-      <div className="columns" style={{ marginTop: '-50px' }}>
+      <div className="columns" style={{ marginTop: '-30px' }}>
         <div className="column">
           <div
             style={{
