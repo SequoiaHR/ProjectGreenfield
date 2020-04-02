@@ -17,20 +17,16 @@ function App(props) {
       <div className="container">
         <OverviewContainer paramsId={params.id} />
       </div>
+      <div className="container" style={{"margin-bottom": "20px"}}>
+        <ListContainer paramsId={params.id} listName="Related" />      
+        <ListContainer paramsId={params.id} listName="Outfit" />
+      </div>
+      <div className="container">
+        <QuestionListContainer paramsId={params.id} />
+      </div>
       <div className="container">
         <ReviewsListContainer id={params.id} />
       </div>
-      <div className="box">
-        <QuestionListContainer paramsId={params.id} />
-      </div>
-
-      <section>
-        <ListContainer paramsId={params.id} listName="Related" />
-      </section>
-
-      <section>
-        <ListContainer paramsId={params.id} listName="Outfit" />
-      </section>
     </div>
   );
 }

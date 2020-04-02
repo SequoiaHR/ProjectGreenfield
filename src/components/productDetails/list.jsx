@@ -140,7 +140,7 @@ const List = ({
 
   return (
     <div style={outerWrapperStyle}>
-      <h1 className="title is-4">
+      <h1 style={{"margin-left":"3%", "margin-top": "3%"}} className="title is-4">
         {listName === "Related" ? "Related Products" : "Your Outfit"}
       </h1>
       <div style={outerWrapperStyle} className="columns">
