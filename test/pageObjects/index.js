@@ -1,6 +1,5 @@
-const rootSelector = "#root";
 
-export const root = async () => await page.$(rootSelector);
+export const root = async () => await page.$("#root");
 
 export const load = async () => {
   await page.goto(URL, {

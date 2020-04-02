@@ -41,8 +41,8 @@ class QuestionList extends React.Component {
 
   //SHOWS THE MODAL FOR SUBMITTING A QUESTION
   addQuestionClick(event) {
-    recordInteraction(event.target.className, "Q&A");
     this.setState({ showModal: !this.state.showModal });
+    recordInteraction(event.target.className, "Q&A");
   }
 
   //DETERMINES THE NUMBER OF QUESTIONS RENDERED
@@ -94,7 +94,7 @@ class QuestionList extends React.Component {
     let filteredSortedQuestions = this.filterQuestions(sortedQuestions);
     return (
       <React.Fragment>
-        <h1 className="title">QUESTIONS & ANSWERS</h1>
+        <h1 className="title questionsTitle">QUESTIONS & ANSWERS</h1>
         <textarea
           className="textarea is-medium"
           placeholder="Have A Question? Search For Answers..."
