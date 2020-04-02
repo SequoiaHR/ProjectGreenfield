@@ -14,7 +14,6 @@ const Card = ({
   productImage,
   productReviews,
   productSalesData,
-  onClickDetails,
   onClickButton
 }) => {
   // local state needed to determine if modal will show
@@ -51,7 +50,11 @@ const Card = ({
         {showModal === true ? (
           <div>
             <Modal
-              onExitClick={() => {
+              onExitClick={e => {
+                recordInteraction(
+                  `div.${e.target.className.split(" ")[0]}`,
+                  "related-items-comparison"
+                );
                 setShowModal(false);
               }}
               title="Comparing"
@@ -76,15 +79,11 @@ const Card = ({
               if (listName === "Related") {
                 setShowModal(true);
                 recordInteraction(
-                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                  `button.${listName}.product-${product.id}`,
                   "related-items-comparison"
                 );
               } else {
                 onClickButton(listName, product.id);
-                recordInteraction(
-                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
-                  "related-items-comparison"
-                );
               }
             }}
           >
@@ -101,8 +100,14 @@ const Card = ({
 
           <AttachProductLink productId={product.id}>
             <img
+              class={`image-${listName}-product-${product.id}`}
               name={product.id}
-              onClick={onClickDetails}
+              onClick={() => {
+                recordInteraction(
+                  `img.image-${listName}-product-${product.id}`,
+                  "related-items-comparison"
+                );
+              }}
               src={
                 productImage === null
                   ? "https://vectorified.com/images/default-image-icon-14.png"
@@ -146,7 +151,6 @@ const Card = ({
 //Information Needed (CARD STATE NEEDED)
 // product <- Related Product Info Object ({id, name, slogan, description, category, default_price, features}) GET /products/:product_id
 // pageProduct <- Product Info Object (...)
-// OnClickDetails <- Go to Clicked Product's page
 // OnClickButton <- Perform Conditional Action depending on which List you are in: Open Modal Window / Remove Card from Outfit
 // thumbImgURL <- Retrieve Thumbnail image url from GET /product/:product_id/styles <- use style_id "1" which is primary style and take first photo. Ryan may provide this also
 

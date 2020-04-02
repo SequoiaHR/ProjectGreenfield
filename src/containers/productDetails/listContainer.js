@@ -19,10 +19,6 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchRelatedProducts(id));
       dispatch(fetchRelatedImages(id));
       dispatch(fetchRelatedReviews(id));
-    },
-    onClickDetails: e => {
-      console.log("new product ID to switch to: ", e.target.name);
-      //dispatch(actionCreatorToRouteToNewItem);
     }
   };
 };
