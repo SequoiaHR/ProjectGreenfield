@@ -1,6 +1,7 @@
 import React from "react";
 import Answer from "./answer";
 import "./questions.css"
+import recordInteraction from "../../interactionsHelper.js";
 
 class AnswerList extends React.Component{
   constructor(props){
@@ -48,6 +49,7 @@ class AnswerList extends React.Component{
   //SETS NUMBER OF ANSWERS DISPLAYED TO ALL ON CLICK
   seeMoreAnswersClick(event){
     event.preventDefault();
+    recordInteraction(event.target.className, "Q&A");
     this.setState({display: this.props.answers.length});
   }
 
@@ -79,10 +81,14 @@ class AnswerList extends React.Component{
           {
           //IF DISPLAYED ANSWERS IS LESS THAN TOTAL ANSWERS THEN DISPLAY 'SHOW MORE' BUTTON
           (answers.length < Object.keys(this.props.answers).length) ?
-          <button className="button is-medium" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
+          <button className="button is-medium showMoreAnswers" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
           //ELSE IF TOTAL ANSWERS IS MORE THAN TWO SHOW 'COLLAPSE ANSWERS' BUTTON
           (Object.keys(this.props.answers).length > 2) ?
-          <button className="button is-medium" onClick={ (event)=>{ this.setState( {display:2} ) } }>COLLAPSE ANSWERS</button> :
+          <button className="button is-medium collapseAnswers"
+                  onClick={ (event)=>{ this.setState( {display:2} ); recordInteraction(event.target.className, "Q&A");} }
+                  >
+                    COLLAPSE ANSWERS
+          </button> :
           <div></div>
           }
         </div>

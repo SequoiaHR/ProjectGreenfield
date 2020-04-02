@@ -10,6 +10,7 @@ import Card from "./card.jsx";
 import AddToOutfitCard from "./addCard.jsx";
 import DirectionalButton from "./directionalButton.jsx";
 import filterForShownItems from "./shownItemsHelper.js";
+import recordInteraction from "../../interactionsHelper.js";
 import "./directionalButton.css";
 
 const List = ({
@@ -66,6 +67,10 @@ const List = ({
       if (shownIndices[0] !== 0) {
         let newShownIndices = shownIndices.map(idx => idx - 1);
         setShownIndices(newShownIndices);
+        recordInteraction(
+          `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
+          "related-items-comparison"
+        );
       } else {
         console.log("Already at left-most item");
       }
@@ -73,6 +78,10 @@ const List = ({
       if (shownIndices[shownIndices.length - 1] !== products.length - 1) {
         let newShownIndices = shownIndices.map(idx => idx + 1);
         setShownIndices(newShownIndices);
+        recordInteraction(
+          `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
+          "related-items-comparison"
+        );
       } else {
         console.log("Already at right-most item");
       }
@@ -112,6 +121,7 @@ const List = ({
         setShownIndices(newShownIndices);
       }
     }
+    console.log("action and id: ", action, id);
   }
 
   var wrapperStyle = {
@@ -130,10 +140,12 @@ const List = ({
 
   return (
     <div style={outerWrapperStyle}>
-      <h1 className="title is-4">{listName === "Related" ? "Related Products" : "Your Outfit"}</h1>
+      <h1 style={{"margin-left":"3%", "margin-top": "3%"}} className="title is-4">
+        {listName === "Related" ? "Related Products" : "Your Outfit"}
+      </h1>
       <div style={outerWrapperStyle} className="columns">
         <div className="column is-narrow is-vertical-centered">
-          <span>
+          <span class={listName}>
             {shownIndices[0] !== 0 ? (
               <DirectionalButton
                 arrowDirection={"left"}
@@ -176,12 +188,19 @@ const List = ({
                               ].results[0].photos[0].thumbnail_url
                             : null
                         }
-                        onClickDetails={onClickDetails}
-                        onClickButton={onClickButton}
                         productReviews={
                           filterForShownItems(productsReviews, shownIndices)[
                             idx
                           ]
+                        }
+                        onClickDetails={onClickDetails}
+                        onClickButton={onClickButton}
+                        productSalesData={
+                          productsImages
+                            ? filterForShownItems(productsImages, shownIndices)[
+                                idx
+                              ]
+                            : null
                         }
                       />
                     </div>
@@ -192,6 +211,7 @@ const List = ({
                 ? filterForShownItems(products, [
                     shownIndices[shownIndices.length - 1] + 1
                   ]).map(product => {
+                    // The next index corresponding to a card I would like to show a piece of.
                     var nextIndex = shownIndices[shownIndices.length - 1] + 1;
                     return (
                       <div className="column is-3">
@@ -216,6 +236,11 @@ const List = ({
                           productReviews={
                             filterForShownItems(productsReviews, [nextIndex])[0]
                           }
+                          productSalesData={
+                            productsImages
+                              ? filterForShownItems(productsImages, [nextIndex])[0]
+                              : null
+                          }
                         />
                       </div>
                     );
@@ -225,18 +250,20 @@ const List = ({
           </div>
         </div>
         <div className="column is-narrow is-vertical-centered">
-          {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
-          products.length > shownIndices.length ? (
-            <DirectionalButton
-              arrowDirection={"right"}
-              icon={"fas fa-chevron-right"}
-              onArrowClick={onArrowClick}
-            />
-          ) : (
-            <span class="button is-static directionalButton is-medium transparent-icon">
-              <i className="fas fa-chevron-right"></i>
-            </span>
-          )}
+          <span class={listName}>
+            {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
+            products.length > shownIndices.length ? (
+              <DirectionalButton
+                arrowDirection={"right"}
+                icon={"fas fa-chevron-right"}
+                onArrowClick={onArrowClick}
+              />
+            ) : (
+              <span class="button is-static directionalButton is-medium transparent-icon">
+                <i className="fas fa-chevron-right"></i>
+              </span>
+            )}
+          </span>
         </div>
       </div>
     </div>

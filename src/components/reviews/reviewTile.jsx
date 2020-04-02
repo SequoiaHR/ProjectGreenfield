@@ -4,7 +4,9 @@ import axios from "axios";
 
 import StarRating from "../starRating.jsx";
 import ReviewPhoto from "./reviewPhoto.jsx";
+
 import "./reviews.css";
+import recordInteraction from "../../interactionsHelper.js";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -22,11 +24,8 @@ class ReviewTile extends React.Component {
     this.handleReportBound = this.handleReport.bind(this);
   }
 
-  componentDidMount() {
 
-    // *******************************************************
-    // ************TODO: logic to check for verified user*****
-    // *******************************************************
+  componentDidMount() {
 
     let storage = window.localStorage;
 
@@ -53,15 +52,19 @@ class ReviewTile extends React.Component {
     });
   }
 
-  toggleExpand() {
+
+  toggleExpand(event) {
     this.setState({
       expanded: !this.state.expanded
     });
+    recordInteraction(`#${event.target.id}`, "Reviews");
   }
 
-  handleHelpful() {
+  handleHelpful(event) {
+
     let arr = JSON.parse(window.localStorage.getItem("helpful"));
     if (!arr || arr.indexOf(this.props.review.review_id) === -1) {
+      recordInteraction(`#${event.target.id}`, "Reviews");
       if (!arr) {
         arr = [this.props.review.review_id];
       } else if (arr.indexOf(this.props.review.review_id) === -1) {
@@ -79,7 +82,9 @@ class ReviewTile extends React.Component {
     }
   }
 
-  handleReport() {
+  handleReport(event) {
+    recordInteraction(`#${event.target.id}`, "Reviews");
+
     let arr = JSON.parse(window.localStorage.getItem("reported"));
     if (arr) {
       arr.push(this.props.review.review_id);
@@ -116,10 +121,10 @@ class ReviewTile extends React.Component {
           ? <div>{review.body}</div>
           : <div>{review.body.slice(0, 250)}...</div>}
         {review.body.length > 250 && !this.state.expanded
-          ? <div className="actionable is-size-7" onClick={this.toggleExpandBound}>Show more</div>
+          ? <div className="actionable is-size-7" id={`${review.review_id}-show-more`} onClick={this.toggleExpandBound}>Show more</div>
           : null}
         {this.state.expanded
-          ? <div className="actionable is-size-7" onClick={this.toggleExpandBound}>Show less</div>
+          ? <div className="actionable is-size-7" id={`${review.review_id}-show-less`} onClick={this.toggleExpandBound}>Show less</div>
           : null}
         {review.recommend
           ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
@@ -131,13 +136,13 @@ class ReviewTile extends React.Component {
           })
           : null}
         </div>
-        {review.response !== undefined && review.response !== null && review.response !== ""
+        {review.response !== undefined && review.response !== null && review.response !== "" && review.response !== "null"
           ? <div><strong>Seller response:</strong><br />{review.response}</div>
           : null}
         <div className="is-size-7">
-          Helpful? <span className="actionable" onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
+          Helpful? <span className="actionable" id={`${review.review_id}-helpful`} onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
             ? <span>Reported</span>
-            : <span className="actionable" onClick={this.handleReportBound}>Report</span>}
+            : <span className="actionable" id={`${review.review_id}-report`} onClick={this.handleReportBound}>Report</span>}
         </div>
       </div>
     );
