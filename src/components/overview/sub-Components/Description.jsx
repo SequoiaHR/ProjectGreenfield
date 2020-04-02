@@ -3,7 +3,7 @@ import React from 'react';
 const Description = function(props) {
   if (props.state.description.slogan !== undefined) {
     return (
-      <div className="columns">
+      <div className="columns" style={{ marginTop: '-30px' }}>
         <div className="column">
           <div
             style={{
@@ -12,8 +12,16 @@ const Description = function(props) {
           >
             {props.state.description.slogan}
           </div>
-          <div style={{ borderRight: '2px solid gray', height: '75%' }}>
-            {props.state.description.productDescription}
+          <div
+            style={{
+              borderRight: '2px solid gray',
+              height: '75%',
+              width: '95%'
+            }}
+          >
+            <div style={{ marginRight: '10px' }}>
+              {props.state.description.productDescription}
+            </div>
           </div>
         </div>
         <div className="column" style={{ marginTop: '23px' }}>

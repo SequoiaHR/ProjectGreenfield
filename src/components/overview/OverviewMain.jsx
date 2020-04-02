@@ -1,6 +1,5 @@
 import React from 'react';
 import ImageCarousel from './sub-Components/imageCarousel/carouselMain.jsx';
-import ProductRating from './sub-Components/ProductRating';
 import BasicDetails from './sub-Components/BasicDetails';
 import StyleSelection from './sub-Components/StyleSelection';
 import AddToBag from './sub-Components/AddToBag';
@@ -17,7 +16,6 @@ class overviewMain extends React.Component {
         currentThumbnailRow: undefined,
         maximized: false
       },
-      starRating: undefined,
       basicDetails: {
         id: undefined,
         category: undefined,
@@ -33,8 +31,7 @@ class overviewMain extends React.Component {
       zoom: false,
       cart: {
         cartSize: undefined,
-        cartNumber: undefined,
-        favorited: undefined
+        cartNumber: undefined
       },
       description: {
         slogan: undefined,
@@ -50,6 +47,10 @@ class overviewMain extends React.Component {
       this
     );
     this.zoomImage = this.zoomImage.bind(this);
+    this.selectProductSize = this.selectProductSize.bind(this);
+    this.handleSeeAllReviewsClick = this.handleSeeAllReviewsClick.bind(this);
+    this.selectProductStock = this.selectProductStock.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   //this changes the style when you click it!
@@ -63,9 +64,20 @@ class overviewMain extends React.Component {
             selectedReducedPrice: this.state.allStyles[i].sale_price
           }
         });
+
+        //conditional logic to keep index positioning when changing styles
+        var currentStyleIndex;
+        if (
+          this.state.allStyles[i].photos[this.state.images.currentImage] !==
+          undefined
+        ) {
+          currentStyleIndex = this.state.images.currentImage;
+        } else {
+          currentStyleIndex = 0;
+        }
         this.setState({
           images: {
-            currentImage: 0,
+            currentImage: currentStyleIndex,
             otherImagesInStyle: this.state.allStyles[i].photos,
             currentThumbnailRow: 0,
             maximized: false,
@@ -101,20 +113,27 @@ class overviewMain extends React.Component {
 
   //this function changes the displayed image when you click the arrow
   onImageArrowClick(direction) {
+    //conditional logic for direction and thumbnail row changing
     if (direction === 'left') {
+      let newImageNumber = this.state.images.currentImage - 1;
+      let newRowNumber = Math.floor(newImageNumber / 4);
+
       this.setState({
         images: {
-          currentImage: this.state.images.currentImage - 1,
+          currentImage: newImageNumber,
           otherImagesInStyle: this.state.images.otherImagesInStyle,
-          currentThumbnailRow: this.state.images.currentThumbnailRow
+          currentThumbnailRow: newRowNumber
         }
       });
     } else if (direction === 'right') {
+      let newImageNumber = this.state.images.currentImage + 1;
+      let newRowNumber = Math.floor(newImageNumber / 4);
+
       this.setState({
         images: {
-          currentImage: this.state.images.currentImage + 1,
+          currentImage: newImageNumber,
           otherImagesInStyle: this.state.images.otherImagesInStyle,
-          currentThumbnailRow: this.state.images.currentThumbnailRow
+          currentThumbnailRow: newRowNumber
         }
       });
     }
@@ -127,7 +146,6 @@ class overviewMain extends React.Component {
     } else if (!this.state.zoom) {
       this.setState({ zoom: true });
     }
-    console.log('clicked and state is ', this.state.zoom);
   }
 
   //this function changes the displayed thumbnail images when you click the arrow
@@ -151,6 +169,17 @@ class overviewMain extends React.Component {
     }
   }
 
+  //click to see all reviews
+  handleSeeAllReviewsClick = e => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 850,
+      left: 0,
+      behavior: 'instant'
+    });
+  };
+
+  //get data from API and save it
   getData(page_id) {
     Axios.get(`http://3.134.102.30/products/${page_id}`)
       .then(API_details => {
@@ -199,7 +228,7 @@ class overviewMain extends React.Component {
         this.setState({
           images: {
             currentImage: 0,
-            otherImagesInStyle: API_Styles.data.results[2].photos,
+            otherImagesInStyle: API_Styles.data.results[0].photos,
             currentThumbnailRow: 0
           }
         });
@@ -207,6 +236,33 @@ class overviewMain extends React.Component {
       .catch(err => {
         console.log(err);
       });
+  }
+
+  //add to cart functions to change state
+  //selected size
+  selectProductSize(event) {
+    this.setState({
+      cart: {
+        cartSize: event.target.value,
+        cartNumber: this.state.cart.cartNumber
+      }
+    });
+  }
+
+  //selected stock
+  selectProductStock(event) {
+    this.setState({
+      cart: {
+        cartSize: this.state.cart.cartSize,
+        cartNumber: event.target.value
+      }
+    });
+  }
+
+  //submit add to cart on button click
+  addToCart() {
+    //need to create API request
+    console.log('this.cart', this.state.cart);
   }
 
   componentDidUpdate(prevProps) {
@@ -223,22 +279,33 @@ class overviewMain extends React.Component {
   }
 
   render() {
-    //conditional rendering for zoom view
-    let zoomStyling;
-    if (this.state.zoom === true) {
-      zoomStyling = <div></div>;
-    } else if (this.state.zoom === false) {
-      zoomStyling = (
-        <div className="tile is-child">
-          <ProductRating state={this.state} />
-          <BasicDetails state={this.state} />
-          <StyleSelection
-            state={this.state}
-            changeStyleOnClick={this.changeStyleOnClick}
-          />
-          <AddToBag state={this.state} />
-        </div>
-      );
+    //conditional rendering to make sure everything is loaded
+    var zoomStyling;
+    if (this.props.storeState.reviewsMetadata.product_id) {
+      //conditional rendering for zoom view
+      if (this.state.zoom === true) {
+        zoomStyling = <div></div>;
+      } else if (this.state.zoom === false) {
+        zoomStyling = (
+          <div className="tile is-child">
+            <BasicDetails
+              state={this.state}
+              reviews={this.props.storeState.reviewsMetadata}
+              handleSeeAllReviewsClick={this.handleSeeAllReviewsClick}
+            />
+            <StyleSelection
+              state={this.state}
+              changeStyleOnClick={this.changeStyleOnClick}
+            />
+            <AddToBag
+              state={this.state}
+              selectProductSize={this.selectProductSize}
+              selectProductStock={this.selectProductStock}
+              addToCart={this.addToCart}
+            />
+          </div>
+        );
+      }
     }
 
     return (
@@ -258,7 +325,7 @@ class overviewMain extends React.Component {
               {zoomStyling}
             </div>
           </div>
-          <div className="tile is-child description">
+          <div>
             <Description state={this.state} />
           </div>
         </div>
