@@ -50,7 +50,11 @@ const Card = ({
         {showModal === true ? (
           <div>
             <Modal
-              onExitClick={() => {
+              onExitClick={e => {
+                recordInteraction(
+                  `div.${e.target.className.split(" ")[0]}`,
+                  "related-items-comparison"
+                );
                 setShowModal(false);
               }}
               title="Comparing"
@@ -96,8 +100,14 @@ const Card = ({
 
           <AttachProductLink productId={product.id}>
             <img
+              class={`image-${listName}-product-${product.id}`}
               name={product.id}
-              onClick={(e) => {}}
+              onClick={() => {
+                recordInteraction(
+                  `img.image-${listName}-product-${product.id}`,
+                  "related-items-comparison"
+                );
+              }}
               src={
                 productImage === null
                   ? "https://vectorified.com/images/default-image-icon-14.png"
