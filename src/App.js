@@ -24,12 +24,13 @@ function App(props) {
         <QuestionListContainer paramsId={params.id} />
       </div>
 
-      <div className="box">
+      <section>
         <ListContainer paramsId={params.id} listName="Related" />
-      </div>
-      <div className="box">
+      </section>
+
+      <section>
         <ListContainer paramsId={params.id} listName="Outfit" />
-      </div>
+      </section>
     </div>
   );
 }

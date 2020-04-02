@@ -211,6 +211,7 @@ const List = ({
                 ? filterForShownItems(products, [
                     shownIndices[shownIndices.length - 1] + 1
                   ]).map(product => {
+                    // The next index corresponding to a card I would like to show a piece of.
                     var nextIndex = shownIndices[shownIndices.length - 1] + 1;
                     return (
                       <div className="column is-3">
@@ -234,6 +235,11 @@ const List = ({
                           onClickButton={onClickButton}
                           productReviews={
                             filterForShownItems(productsReviews, [nextIndex])[0]
+                          }
+                          productSalesData={
+                            productsImages
+                              ? filterForShownItems(productsImages, [nextIndex])[0]
+                              : null
                           }
                         />
                       </div>

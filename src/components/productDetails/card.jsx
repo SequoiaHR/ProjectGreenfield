@@ -120,7 +120,7 @@ const Card = ({
           </p>
           <p className="">{product.name}</p>
           {salesPrice === null || salesPrice === 0 ? (
-            <p>${salesPrice}</p>
+            <p>${product.default_price}</p>
           ) : (
             <p>
               <strike style={{ color: "red", "font-size": "20px" }}>
