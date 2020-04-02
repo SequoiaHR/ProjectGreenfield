@@ -13,14 +13,40 @@ const Card = ({
   product,
   productImage,
   productReviews,
+  productSalesData,
   onClickDetails,
   onClickButton
 }) => {
   // local state needed to determine if modal will show
   let [showModal, setShowModal] = useState(false);
 
+  // Sales Price Value Calculation
+  let salesPrice = productSalesData
+    ? getSalesPriceIfAvailable(productSalesData)
+    : null;
+
+  function getSalesPriceIfAvailable(data) {
+    if (data.hasOwnProperty("results")) {
+      if (data.results[0] !== undefined) {
+        if (data.results[0].hasOwnProperty("sale_price")) {
+          return Number(data.results[0]["sale_price"]);
+        }
+      }
+    }
+    return null;
+  }
+
+  function showAverageReview(productReviews) {
+    // check if ProductReviews exists and if the ratings property exists.
+    if (productReviews && calculateRating(productReviews) !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   return (
-    <div style={{ "max-height": "100%" }} className="card">
+    <div style={{ "max-height": "60vh" }} className="card">
       <div>
         {showModal === true ? (
           <div>
@@ -33,44 +59,53 @@ const Card = ({
               <ComparisonTable product={product} pageProduct={pageProduct} />
             </Modal>
           </div>
-        ) : (
-          <div></div>
-        )}
+        ) : null}
       </div>
       <div className="card-image actionButtonDiv">
-        <button
-          className={`button is-small actionButton product-${product.id} ${listName}`}
-          value={listName}
-          onClick={e => {
-            if (listName === "Related") {
-              setShowModal(true);
-              recordInteraction(
-                `button.button.is-small.actionButton.product-${product.id}.${listName}`,
-                "related-items-comparison"
-              );
-            } else {
-              onClickButton(listName, product.id);
-              recordInteraction(
-                `button.button.is-small.actionButton.product-${product.id}.${listName}`,
-                "related-items-comparison"
-              );
-            }
-          }}
-        >
-          {listName === "Outfit" ? (
-            <i className="fas fa-times-circle"></i>
-          ) : (
-            <i className="fas fa-star"></i>
-          )}
-        </button>
         <figure className="image is-square">
+          <button
+            style={{
+              "z-index": "2",
+              position: "absolute",
+              top: "0",
+              right: "0"
+            }}
+            className={`button is-small actionButton product-${product.id} ${listName}`}
+            value={listName}
+            onClick={e => {
+              if (listName === "Related") {
+                setShowModal(true);
+                recordInteraction(
+                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                  "related-items-comparison"
+                );
+              } else {
+                onClickButton(listName, product.id);
+                recordInteraction(
+                  `button.button.is-small.actionButton.product-${product.id}.${listName}`,
+                  "related-items-comparison"
+                );
+              }
+            }}
+          >
+            {listName === "Outfit" ? (
+              <span className="icon is-medium">
+                <i className="fas fa-lg fa-times-circle has-text-danger"></i>
+              </span>
+            ) : (
+              <span className="icon is-medium">
+                <i className="far fa-lg fa-star"></i>
+              </span>
+            )}
+          </button>
+
           <AttachProductLink productId={product.id}>
             <img
               name={product.id}
               onClick={onClickDetails}
               src={
                 productImage === null
-                  ? "https://image.shutterstock.com/image-vector/no-image-available-sign-absence-260nw-373243873.jpg"
+                  ? "https://vectorified.com/images/default-image-icon-14.png"
                   : productImage
               }
               alt={`${listName}-Product Item`}
@@ -78,15 +113,23 @@ const Card = ({
           </AttachProductLink>
         </figure>
       </div>
-      <div className="card-content">
-        <div className="media-content">
+      <div className="flex-container">
+        <div className="flex-container-info">
           <p style={{ "border-bottom": ".5px solid black" }} className="">
             {product.category}
           </p>
-          <p className="title is-6">{product.name}</p>
-          <p className="">{product.slogan}</p>
-          <p className="">${product.default_price}</p>
-          {productReviews ? (
+          <p className="">{product.name}</p>
+          {salesPrice === null || salesPrice === 0 ? (
+            <p>${product.default_price}</p>
+          ) : (
+            <p>
+              <span style={{ color: "red", "font-size": "20px" }}>
+                ${salesPrice}
+              </span>{" "}
+              <strike>${product.default_price}</strike>
+            </p>
+          )}
+          {showAverageReview(productReviews) ? (
             <StarRating
               rating={calculateRating(productReviews)}
               width={20}

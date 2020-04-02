@@ -121,7 +121,7 @@ const List = ({
         setShownIndices(newShownIndices);
       }
     }
-    console.log('action and id: ', action, id)
+    console.log("action and id: ", action, id);
   }
 
   var wrapperStyle = {
@@ -140,7 +140,7 @@ const List = ({
 
   return (
     <div style={outerWrapperStyle}>
-      <h1 className="title is-4">
+      <h1 style={{"margin-left":"3%", "margin-top": "3%"}} className="title is-4">
         {listName === "Related" ? "Related Products" : "Your Outfit"}
       </h1>
       <div style={outerWrapperStyle} className="columns">
@@ -188,12 +188,19 @@ const List = ({
                               ].results[0].photos[0].thumbnail_url
                             : null
                         }
-                        onClickDetails={onClickDetails}
-                        onClickButton={onClickButton}
                         productReviews={
                           filterForShownItems(productsReviews, shownIndices)[
                             idx
                           ]
+                        }
+                        onClickDetails={onClickDetails}
+                        onClickButton={onClickButton}
+                        productSalesData={
+                          productsImages
+                            ? filterForShownItems(productsImages, shownIndices)[
+                                idx
+                              ]
+                            : null
                         }
                       />
                     </div>
@@ -204,6 +211,7 @@ const List = ({
                 ? filterForShownItems(products, [
                     shownIndices[shownIndices.length - 1] + 1
                   ]).map(product => {
+                    // The next index corresponding to a card I would like to show a piece of.
                     var nextIndex = shownIndices[shownIndices.length - 1] + 1;
                     return (
                       <div className="column is-3">
@@ -227,6 +235,11 @@ const List = ({
                           onClickButton={onClickButton}
                           productReviews={
                             filterForShownItems(productsReviews, [nextIndex])[0]
+                          }
+                          productSalesData={
+                            productsImages
+                              ? filterForShownItems(productsImages, [nextIndex])[0]
+                              : null
                           }
                         />
                       </div>
