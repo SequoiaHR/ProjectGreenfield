@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 #reviews-section {
   margin-bottom: 30px;
 }
