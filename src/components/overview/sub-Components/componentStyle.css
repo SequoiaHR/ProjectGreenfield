@@ -1,15 +1,23 @@
+/***************** social media ****************************/
+
 .flexContainerSocial {
   display: flex;
-  margin-left: 20px;
 }
 
 .socialMediaButtons {
   margin: 3px;
 }
 
+/***************** prices ****************************/
+
 .flexContainer {
+  width: 350px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
+/***************** styles selection ****************************/
 
 .imgStyling {
   position: absolute;
@@ -32,6 +40,12 @@
   margin-right: 10px;
 }
 
+.circleStyling:hover {
+  border-color: #191970;
+  border-style: solid;
+  border-width: 2px;
+}
+
 .rowStyle {
   width: 380px;
   height: 80px;
@@ -49,7 +63,127 @@
 }
 
 .selectedStyleBorder {
-  border-color: rgb(30, 144, 255);
+  border-color: #191970;
   border-style: solid;
   border-width: 2px;
+}
+
+/***************** reviews ****************************/
+
+.starContainerStyling {
+  margin: 0px;
+}
+
+.readAllReviews {
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/***************** add to cart ****************************/
+
+.cartContainer {
+  width: 360px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/** first row ***/
+
+.cartFirstRowContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.dropdown-containerSize {
+  width: 230px;
+  margin-right: 15px;
+}
+
+.dropdown-containerNumber {
+  width: 130px;
+}
+
+.selectStyling {
+  width: 100%;
+  height: 50px;
+  font-size: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+  background-color: white;
+  border: 4px solid #191970;
+  color: #191970;
+  transition: color 0.2s ease, background-color 0.3s ease;
+  text-align: center;
+  text-align-last: center;
+  font-size: 20px;
+}
+
+.selectStyling:hover {
+  color: white;
+  background-color: #191970;
+}
+
+/** second row ***/
+
+.cartSecondRowContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+  flex-direction: row;
+}
+
+.addToCartContainer {
+  width: 280px;
+  margin-right: 15px;
+}
+
+.favoritesContainer {
+  width: 80px;
+}
+
+.addToCartButton {
+  width: 280px;
+  color: #191970;
+  background: #ffffff;
+  padding: 15px;
+  border: 4px solid #191970;
+  transition: all 0.3s ease 0s;
+  display: block;
+  margin-right: 15px;
+  text-align: center;
+  text-align-last: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.addToCartButton:hover {
+  color: #ffffff;
+  background: #191970;
+  border-color: #191970;
+  transition: all 0.3s ease 0s;
+}
+
+.favoritesButton {
+  width: 65px;
+  color: #191970;
+  background: #ffffff;
+  padding: 15px;
+  border: 4px solid #191970;
+  transition: all 0.3s ease 0s;
+  display: block;
+  text-align: center;
+  text-align-last: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.favoritesButton:hover {
+  color: #ffffff;
+  background: #191970;
+  border-color: #191970;
+  transition: all 0.3s ease 0s;
 }

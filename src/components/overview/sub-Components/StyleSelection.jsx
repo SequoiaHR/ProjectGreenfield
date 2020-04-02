@@ -29,17 +29,20 @@ const StyleSelection = function(props) {
                 } else {
                   selectedStyleBorder = 'circleStyling regularStyleBorder';
                 }
-                return (
-                  <div className={selectedStyleBorder} key={index}>
-                    <img
-                      className="imgStyling"
-                      src={eachStyle.photos[0].thumbnail_url}
-                      onClick={() =>
-                        props.changeStyleOnClick(eachStyle.style_id)
-                      }
-                    ></img>
-                  </div>
-                );
+                //some data has no images, this condtional logic hides those styles
+                if (eachStyle.photos[0].thumbnail_url !== null) {
+                  return (
+                    <div className={selectedStyleBorder} key={index}>
+                      <img
+                        className="imgStyling"
+                        src={eachStyle.photos[0].thumbnail_url}
+                        onClick={() =>
+                          props.changeStyleOnClick(eachStyle.style_id)
+                        }
+                      ></img>
+                    </div>
+                  );
+                }
               })}
             </div>
           );

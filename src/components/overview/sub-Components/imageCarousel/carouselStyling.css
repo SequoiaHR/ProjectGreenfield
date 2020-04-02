@@ -1,7 +1,8 @@
 /************** carousel style **********************  */
 .entireImageCarouselStyling {
   position: relative;
-  margin-right: 20px;
+  margin-right: 40px;
+  margin-left: -20px;
 }
 
 /************* images ******************************** */
@@ -13,6 +14,7 @@
   position: relative;
   overflow: hidden;
   float: left;
+  margin-top: 55px;
 }
 
 /* image styling */
@@ -82,7 +84,6 @@
   position: relative;
   overflow: hidden;
   float: left;
-  margin: 5px;
 }
 
 /* thumbnail images bucket */
@@ -93,6 +94,7 @@
   right: 50%;
   top: 50%;
   transform: translate(50%, -50%);
+  display: flex;
 }
 
 /* image thumbnails styling */

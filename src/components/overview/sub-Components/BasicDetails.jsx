@@ -1,6 +1,9 @@
 import React from 'react';
 import SocialMedia from './SocialMedia.jsx';
 import './componentStyle.css';
+import StarRating from '../../starRating.jsx';
+import calculateRating from '../../../calculateRating';
+import ReadAllReviews from './readAllReviews.jsx';
 
 const productNameStyle = {
   fontSize: '32pt',
@@ -30,6 +33,17 @@ const BasicDetails = function(props) {
         <div style={productNameStyle}>{props.state.basicDetails.name}</div>
         <div className="flexContainer">
           <div style={{ fontSize: '15pt' }}>{prices}</div>
+          <div className="starContainerStyling">
+            <StarRating
+              rating={calculateRating(props.reviews)}
+              width={14}
+              height={7}
+            />
+          </div>
+          <ReadAllReviews
+            allReviews={props.reviews}
+            handleSeeAllReviewsClick={props.handleSeeAllReviewsClick}
+          />
           <SocialMedia state={props.state} />
         </div>
       </div>
