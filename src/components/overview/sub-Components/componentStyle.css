@@ -79,6 +79,10 @@
   font-size: 13px;
 }
 
+.readAllReviews:link {
+  font: black;
+}
+
 /***************** add to cart ****************************/
 
 .cartContainer {

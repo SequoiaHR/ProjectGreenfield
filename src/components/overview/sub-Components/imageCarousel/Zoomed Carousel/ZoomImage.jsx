@@ -1,9 +1,8 @@
 import React from 'react';
-import './carouselStyling.css';
-import zoomImg from './zoom.png';
-import ArrowImage from './arrowImage';
+import './zoomCarouselStyling.css';
+import ArrowImage from '../Regular Carousel/arrowImage';
 
-const ImageFullSize = function(props) {
+const ZoomImage = function(props) {
   let arrowLeft = <div></div>;
   let arrowRight = <div></div>;
 
@@ -14,7 +13,7 @@ const ImageFullSize = function(props) {
         <ArrowImage
           arrowDirection={'left'}
           icon={'fas fa-angle-left'}
-          onImageArrowClick={props.onImageArrowClick}
+          onImageArrowClick={props.onImageModalArrowClick}
         />
       </div>
     );
@@ -26,7 +25,7 @@ const ImageFullSize = function(props) {
         <ArrowImage
           arrowDirection={'right'}
           icon={'fas fa-angle-right'}
-          onImageArrowClick={props.onImageArrowClick}
+          onImageArrowClick={props.onImageModalArrowClick}
         />
       </div>
     );
@@ -35,12 +34,11 @@ const ImageFullSize = function(props) {
   if (props.state.currentImage !== undefined) {
     let indexImage = props.state.currentImage;
     let imageURL = props.state.otherImagesInStyle[indexImage].url;
-
+    // console.log(document.getElementById("test"))
     return (
-      <div className="largeImageBucket">
+      <div className="largeImageModalBucket">
         {arrowLeft}
-        <img src={zoomImg} className="zoom" onClick={props.zoomImage} />
-        <img className="imgStyle" src={imageURL} />
+        <img className="imgStyle magniflier" src={imageURL} />
         {arrowRight}
       </div>
     );
@@ -49,4 +47,4 @@ const ImageFullSize = function(props) {
   }
 };
 
-export default ImageFullSize;
+export default ZoomImage;

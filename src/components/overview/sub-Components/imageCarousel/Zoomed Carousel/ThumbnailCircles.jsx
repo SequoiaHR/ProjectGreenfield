@@ -1,7 +1,7 @@
 import React from 'react';
-import './carouselStyling.css';
+import './zoomCarouselStyling.css';
 
-const ThumbnailImages = function(props) {
+const ThumbnailCircles = function(props) {
   //divide into rows to make easier to manipulate
   let thumbnailRows = [];
   for (
@@ -13,29 +13,24 @@ const ThumbnailImages = function(props) {
     thumbnailRows.push(row);
   }
 
-  //this is just to give me a random key to stop console warnings
-  //conditional logic to render page
   if (props.state.currentThumbnailRow !== undefined) {
-    //variables for my thumbnail border logic
     let indexImage = props.state.currentImage;
     let imageURL = props.state.otherImagesInStyle[indexImage].url;
     return (
-      <div className="imagesNavBucket">
+      <div className="zoomNavigationBucket">
         {thumbnailRows[props.state.currentThumbnailRow].map(
           (eachThumbnailImage, index) => {
-            //conditional logic for highlight thumbnail
             let selectedThumbnail;
             if (eachThumbnailImage.url === imageURL) {
-              selectedThumbnail = 'thumbStyle selectedStyleBorder';
+              selectedThumbnail = 'circleZoomNav selectedCircleBorder';
             } else {
-              selectedThumbnail = 'thumbStyle regularStyleBorder';
+              selectedThumbnail = 'circleZoomNav regularCircleBorder';
             }
             return (
-              <img
+              <div
                 className={selectedThumbnail}
-                src={eachThumbnailImage.thumbnail_url}
                 onClick={() => {
-                  props.changeImageOnThumbnailClick(
+                  props.changeZoomImageOnCircleClick(
                     eachThumbnailImage.thumbnail_url
                   );
                 }}
@@ -51,4 +46,4 @@ const ThumbnailImages = function(props) {
   }
 };
 
-export default ThumbnailImages;
+export default ThumbnailCircles;

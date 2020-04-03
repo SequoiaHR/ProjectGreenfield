@@ -3,7 +3,7 @@ import SocialMedia from './SocialMedia.jsx';
 import './componentStyle.css';
 import StarRating from '../../starRating.jsx';
 import calculateRating from '../../../calculateRating';
-import ReadAllReviews from './readAllReviews.jsx';
+import ReadAllReviews from './ReadAllReviews.jsx';
 
 const productNameStyle = {
   fontSize: '32pt',
