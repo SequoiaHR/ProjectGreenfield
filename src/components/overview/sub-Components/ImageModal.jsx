@@ -4,9 +4,9 @@ const ImageModal = ({ title, children, onExitClick }) => {
   return (
     <div>
       <div className="modal is-active">
-        <div onClick={onExitClick} class="modal-background"></div>
+        <div onClick={onExitClick} className="modal-background"></div>
         <div className="modal-card">
-          <header class="modal-card-head">
+          <header className="modal-card-head">
             <p className="modal-card-title">{title}</p>
           </header>
           <div className="modal-card-body">{children}</div>
