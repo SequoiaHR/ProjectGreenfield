@@ -1,4 +1,4 @@
-import calculateRating from "./calculateRating.js";
+import calculateRating from "../../src/calculateRating.js";
 var testDataMixedStar = {
   product_id: "1",
   ratings: {
@@ -32,14 +32,14 @@ var testDataFiveStar = {
 describe("Calculate Rating Function", () => {
   test("Should calculate a Five Star Rating correctly", () => {
     let outcome = calculateRating(testDataFiveStar);
-    expect(outcome).toBe(5);
+    expect(outcome).toBe("5.0");
   });
   test("Should calculate a rating correctly on mixed rating data", () => {
     let outcome = calculateRating(testDataMixedStar);
-    expect(outcome).toBe(3.4);
+    expect(outcome).toBe("3.4");
   });
   test("Should calculate a rating correctly on rating data that has no one star ratings", () => {
     let outcome = calculateRating(testDataNoOneStar);
-    expect(outcome).toBe(4.1);
+    expect(outcome).toBe("4.1");
   });
 });
