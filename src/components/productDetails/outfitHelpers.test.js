@@ -1,8 +1,4 @@
-import {
-  addToOutfit,
-  removeFromOutfit
-} from "../../src/components/productDetails/outfitHelpers.js";
-import { load } from "../pageObjects/index";
+import { addToOutfit, removeFromOutfit } from "./outfitHelpers.js";
 
 //Closure scope to store Current Local Storage Outfit Before Tests
 let localOutfit;
