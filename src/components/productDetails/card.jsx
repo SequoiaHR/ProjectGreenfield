@@ -94,7 +94,7 @@ const Card = ({
               </span>
             ) : (
               <span className="icon is-medium fa-layers fa-fw">
-                <i style={{color: "white"}}className="fas fa-star"></i>
+                <i style={{color: "white"}} className="fas fa-star"></i>
                 <i className="far fa-lg fa-star"></i>
               </span>
             )}
