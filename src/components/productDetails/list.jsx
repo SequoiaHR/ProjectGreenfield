@@ -119,10 +119,7 @@ const List = ({
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
       fetchOutfitsReviews(setOutfitsReviews);
-      recordInteraction(
-        "button.addCardButton",
-        "related-items-comparison"
-      );
+      recordInteraction("button.addCardButton", "related-items-comparison");
     }
     if (action === "Outfit") {
       removeFromOutfit(id);
@@ -132,7 +129,7 @@ const List = ({
       recordInteraction(
         `button.Outfit.product-${id}`,
         "related-items-comparison"
-      )
+      );
       // on delete - move all shown indices down one if first shown index doesn't equal zero.
       if (shownIndices[0] !== 0) {
         let newShownIndices = shownIndices.map(idx => idx - 1);
@@ -172,6 +169,7 @@ const List = ({
                   arrowDirection={"left"}
                   icon={"fas fa-chevron-left"}
                   onArrowClick={onArrowClick}
+                  listName={listName}
                 />
               ) : (
                 <span class="button is-static directionalButton is-medium transparent-icon">
@@ -282,6 +280,7 @@ const List = ({
                   arrowDirection={"right"}
                   icon={"fas fa-chevron-right"}
                   onArrowClick={onArrowClick}
+                  listName={listName}
                 />
               ) : (
                 <span class="button is-static directionalButton is-medium transparent-icon">
