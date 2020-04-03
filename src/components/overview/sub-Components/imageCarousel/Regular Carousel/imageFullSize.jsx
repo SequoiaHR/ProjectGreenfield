@@ -35,7 +35,7 @@ const ImageFullSize = function(props) {
   if (props.state.currentImage !== undefined) {
     let indexImage = props.state.currentImage;
     let imageURL = props.state.otherImagesInStyle[indexImage].url;
-
+    console.log('imageURL', imageURL);
     return (
       <div className="largeImageBucket">
         {arrowLeft}

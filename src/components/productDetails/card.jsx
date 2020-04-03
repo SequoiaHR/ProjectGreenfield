@@ -88,11 +88,13 @@ const Card = ({
             }}
           >
             {listName === "Outfit" ? (
-              <span className="icon is-medium">
+              <span className="icon is-medium fa-layers fa-fw">
+                <i style={{color: "white"}} className="fas fa-circle"></i>
                 <i className="fas fa-lg fa-times-circle has-text-danger"></i>
               </span>
             ) : (
-              <span className="icon is-medium">
+              <span className="icon is-medium fa-layers fa-fw">
+                <i style={{color: "white"}} className="fas fa-star"></i>
                 <i className="far fa-lg fa-star"></i>
               </span>
             )}
@@ -100,7 +102,7 @@ const Card = ({
 
           <AttachProductLink productId={product.id}>
             <img
-              class={`image-${listName}-product-${product.id}`}
+              className={`image-${listName}-product-${product.id}`}
               name={product.id}
               onClick={() => {
                 recordInteraction(

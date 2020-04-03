@@ -10,4 +10,8 @@ describe("Questions", () => {
     expect(await getQuestionsTitle()).toBe("QUESTIONS & ANSWERS");
   });
 
+  // it("should add a question", async() => {
+
+  // })
+
 });

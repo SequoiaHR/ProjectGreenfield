@@ -35,7 +35,7 @@ const ComparisonTable = ({ product, pageProduct }) => {
       <tr key={idx}>
         {pageItem === "null" ? (
           <td className="has-text-centered">
-            <i class="fas fa-check"></i>
+            <i className="fas fa-check"></i>
           </td>
         ) : (
           <td className="has-text-centered">{pageItem}</td>
@@ -43,7 +43,7 @@ const ComparisonTable = ({ product, pageProduct }) => {
         <td className="has-text-centered is-feature">{feat}</td>
         {compareItem === "null" ? (
           <td className="has-text-centered">
-            <i class="fas fa-check"></i>
+            <i className="fas fa-check"></i>
           </td>
         ) : (
           <td className="has-text-centered">{compareItem}</td>
@@ -53,7 +53,7 @@ const ComparisonTable = ({ product, pageProduct }) => {
   };
 
   return (
-    <table class="table">
+    <table className="table">
       <thead>
         <tr>
           <th align="center">{pageProduct.name}</th>

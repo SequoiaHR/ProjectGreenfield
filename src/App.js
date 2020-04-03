@@ -13,15 +13,15 @@ function App(props) {
   } = props;
   return (
     <div className="App container">
-      <Banner />
+      <Banner/>
       <div className="container">
         <OverviewContainer paramsId={params.id} />
       </div>
       <div className="container" style={{"margin-bottom": "20px"}}>
-        <ListContainer paramsId={params.id} listName="Related" />      
+        <ListContainer paramsId={params.id} listName="Related" />
         <ListContainer paramsId={params.id} listName="Outfit" />
       </div>
-      <div className="container">
+      <div className="container" style={{margin: "8vh 0vh 8vh 0vh"}}>
         <QuestionListContainer paramsId={params.id} />
       </div>
       <div className="container">

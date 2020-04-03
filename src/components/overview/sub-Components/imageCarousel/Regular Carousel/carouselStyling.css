@@ -55,11 +55,11 @@
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prevArrowImg:hover,
+/* .prevArrowImg:hover,
 .nextArrowImg:hover {
-  background-color: #00004d;
+  background-color: hsl(171, 100%, 41%);
   color: white;
-}
+} */
 
 /* zoom changer */
 .zoom {
@@ -71,7 +71,7 @@
 }
 
 .zoom:hover {
-  background-color: #00004d;
+  background-color: hsl(171, 100%, 41%);
   color: white;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .thumbStyle:hover {
-  border-color: #00004d;
+  border-color: hsl(171, 100%, 41%);
   border-style: solid;
   border-width: 2px;
 }
@@ -121,7 +121,7 @@
   width: auto;
   padding: 10px;
   margin-top: -22px;
-  color: #00004d;
+  color: hsl(171, 100%, 41%);
   font-weight: bold;
   font-size: 18px;
   transition: 0.3s ease;
@@ -140,11 +140,11 @@
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prevArrowNav:hover,
+/* .prevArrowNav:hover,
 .nextArrowNav:hover {
-  background-color: #00004d;
+  background-color: hsl(171, 100%, 41%);
   color: white;
-}
+} */
 
 /* thumbnail  border styling*/
 .regularStyleBorder {

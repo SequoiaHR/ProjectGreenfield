@@ -4,6 +4,7 @@ import Modal from "../Modal.jsx";
 import AddAnswer from "./addAnswer.js";
 import recordInteraction from "../../interactionsHelper.js";
 import axios from "axios";
+import "./questions.css"
 
 class Question extends React.Component {
   constructor(props) {
@@ -70,16 +71,16 @@ class Question extends React.Component {
     return (
       <div className="container">
         <div className="container">
-          <div className="title is-inline-block">{`Q: ${this.props.question_body}`}</div>
+          <div className="title is-4 is-inline-block">{`Q: ${this.props.question_body}`}</div>
           <div className="is-pulled-right is-inline-block">
-            <div className="is-inline-block" id={this.props.question_id} onClick={this.helpfulClick}>
+            <div className="is-inline-block is-clickable" id={this.props.question_id} onClick={this.helpfulClick}>
               Helpful?{" "}
               <u id={this.props.question_id} className={`question${this.props.question_id}isHelpful`}>
                 Yes
               </u>
               ({this.props.question_helpfulness})
             </div>
-            <div className="is-inline-block" onClick={this.addAnswerClick}>
+            <div className="is-inline-block is-clickable" onClick={this.addAnswerClick}>
               {" | "}
               <u className={`addAnswerToQuestion${this.props.question_id} addAnswer`}>Add Answer</u>
             </div>
