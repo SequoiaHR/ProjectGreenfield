@@ -103,10 +103,10 @@ class Answer extends React.Component {
       <div className="tile is-child box">
         <div className="title is-5">{`A: ${this.props.body}`}</div>
         <div className="is-inline-block">
-          <div>
+          <div className="is-inline-block">
             by {name}
             {`,
-            ${formatDate(this.props.date)} |`}
+            ${formatDate(this.props.date)} | \u00A0`}
           </div>
           <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.helpfulClick}>
             Helpful?{" "}
