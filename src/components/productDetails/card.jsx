@@ -88,11 +88,13 @@ const Card = ({
             }}
           >
             {listName === "Outfit" ? (
-              <span className="icon is-medium">
+              <span className="icon is-medium fa-layers fa-fw">
+                <i style={{color: "white"}} class="fas fa-circle"></i>
                 <i className="fas fa-lg fa-times-circle has-text-danger"></i>
               </span>
             ) : (
-              <span className="icon is-medium">
+              <span className="icon is-medium fa-layers fa-fw">
+                <i style={{color: "white"}}class="fas fa-star"></i>
                 <i className="far fa-lg fa-star"></i>
               </span>
             )}
