@@ -14,8 +14,8 @@ class ReviewsList extends React.Component {
     this.state = {
       reviewsShown: 2,
       sort: "relevant",
-      filters: new Set(),
-      modalOpen: false
+      filters: new Set(), // no filters at first
+      modalOpen: false // for 'add a review' modal
     };
     this.changeLoadBound = this.changeLoad.bind(this);
     this.toggleFilterBound = this.toggleFilter.bind(this);
@@ -31,6 +31,7 @@ class ReviewsList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // when ID changes from react router, repeat fetch and reset state
     if (this.props.id !== prevProps.id) {
       this.props.getData(this.props.id, "relevant");
       this.setState({
@@ -43,6 +44,7 @@ class ReviewsList extends React.Component {
   }
 
   changeLoad(direction) {
+    // either load two more reviews or collapse reviews back to 2
     this.setState({
       reviewsShown: direction === "more"
       ? this.state.reviewsShown + 2
@@ -55,7 +57,7 @@ class ReviewsList extends React.Component {
     }
   }
 
-  toggleFilter(event) {
+  toggleFilter(event) { // add or remove a star filter
     const stars = Number(event.target.dataset.stars);
     let current = new Set(this.state.filters);
     if (current.has(stars)) {
@@ -75,6 +77,7 @@ class ReviewsList extends React.Component {
     this.setState({
       filters: new Set()
     });
+    // remove bold styling from any selected filters
     const filters = Array.from(document.getElementsByClassName("filter-option"));
     filters.forEach((el) => {
       el.setAttribute("style", "font-weight:normal");
@@ -82,7 +85,7 @@ class ReviewsList extends React.Component {
     recordInteraction(`#${event.target.id}`, "Reviews");
   }
 
-  sort(event) {
+  sort(event) { // update reviews list according to sort selected
     this.setState({
       sort: event.target.value
     }, () => {

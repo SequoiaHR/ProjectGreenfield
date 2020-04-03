@@ -14,10 +14,9 @@ class ReviewTile extends React.Component {
 
     this.state = {
       expanded: false,
-      markedHelpful: false,
       numHelpful: 0,
       reported: false,
-      verified: false,
+      verified: false // not currently used
     };
     this.toggleExpandBound = this.toggleExpand.bind(this);
     this.handleHelpfulBound = this.handleHelpful.bind(this);
@@ -26,18 +25,10 @@ class ReviewTile extends React.Component {
 
 
   componentDidMount() {
-
     let storage = window.localStorage;
 
-    let helpful = JSON.parse(storage.getItem("helpful"));
-    if (helpful) {
-      if (helpful.indexOf(this.props.review.review_id) >= 0) {
-        this.setState({
-          markedHelpful: true
-        });
-      }
-    }
-    // shouldn't be possible that it's reported, but accounting for changes in API
+    // check whether already reported, for conditional rendering of link
+    // shouldn't be possible that it's already reported, but accounting for changes in API
     let reported = JSON.parse(storage.getItem("reported"));
     if (reported) {
       if (reported.indexOf(this.props.review.review_id) >= 0) {
@@ -53,7 +44,7 @@ class ReviewTile extends React.Component {
   }
 
 
-  toggleExpand(event) {
+  toggleExpand(event) { // expand or collapse review body
     this.setState({
       expanded: !this.state.expanded
     });
@@ -72,8 +63,7 @@ class ReviewTile extends React.Component {
       }
       window.localStorage.setItem("helpful", JSON.stringify(arr));
       this.setState({
-        markedHelpful: true,
-        numHelpful: this.state.numHelpful + 1
+        numHelpful: this.state.numHelpful + 1 // avoid re-fetching reviews to display updated num
       });
       axios.put(`http://3.134.102.30/reviews/helpful/${this.props.review.review_id}`)
         .catch((err) => {
