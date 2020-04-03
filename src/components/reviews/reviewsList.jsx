@@ -119,7 +119,7 @@ class ReviewsList extends React.Component {
 
     return(
       <div id="reviews-section">
-        <div className="title">RATINGS & REVIEWS</div>
+        <div className="title is-4">RATINGS & REVIEWS</div>
         <div>
           <div className="tile is-ancestor">
             <div className="tile is-parent is-4">
@@ -145,11 +145,11 @@ class ReviewsList extends React.Component {
               </div>
               <div className="tile is-child">
                 {reviews.length > this.state.reviewsShown // conditionally render show more or collapse
-                  ? <button className="button" id={`${this.props.id}-show-more`} onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
+                  ? <button className="button is-outlined is-primary" id={`${this.props.id}-show-more`} onClick={() => this.changeLoadBound("more")}>MORE REVIEWS</button>
                   : reviews.length > 2 
-                    ? <button className="button" id={`${this.props.id}-show-fewer`} onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
+                    ? <button className="button is-outlined is-primary" id={`${this.props.id}-show-fewer`} onClick={() => this.changeLoadBound("fewer")}>COLLAPSE REVIEWS</button>
                     : null}
-                <button className="button" id={`${this.props.id}-add-review`} onClick={this.openModalBound}>ADD A REVIEW</button>
+                <button className="button is-outlined is-primary" id={`${this.props.id}-add-review`} onClick={this.openModalBound}>ADD A REVIEW</button>
                 {this.state.modalOpen
                   ? <Modal title="Write Your Review" onExitClick={this.exitModalBound}>
                     <AddReviewFormContainer 

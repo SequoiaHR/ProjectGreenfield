@@ -43,7 +43,7 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
                 ? <span className="filter-option is-size-7" id={`${num}-star-filter`} data-stars={num} onClick={toggleHandler}>{num} star</span>
                 : <span className="filter-option is-size-7" id={`${num}-star-filter`} data-stars={num} onClick={toggleHandler}>{num} stars</span>}
               <progress // progress bar
-                className="progress is-small is-success"
+                className="progress is-small is-primary"
                 value={metadata.ratings[num] || 0}
                 max={total}>
               </progress>
