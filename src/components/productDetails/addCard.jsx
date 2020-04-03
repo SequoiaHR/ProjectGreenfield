@@ -1,16 +1,20 @@
-import React from "react";
-import "./addCard.css";
+import React from 'react';
+import './addCard.css';
 
 const AddToOutfitCard = ({ onClickButton, pageProduct }) => {
   return (
     <div class="column is-3">
-      <div style={{"min-height": "30vh"}} class="card is-vertical-centered has-background-grey-lighter">
+      <div
+        style={{ 'min-height': '30vh' }}
+        class="card is-vertical-centered has-background-grey-lighter"
+      >
         <button
           class="button is-medium is-vertical-centered addCardButton"
           value="Add"
-          onClick={e => onClickButton("Add", pageProduct.id)}
+          onClick={e => onClickButton('Add', pageProduct.id)}
         >
-          <p>Add </p><i class="fas fa-plus"></i>
+          <p>Add{'\u00A0'}</p>
+          <i class="fas fa-plus"></i>
         </button>
       </div>
     </div>
