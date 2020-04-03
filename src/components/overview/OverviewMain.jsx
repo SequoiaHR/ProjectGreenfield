@@ -237,8 +237,8 @@ class overviewMain extends React.Component {
         this.setState({
           zoomedImages: {
             currentImage: i,
-            otherImagesInStyle: this.state.images.otherImagesInStyle,
-            currentThumbnailRow: this.state.images.currentThumbnailRow
+            otherImagesInStyle: this.state.zoomedImages.otherImagesInStyle,
+            currentThumbnailRow: this.state.zoomedImages.currentThumbnailRow
           }
         });
         break;
@@ -303,7 +303,6 @@ class overviewMain extends React.Component {
             features: API_details.data.features
           }
         });
-        console.log('Tristan is a cottonheaded ninnymuggins');
       })
       .catch(err => {
         console.log(err);
@@ -315,24 +314,26 @@ class overviewMain extends React.Component {
         this.props.storeProductStyles(API_Styles.data);
         //input this data into currentView
         //set style data in state
-        this.setState({
-          selectedStyle: {
-            selectedStyleId: API_Styles.data.results[0].style_id,
-            selectedStyleColor: API_Styles.data.results[0].name,
-            selectedReducedPrice: API_Styles.data.results[0].sale_price
-          }
-        });
-        this.setState({
-          allStyles: API_Styles.data.results
-        });
-        //set state for images
-        this.setState({
-          images: {
-            currentImage: 0,
-            otherImagesInStyle: API_Styles.data.results[0].photos,
-            currentThumbnailRow: 0
-          }
-        });
+        if (API_Styles.data.results.length > 0) {
+          this.setState({
+            selectedStyle: {
+              selectedStyleId: API_Styles.data.results[0].style_id,
+              selectedStyleColor: API_Styles.data.results[0].name,
+              selectedReducedPrice: API_Styles.data.results[0].sale_price
+            }
+          });
+          this.setState({
+            allStyles: API_Styles.data.results
+          });
+          //set state for images
+          this.setState({
+            images: {
+              currentImage: 0,
+              otherImagesInStyle: API_Styles.data.results[0].photos,
+              currentThumbnailRow: 0
+            }
+          });
+        }
       })
       .catch(err => {
         console.log(err);
