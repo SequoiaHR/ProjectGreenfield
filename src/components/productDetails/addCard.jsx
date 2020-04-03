@@ -3,18 +3,18 @@ import './addCard.css';
 
 const AddToOutfitCard = ({ onClickButton, pageProduct }) => {
   return (
-    <div class="column is-3">
+    <div className="column is-3">
       <div
         style={{ 'min-height': '30vh' }}
-        class="card is-vertical-centered has-background-grey-lighter"
+        className="card is-vertical-centered has-background-grey-lighter"
       >
         <button
-          class="button is-medium is-vertical-centered addCardButton"
+          className="button is-medium is-vertical-centered addCardButton"
           value="Add"
           onClick={e => onClickButton('Add', pageProduct.id)}
         >
           <p>Add{'\u00A0'}</p>
-          <i class="fas fa-plus"></i>
+          <i className="fas fa-plus"></i>
         </button>
       </div>
     </div>

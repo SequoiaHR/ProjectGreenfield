@@ -7,9 +7,9 @@ function DirectionalButton({ arrowDirection, icon, onArrowClick, listName }) {
       onClick={() => {
         onArrowClick(arrowDirection);
       }}
-      class={`button is-medium directionalButton button-${listName}-${arrowDirection}`}
+      className={`button is-medium directionalButton button-${listName}-${arrowDirection}`}
     >
-      <i class={icon}></i>
+      <i className={icon}></i>
     </button>
   );
 }

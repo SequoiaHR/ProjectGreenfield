@@ -39,7 +39,7 @@ var Banner = () => {
   };
 
   return (
-    <section className="hero is-success is-small">
+    <section className="hero is-primary is-small">
       <div className="hero-head">
         <nav className="navbar">
           <div className="container">

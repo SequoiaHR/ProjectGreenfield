@@ -94,7 +94,7 @@ class QuestionList extends React.Component {
     let filteredSortedQuestions = this.filterQuestions(sortedQuestions);
     return (
       <React.Fragment>
-        <h1 className="title questionsTitle">QUESTIONS & ANSWERS</h1>
+        <h1 className="title is-4 questionsTitle">QUESTIONS & ANSWERS</h1>
         <textarea
           className="textarea is-medium"
           placeholder="Have A Question? Search For Answers..."
@@ -129,14 +129,14 @@ class QuestionList extends React.Component {
         <div>
           {//IF DISPLAYED QUESTIONS IS LESS THAN TOTAL QUESTIONS THEN DISPLAY 'SHOW MORE' BUTTON
           this.determineDisplayed(filteredSortedQuestions).length < filteredSortedQuestions.length ? (
-            <button className="button is-medium showMoreQuestions" onClick={this.seeMoreQuestionsClick}>
+            <button className="button is-medium is-primary is-outlined showMoreQuestions" onClick={this.seeMoreQuestionsClick}>
               SHOW MORE QUESTIONS
             </button>
           ) : //ELSE IF DISPLAYED QUESTIONS IS EQUAL TO TOTAL QUESTIONS SHOW 'COLLAPSE' BUTTON
           this.determineDisplayed(filteredSortedQuestions).length === filteredSortedQuestions.length &&
             filteredSortedQuestions.length > 2 ? (
             <button
-              className="button is-medium"
+              className="button is-medium is-primary is-outlined "
               onClick={() => {
                 this.setState({ display: 2 });
               }}
@@ -148,7 +148,7 @@ class QuestionList extends React.Component {
           )}
           <br />
           <br />
-          <button className="button is-large askQuestionButton" onClick={this.addQuestionClick}>
+          <button className="button is-medium is-pulled-right is-primary is-outlined askQuestionButton" onClick={this.addQuestionClick}>
             ASK A NEW QUESTION
           </button>
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import formatDate from "../../formatDate";
 import recordInteraction from "../../interactionsHelper.js";
 import axios from "axios";
+import "./questions.css"
 
 class Answer extends React.Component {
   constructor(props) {
@@ -101,13 +102,17 @@ class Answer extends React.Component {
     return (
       <div className="tile is-child box">
         <div className="title is-5">{`A: ${this.props.body}`}</div>
+        {this.props.photos.map((photo, index) => (
+          <img style={{ maxHeight: 100, maxWidth: 100 }} src={photo} alt={photo} />
+        ))}
+        <br/>
         <div className="is-inline-block">
-          <div>
+          <div className="is-inline-block">
             by {name}
             {`,
-            ${formatDate(this.props.date)} |`}
+            ${formatDate(this.props.date)} | \u00A0`}
           </div>
-          <div className="is-inline-block" id={this.props.id} onClick={this.helpfulClick}>
+          <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.helpfulClick}>
             Helpful?{" "}
             <u id={this.props.id} className={`answer${this.props.id}isHelpful`}>
               Yes
@@ -115,7 +120,7 @@ class Answer extends React.Component {
             ({this.props.helpfulness}) | {"\u00A0"}
           </div>
           {!this.state.isReported ? (
-            <div className="is-inline-block" id={this.props.id} onClick={this.reportedClick}>
+            <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.reportedClick}>
               <u id={this.props.id} className={`answer${this.props.id}isReported`}>
                 Report
               </u>
@@ -126,9 +131,8 @@ class Answer extends React.Component {
 
           {/* MAP ANY EXISTING PHOTOS TO ANSWER */}
         </div>
-        {this.props.photos.map((photo, index) => (
-          <img style={{ maxHeight: 100, maxWidth: 100 }} src={photo} alt={photo} />
-        ))}
+
+
       </div>
     );
   }

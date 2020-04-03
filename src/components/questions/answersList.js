@@ -26,15 +26,15 @@ class AnswerList extends React.Component{
     }
     answerArray.sort((a,b)=>b.helpfulness - a.helpfulness);
     answerArray.sort((a,b)=> {
+      let result = 0;
       if (b.answerer_name === "Seller" && a.answerer_name === "Seller") {
-        return 0;
+        result = 0;
+      } else if (b.answerer_name === "Seller") {
+        result = 1;
+      } else if (a.answerer_name === "Seller") {
+        result = -1;
       }
-      if (b.answerer_name === "Seller") {
-        return 1;
-      }
-      if (a.answerer_name === "Seller") {
-        return -1;
-      }
+      return result;
     });
     return answerArray;
   }
@@ -81,10 +81,10 @@ class AnswerList extends React.Component{
           {
           //IF DISPLAYED ANSWERS IS LESS THAN TOTAL ANSWERS THEN DISPLAY 'SHOW MORE' BUTTON
           (answers.length < Object.keys(this.props.answers).length) ?
-          <button className="button is-medium showMoreAnswers" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
+          <button className="button is-small is-primary is-outlined showMoreAnswers" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
           //ELSE IF TOTAL ANSWERS IS MORE THAN TWO SHOW 'COLLAPSE ANSWERS' BUTTON
           (Object.keys(this.props.answers).length > 2) ?
-          <button className="button is-medium collapseAnswers"
+          <button className="button is-small is-primary is-outlined collapseAnswers"
                   onClick={ (event)=>{ this.setState( {display:2} ); recordInteraction(event.target.className, "Q&A");} }
                   >
                     COLLAPSE ANSWERS

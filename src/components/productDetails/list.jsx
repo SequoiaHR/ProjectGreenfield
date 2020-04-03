@@ -163,7 +163,7 @@ const List = ({
         </h1>
         <div style={outerWrapperStyle} className="columns">
           <div className="column is-narrow is-vertical-centered">
-            <span class={listName}>
+            <span className={listName}>
               {shownIndices[0] !== 0 ? (
                 <DirectionalButton
                   arrowDirection={"left"}
@@ -172,15 +172,15 @@ const List = ({
                   listName={listName}
                 />
               ) : (
-                <span class="button is-static directionalButton is-medium transparent-icon">
+                <span className="button is-static directionalButton is-medium transparent-icon">
                   <i className="fas fa-chevron-left"></i>
                 </span>
               )}
             </span>
           </div>
-          <div class="column outer">
-            <div class="box has-background-light" style={wrapperStyle}>
-              <div class="columns" style={innerWrapperStyle}>
+          <div className="column outer">
+            <div className="box has-background-light" style={wrapperStyle}>
+              <div className="columns" style={innerWrapperStyle}>
                 {listName === "Outfit" ? (
                   <AddToOutfitCard
                     pageProduct={pageProduct}
@@ -273,7 +273,7 @@ const List = ({
             </div>
           </div>
           <div className="column is-narrow is-vertical-centered">
-            <span class={listName}>
+            <span className={listName}>
               {shownIndices[shownIndices.length - 1] !== products.length - 1 &&
               products.length > shownIndices.length ? (
                 <DirectionalButton
@@ -283,7 +283,7 @@ const List = ({
                   listName={listName}
                 />
               ) : (
-                <span class="button is-static directionalButton is-medium transparent-icon">
+                <span className="button is-static directionalButton is-medium transparent-icon">
                   <i className="fas fa-chevron-right"></i>
                 </span>
               )}
