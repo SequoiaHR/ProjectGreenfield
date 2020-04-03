@@ -169,7 +169,7 @@ class AddQuestion extends React.Component {
         )}
         <div>For Authentication Reasons, You Will Not Be Emailed</div>
         <br />
-        <button className="button is-medium is-primary is-outlined " onClick={this.submitAnswer}>
+        <button className="button is-small is-primary is-outlined " onClick={this.submitAnswer}>
           SUBMIT QUESTION
         </button>
         <br />
