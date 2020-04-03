@@ -2,6 +2,7 @@ import React from "react";
 import formatDate from "../../formatDate";
 import recordInteraction from "../../interactionsHelper.js";
 import axios from "axios";
+import "./questions.css"
 
 class Answer extends React.Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class Answer extends React.Component {
             {`,
             ${formatDate(this.props.date)} |`}
           </div>
-          <div className="is-inline-block" id={this.props.id} onClick={this.helpfulClick}>
+          <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.helpfulClick}>
             Helpful?{" "}
             <u id={this.props.id} className={`answer${this.props.id}isHelpful`}>
               Yes
@@ -115,7 +116,7 @@ class Answer extends React.Component {
             ({this.props.helpfulness}) | {"\u00A0"}
           </div>
           {!this.state.isReported ? (
-            <div className="is-inline-block" id={this.props.id} onClick={this.reportedClick}>
+            <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.reportedClick}>
               <u id={this.props.id} className={`answer${this.props.id}isReported`}>
                 Report
               </u>

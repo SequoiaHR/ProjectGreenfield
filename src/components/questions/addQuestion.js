@@ -25,6 +25,7 @@ class AddQuestion extends React.Component {
   }
 
   checkEmailValidity(email) {
+    // eslint-disable-next-line
     let regex = RegExp(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
     return regex.test(email);
   }
@@ -168,7 +169,7 @@ class AddQuestion extends React.Component {
         )}
         <div>For Authentication Reasons, You Will Not Be Emailed</div>
         <br />
-        <button className="button is-medium" onClick={this.submitAnswer}>
+        <button className="button is-medium is-primary is-outlined " onClick={this.submitAnswer}>
           SUBMIT QUESTION
         </button>
         <br />
