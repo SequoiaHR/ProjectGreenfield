@@ -13,14 +13,15 @@ const SocialMedia = function(props) {
     let imageURL = props.state.images.otherImagesInStyle[indexImage].url;
     let productName = props.state.basicDetails.name;
     let twitterHashtags = [['Sequoia']];
+    let webpageUrl = `http://54.152.146.97/product/${props.state.basicDetails.id}`;
 
     return (
       <div className="flexContainerSocial">
         <div className="socialMediaButtons">
           <FacebookShareButton
             children={' '}
-            url={'cnn.com'}
-            quote={`check out this ${productName} I found on Sequoia!`}
+            url={webpageUrl}
+            quote={`Check out this ${productName} I found on Sequoia!`}
             hashtag={'#Sequoia'}
           >
             <FacebookIcon size={'20'} />
@@ -29,7 +30,7 @@ const SocialMedia = function(props) {
         <div className="socialMediaButtons">
           <TwitterShareButton
             children={' '}
-            url={'cnn.com'}
+            url={webpageUrl}
             hashtags={twitterHashtags}
             title={`Check out this ${productName} I found on Sequoia!  cnn.com`}
           >
@@ -39,8 +40,8 @@ const SocialMedia = function(props) {
         <div className="socialMediaButtons">
           <PinterestShareButton
             children={' '}
-            url={'cnn.com'}
-            description={`check out this ${'tbd'} I found on Sequoia!`}
+            url={webpageUrl}
+            description={`Check out this ${'tbd'} I found on Sequoia!`}
             media={imageURL}
           >
             <PinterestIcon size={'20'} />

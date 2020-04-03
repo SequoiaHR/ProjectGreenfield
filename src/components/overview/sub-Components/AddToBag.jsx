@@ -103,9 +103,9 @@ const AddToBag = function(props) {
               ADD TO CART
             </a>
           </div>
-          <div className="favoritesContainer">
-            <a className="favoritesButton">FAV</a>
-          </div>
+          <a className="favoritesButton">
+            <i class="far fa-star"></i>
+          </a>
         </div>
       </div>
     );
