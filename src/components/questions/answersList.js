@@ -81,10 +81,10 @@ class AnswerList extends React.Component{
           {
           //IF DISPLAYED ANSWERS IS LESS THAN TOTAL ANSWERS THEN DISPLAY 'SHOW MORE' BUTTON
           (answers.length < Object.keys(this.props.answers).length) ?
-          <button className="button is-medium is-primary is-outlined showMoreAnswers" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
+          <button className="button is-small is-primary is-outlined showMoreAnswers" onClick={this.seeMoreAnswersClick}>SHOW MORE ANSWERS</button> :
           //ELSE IF TOTAL ANSWERS IS MORE THAN TWO SHOW 'COLLAPSE ANSWERS' BUTTON
           (Object.keys(this.props.answers).length > 2) ?
-          <button className="button is-medium is-primary is-outlined collapseAnswers"
+          <button className="button is-small is-primary is-outlined collapseAnswers"
                   onClick={ (event)=>{ this.setState( {display:2} ); recordInteraction(event.target.className, "Q&A");} }
                   >
                     COLLAPSE ANSWERS
