@@ -102,6 +102,10 @@ class Answer extends React.Component {
     return (
       <div className="tile is-child box">
         <div className="title is-5">{`A: ${this.props.body}`}</div>
+        {this.props.photos.map((photo, index) => (
+          <img style={{ maxHeight: 100, maxWidth: 100 }} src={photo} alt={photo} />
+        ))}
+        <br/>
         <div className="is-inline-block">
           <div className="is-inline-block">
             by {name}
@@ -127,9 +131,8 @@ class Answer extends React.Component {
 
           {/* MAP ANY EXISTING PHOTOS TO ANSWER */}
         </div>
-        {this.props.photos.map((photo, index) => (
-          <img style={{ maxHeight: 100, maxWidth: 100 }} src={photo} alt={photo} />
-        ))}
+
+
       </div>
     );
   }
