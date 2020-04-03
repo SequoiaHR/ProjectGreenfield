@@ -1,27 +1,35 @@
 import React from 'react';
-import ImageCarousel from './sub-Components/imageCarousel/carouselMain.jsx';
+import ImageCarousel from './sub-Components/imageCarousel/Regular Carousel/carouselMain.jsx';
 import BasicDetails from './sub-Components/BasicDetails';
 import StyleSelection from './sub-Components/StyleSelection';
 import AddToBag from './sub-Components/AddToBag';
 import Description from './sub-Components/Description';
 import Axios from 'axios';
+import ImageModal from './sub-Components/ImageModal.jsx';
+import ZoomImage from './sub-Components/imageCarousel/Zoomed Carousel/ZoomImage.jsx';
+import ZoomNavigation from './sub-Components/imageCarousel/Zoomed Carousel/ZoomNavigation.jsx';
 
 class overviewMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: {
-        currentImage: undefined,
-        otherImagesInStyle: [],
-        currentThumbnailRow: undefined,
-        maximized: false
-      },
       basicDetails: {
         id: undefined,
         category: undefined,
         name: undefined,
         price: undefined
       },
+      images: {
+        currentImage: undefined,
+        otherImagesInStyle: [],
+        currentThumbnailRow: undefined
+      },
+      zoomedImages: {
+        currentImage: undefined,
+        otherImagesInStyle: [],
+        currentThumbnailRow: undefined
+      },
+
       selectedStyle: {
         selectedStyleId: undefined,
         selectedStyleColor: undefined,
@@ -51,7 +59,16 @@ class overviewMain extends React.Component {
     this.handleSeeAllReviewsClick = this.handleSeeAllReviewsClick.bind(this);
     this.selectProductStock = this.selectProductStock.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.onImageModalArrowClick = this.onImageModalArrowClick.bind(this);
+    this.onModalNavArrowClick = this.onModalNavArrowClick.bind(this);
+    this.changeZoomImageOnCircleClick = this.changeZoomImageOnCircleClick.bind(
+      this
+    );
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// STYLES CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
 
   //this changes the style when you click it!
   changeStyleOnClick(newStyleId) {
@@ -89,10 +106,13 @@ class overviewMain extends React.Component {
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// REGULAR IMAGE CAROUSEL CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
+
   //this function is attached to the thumbnail images in the image carousel and
   //changes the selected image when these images are clicked.
-  //My logic is needlessly complex--I'm using an index for my current image when I should be
-  //using the url. Will change perhaps in the future
+
   changeImageOnThumbnailClick(newThumbnailUrl) {
     for (let i = 0; i < this.state.images.otherImagesInStyle.length; i++) {
       if (
@@ -144,7 +164,10 @@ class overviewMain extends React.Component {
     if (this.state.zoom) {
       this.setState({ zoom: false });
     } else if (!this.state.zoom) {
-      this.setState({ zoom: true });
+      //creating a duplicate image state for our modal to use
+      this.setState({ zoomedImages: this.state.images }, () => {
+        this.setState({ zoom: true });
+      });
     }
   }
 
@@ -168,6 +191,84 @@ class overviewMain extends React.Component {
       });
     }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// ZOOM IMAGE CAROUSEL CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
+
+  //this MODAL function changes the displayed image when you click the arrow
+  onImageModalArrowClick(direction) {
+    //conditional logic for direction and thumbnail row changing
+    if (direction === 'left') {
+      let newImageNumber = this.state.zoomedImages.currentImage - 1;
+      let newRowNumber = Math.floor(newImageNumber / 4);
+
+      this.setState({
+        zoomedImages: {
+          currentImage: newImageNumber,
+          otherImagesInStyle: this.state.zoomedImages.otherImagesInStyle,
+          currentThumbnailRow: newRowNumber
+        }
+      });
+    } else if (direction === 'right') {
+      let newImageNumber = this.state.zoomedImages.currentImage + 1;
+      let newRowNumber = Math.floor(newImageNumber / 4);
+
+      this.setState({
+        zoomedImages: {
+          currentImage: newImageNumber,
+          otherImagesInStyle: this.state.zoomedImages.otherImagesInStyle,
+          currentThumbnailRow: newRowNumber
+        }
+      });
+    }
+  }
+
+  changeZoomImageOnCircleClick(newThumbnailUrl) {
+    for (
+      let i = 0;
+      i < this.state.zoomedImages.otherImagesInStyle.length;
+      i++
+    ) {
+      if (
+        this.state.zoomedImages.otherImagesInStyle[i].thumbnail_url ===
+        newThumbnailUrl
+      ) {
+        this.setState({
+          zoomedImages: {
+            currentImage: i,
+            otherImagesInStyle: this.state.images.otherImagesInStyle,
+            currentThumbnailRow: this.state.images.currentThumbnailRow
+          }
+        });
+        break;
+      }
+    }
+  }
+  //this function changes the displayed circles when you click the modal arrow
+  onModalNavArrowClick(direction) {
+    if (direction === 'left') {
+      this.setState({
+        zoomedImages: {
+          currentImage: this.state.zoomedImages.currentImage,
+          otherImagesInStyle: this.state.zoomedImages.otherImagesInStyle,
+          currentThumbnailRow: this.state.zoomedImages.currentThumbnailRow - 1
+        }
+      });
+    } else if (direction === 'right') {
+      this.setState({
+        zoomedImages: {
+          currentImage: this.state.zoomedImages.currentImage,
+          otherImagesInStyle: this.state.zoomedImages.otherImagesInStyle,
+          currentThumbnailRow: this.state.zoomedImages.currentThumbnailRow + 1
+        }
+      });
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// DETAILS AND API CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
 
   //click to see all reviews
   handleSeeAllReviewsClick = e => {
@@ -238,6 +339,10 @@ class overviewMain extends React.Component {
       });
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// ADD TO CART CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
+
   //add to cart functions to change state
   //selected size
   selectProductSize(event) {
@@ -261,9 +366,25 @@ class overviewMain extends React.Component {
 
   //submit add to cart on button click
   addToCart() {
-    //need to create API request
-    console.log('this.cart', this.state.cart);
+    //API request does nothing
+    if (
+      this.state.cart.cartNumber !== undefined &&
+      this.state.cart.cartSize !== undefined
+    ) {
+      window.alert(
+        `Your order of ${this.state.cart.cartNumber} size ${this.state.cart.cartSize} item(s) has been added to your cart!`
+      );
+      this.setState({ cart: {} });
+    } else {
+      window.alert(
+        `Please pick a size and number of items before adding to your cart!`
+      );
+    }
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////// LIFE CYCLE CODE /////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
 
   componentDidUpdate(prevProps) {
     if (this.props.paramsId !== prevProps.paramsId) {
@@ -279,58 +400,69 @@ class overviewMain extends React.Component {
   }
 
   render() {
-    //conditional rendering to make sure everything is loaded
-    var zoomStyling;
     if (this.props.storeState.reviewsMetadata.product_id) {
-      //conditional rendering for zoom view
-      if (this.state.zoom === true) {
-        zoomStyling = <div></div>;
-      } else if (this.state.zoom === false) {
-        zoomStyling = (
-          <div className="tile is-child">
-            <BasicDetails
-              state={this.state}
-              reviews={this.props.storeState.reviewsMetadata}
-              handleSeeAllReviewsClick={this.handleSeeAllReviewsClick}
-            />
-            <StyleSelection
-              state={this.state}
-              changeStyleOnClick={this.changeStyleOnClick}
-            />
-            <AddToBag
-              state={this.state}
-              selectProductSize={this.selectProductSize}
-              selectProductStock={this.selectProductStock}
-              addToCart={this.addToCart}
-            />
-          </div>
-        );
-      }
-    }
-
-    return (
-      <div className="tile is-ancestor " style={{ marginBottom: '30px' }}>
-        <div className="tile is-vertical is-parent">
-          <div className="tile is-child">
-            <div className="tile is-parent">
-              <div className="tile is-child">
-                <ImageCarousel
-                  state={this.state.images}
-                  onImageArrowClick={this.onImageArrowClick}
-                  onNavArrowClick={this.onNavArrowClick}
-                  changeImageOnThumbnailClick={this.changeImageOnThumbnailClick}
-                  zoomImage={this.zoomImage}
-                />
+      return (
+        <div className="tile is-ancestor " style={{ marginBottom: '30px' }}>
+          <div className="tile is-vertical is-parent">
+            <div className="tile is-child">
+              <div className="tile is-parent">
+                <div className="tile is-child">
+                  <ImageCarousel
+                    state={this.state.images}
+                    onImageArrowClick={this.onImageArrowClick}
+                    onNavArrowClick={this.onNavArrowClick}
+                    changeImageOnThumbnailClick={
+                      this.changeImageOnThumbnailClick
+                    }
+                    zoomImage={this.zoomImage}
+                  />
+                </div>
+                <div className="tile is-child">
+                  <BasicDetails
+                    state={this.state}
+                    reviews={this.props.storeState.reviewsMetadata}
+                    handleSeeAllReviewsClick={this.handleSeeAllReviewsClick}
+                  />
+                  <StyleSelection
+                    state={this.state}
+                    changeStyleOnClick={this.changeStyleOnClick}
+                  />
+                  <AddToBag
+                    state={this.state}
+                    selectProductSize={this.selectProductSize}
+                    selectProductStock={this.selectProductStock}
+                    addToCart={this.addToCart}
+                  />
+                  {this.state.zoom ? (
+                    <ImageModal
+                      title={this.state.basicDetails.name}
+                      onExitClick={this.zoomImage}
+                    >
+                      <ZoomImage
+                        state={this.state.zoomedImages}
+                        onImageModalArrowClick={this.onImageModalArrowClick}
+                      />
+                      <ZoomNavigation
+                        state={this.state.zoomedImages}
+                        onModalNavArrowClick={this.onModalNavArrowClick}
+                        changeZoomImageOnCircleClick={
+                          this.changeZoomImageOnCircleClick
+                        }
+                      />
+                    </ImageModal>
+                  ) : null}
+                </div>
               </div>
-              {zoomStyling}
+            </div>
+            <div>
+              <Description state={this.state} />
             </div>
           </div>
-          <div>
-            <Description state={this.state} />
-          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return <div></div>;
+    }
   }
 }
 

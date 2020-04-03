@@ -48,7 +48,7 @@ const AddToBag = function(props) {
           onChange={props.selectProductStock}
           disabled
         >
-          <option>OUT OF STOCK</option>
+          <option>OUT</option>
           {sizesArray.map((number, index) => {
             return (
               <option key={index} value={number}>

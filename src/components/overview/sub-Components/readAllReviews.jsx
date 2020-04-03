@@ -7,10 +7,11 @@ const ReadAllReviews = function(props) {
   let reviewsDiv = <div></div>;
   if (sumReviews !== 0) {
     reviewsDiv = (
-      <div
+      <a
         className="readAllReviews"
-        onClick={props.handleSeeAllReviewsClick}
-      >{`Read all ${sumReviews} reviews!`}</div>
+        href="#reviews-section"
+        // onClick={props.handleSeeAllReviewsClick}
+      >{`Read all ${sumReviews} reviews!`}</a>
     );
   }
   return reviewsDiv;

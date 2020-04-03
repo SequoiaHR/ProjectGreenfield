@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ title, children, onExitClick }) => {
+const ImageModal = ({ title, children, onExitClick }) => {
   return (
     <div>
       <div className="modal is-active">
@@ -9,7 +9,7 @@ const Modal = ({ title, children, onExitClick }) => {
           <header class="modal-card-head">
             <p className="modal-card-title">{title}</p>
           </header>
-          <section className="modal-card-body">{children}</section>
+          <div className="modal-card-body">{children}</div>
         </div>
         <button
           className="modal-close is-large"
@@ -22,4 +22,4 @@ const Modal = ({ title, children, onExitClick }) => {
 };
 
 //need to close modal as well.
-export default Modal;
+export default ImageModal;
