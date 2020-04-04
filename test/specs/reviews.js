@@ -26,4 +26,10 @@ describe("Ratings & Reviews", () => {
     expect(await page.$("#review-form")).toBeTruthy();
   });
 
+  it("Should display errors upon form submit with empty fields", async () => {
+    await page.$eval(".add-review", el => el.click());
+    await page.$eval(".review-submit", el => el.click());
+    expect(await page.$$eval(".review-error", els => els.length)).toBe(6);
+  });
+
 });
