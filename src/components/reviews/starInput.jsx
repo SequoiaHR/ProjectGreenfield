@@ -2,6 +2,7 @@ import React from "react";
 import EMPTY_STAR from "../../starAssets/empty-star.png";
 import FULL_STAR from "../../starAssets/full-star.png";
 
+// display appropriate number of stars on user click, for add review form
 class StarInput extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ class StarInput extends React.Component {
   }
 
   setFill(num) {
-    switch(num) {
+    switch(num) { // set new fill
       case 1:
         this.setState({
           1: 1,
@@ -66,13 +67,13 @@ class StarInput extends React.Component {
       default:
         return;
     }
-    this.props.update(num);
+    this.props.update(num); // update rating in add review form component
   }
 
   render() {
     return(
       <span>
-        {[1, 2, 3, 4, 5].map((num) => {
+        {[1, 2, 3, 4, 5].map((num) => { // conditionally map empty or full stars
           return(
             this.state[num]
               ? <img

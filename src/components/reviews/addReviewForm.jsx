@@ -24,6 +24,7 @@ class AddReviewForm extends React.Component {
     this.onChangeBound = this.onChange.bind(this);
     this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
     this.changeRatingBound = this.changeRating.bind(this);
+    this.changeRecommendBound = this.changeRecommend.bind(this);
     this.uploadChangeBound = this.uploadChange.bind(this);
     this.validateBound = this.validate.bind(this);
   }
@@ -60,7 +61,19 @@ class AddReviewForm extends React.Component {
     });
   }
 
-  readFileAsync(file) {
+  changeRecommend() {
+    if (document.getElementById("yes").checked) {
+      this.setState({
+        recommend: 1
+      });
+    } else {
+      this.setState({
+        recommend: 0
+      });
+    }
+  }
+
+  readFileAsync(file) { // extract data uri from a file
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => { resolve(reader.result) };
@@ -70,10 +83,11 @@ class AddReviewForm extends React.Component {
 
   uploadChange(event) {
 
-    if (!event.target.files || !event.target.files[0]) { return; }
+    if (!event.target.files || !event.target.files[0]) { return; } // prevent error on cancel
 
     const file = event.target.files[0];
 
+    // validation for incorrect type or too many photos
     if (!file.type.startsWith("image/")) {
       this.setState({
         imageError: "You may only upload images."
@@ -88,13 +102,13 @@ class AddReviewForm extends React.Component {
         imageError: ""
       });
 
-      this.readFileAsync(file)
+      this.readFileAsync(file) // upload photo to cloudinary
         .then((data) => {
           axios.post("https://api.cloudinary.com/v1_1/greenfield/image/upload", {
             file: data,
             upload_preset: "mqk58mpg"
           })
-            .then((res) => {
+            .then((res) => { // store returned url in state
               this.setState({
                 photos: [...this.state.photos, res.data.url]
               });
@@ -132,6 +146,7 @@ class AddReviewForm extends React.Component {
     if (!this.state.nickname) { // nickname
       errors.push(["Please enter your nickname.", 5]);
     }
+    // eslint-disable-next-line
     const emailFormat = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
     if (!this.state.email || !emailFormat.test(this.state.email)) { // email
       errors.push(["Please enter a valid email address.", 6]);
@@ -175,18 +190,21 @@ class AddReviewForm extends React.Component {
       <div>
         <div className="subtitle">{`About the ${this.props.name}`}</div>
         <form>
+
           <label>
             <div className="add-input">Overall rating (select):*</div>
             <StarInput width="25" height="25" update={this.changeRatingBound} />
           </label>
+
           <br />
           <label>
           <div className="add-input">Do you recommend this product?*</div>
             <div>
-              <input type="radio" name="recommend" value={1} onChange={this.onChangeBound} /> Yes
-              <input type="radio" name="recommend" value={0} onChange={this.onChangeBound} /> No
+              <input type="radio" name="recommend" id="yes" value={1} onChange={this.changeRecommendBound} /> Yes
+              <input type="radio" name="recommend" id="no" value={0} onChange={this.changeRecommendBound} /> No
             </div>
           </label>
+
           <br />
           <div>
             {Object.keys(this.props.characteristics).map((charName) => {
@@ -197,6 +215,7 @@ class AddReviewForm extends React.Component {
                 handler={this.changeCharacteristicBound} />;
             })}
           </div>
+
           <label>
           <div className="add-input">Summary:*</div>
             <br />
@@ -209,6 +228,7 @@ class AddReviewForm extends React.Component {
               required={true} 
               onChange={this.onChangeBound} />
           </label>
+
           <label>
           <div className="add-input">Your review:*</div>
             <br />
@@ -226,6 +246,7 @@ class AddReviewForm extends React.Component {
               ? <span className="is-size-7">{`Please enter ${50 - this.state.body.length} more characters.`}</span>
               : <span className="is-size-7">Minimum reached!</span>}
           </label>
+
           <br />&nbsp;<br />
           <label>
             What is your nickname?*
@@ -241,6 +262,7 @@ class AddReviewForm extends React.Component {
               <br />
             <div className="is-size-7">For privacy reasons, do not use your full name or email address</div>
           </label>
+
           <br />
           <label>
             What is your email?*
@@ -256,6 +278,7 @@ class AddReviewForm extends React.Component {
               <br />
               <div className="is-size-7">For authentication reasons, you will not be emailed</div>
           </label>
+
           <input type="file" id="file-input" style={{display:"none"}} onChange={this.uploadChangeBound} />
           <button 
             className="button add-input"
@@ -264,14 +287,19 @@ class AddReviewForm extends React.Component {
             onClick={() => document.getElementById("file-input").click()}>
             + Add your photos (max 5)
           </button>
+
+          {/* render out any photos that have been added to state as thumbnails */}
           <br />
           <div className="photos-wrapper">
             {this.state.photos.map((url, idx) => {
               return <img key={idx} src={url} alt="your uploaded content" className="review-photo"></img>
             })}
           </div>
+
           <button className="button add-input" type="submit" id={`${this.props.id}-submit-review`} onClick={this.validateBound}>Submit</button>
         </form>
+        
+        {/* render out any errors that have been detected */}
         <div id="errors">
           {this.state.errors.map((err) => {
             return <div key={err[1]}>{err[0]}</div>;

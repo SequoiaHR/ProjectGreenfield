@@ -30,10 +30,10 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
         </div>
       </div>
 
-
       {metadata.recommended !== undefined && Object.keys(metadata.recommended).length !== 0
         ? <div className="subtitle">{percent}% of reviewers recommend this product</div>
         : null}
+
       {metadata.ratings
         ? <div>
           {[5, 4, 3, 2, 1].map((num) => { // for each rating from 5 to 1,
@@ -52,9 +52,11 @@ const ReviewBreakdown = ({ filters, metadata, toggleHandler, clearHandler }) => 
           })}
         </div>
         : null}
+
       {filters.size > 0
         ? <div className="actionable is-size-7" id="clear-filters" onClick={clearHandler}>Remove all filters</div>
         : null}
+        
       <div id="features-breakdown">
         <FeaturesBreakdown metadata={metadata} />
       </div>

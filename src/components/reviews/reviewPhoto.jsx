@@ -4,6 +4,7 @@ import Modal from "../Modal.jsx";
 import recordInteraction from "../../interactionsHelper.js";
 import "./reviews.css";
 
+// render a single review photo with associated modal pop-up
 class ReviewPhoto extends React.Component {
   constructor(props) {
     super(props);

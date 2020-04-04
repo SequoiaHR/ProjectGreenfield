@@ -14,10 +14,9 @@ class ReviewTile extends React.Component {
 
     this.state = {
       expanded: false,
-      markedHelpful: false,
       numHelpful: 0,
       reported: false,
-      verified: false,
+      verified: false // not currently used
     };
     this.toggleExpandBound = this.toggleExpand.bind(this);
     this.handleHelpfulBound = this.handleHelpful.bind(this);
@@ -26,18 +25,10 @@ class ReviewTile extends React.Component {
 
 
   componentDidMount() {
-
     let storage = window.localStorage;
 
-    let helpful = JSON.parse(storage.getItem("helpful"));
-    if (helpful) {
-      if (helpful.indexOf(this.props.review.review_id) >= 0) {
-        this.setState({
-          markedHelpful: true
-        });
-      }
-    }
-    // shouldn't be possible that it's reported, but accounting for changes in API
+    // check whether already reported, for conditional rendering of link
+    // shouldn't be possible that it's already reported, but accounting for changes in API
     let reported = JSON.parse(storage.getItem("reported"));
     if (reported) {
       if (reported.indexOf(this.props.review.review_id) >= 0) {
@@ -53,7 +44,7 @@ class ReviewTile extends React.Component {
   }
 
 
-  toggleExpand(event) {
+  toggleExpand(event) { // expand or collapse review body
     this.setState({
       expanded: !this.state.expanded
     });
@@ -72,8 +63,7 @@ class ReviewTile extends React.Component {
       }
       window.localStorage.setItem("helpful", JSON.stringify(arr));
       this.setState({
-        markedHelpful: true,
-        numHelpful: this.state.numHelpful + 1
+        numHelpful: this.state.numHelpful + 1 // avoid re-fetching reviews to display updated num
       });
       axios.put(`http://3.134.102.30/reviews/helpful/${this.props.review.review_id}`)
         .catch((err) => {
@@ -108,16 +98,24 @@ class ReviewTile extends React.Component {
         <div className="tile is-child box">
           <div className="level">
             <div className="level-left">
+
+              {/* overall rating */}
               <div className="level-item"><StarRating rating={review.rating} width="15" height="15" /></div>
             </div>
             <div className="level-right">
+
+              {/* verified not currently used */}
               {this.state.verified
                 ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
                   <br /><i className="fas fa-check-circle"></i> Verified user</div>
                 : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
             </div>
           </div>
+
+          {/* review summary */}
           <div className="subtitle">{review.summary}</div>
+
+          {/* conditionally render review body as open or closed */}
           {this.state.expanded || review.body.length <= 250
             ? <div>{review.body}</div>
             : <div>{review.body.slice(0, 250)}...</div>}
@@ -127,9 +125,13 @@ class ReviewTile extends React.Component {
           {this.state.expanded
             ? <div className="actionable is-size-7" id={`${review.review_id}-show-less`} onClick={this.toggleExpandBound}>Show less</div>
             : null}
+
+          {/* conditionally rendered 'recommended' flag */}
           {review.recommend
             ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
             : null}
+
+          {/* product photos */}
           <div className="photos-wrapper">
           {review.photos !== undefined && review.photos.length > 0
             ? review.photos.map((photo) => {
@@ -137,9 +139,13 @@ class ReviewTile extends React.Component {
             })
             : null}
           </div>
+
+          {/* seller response if exists */}
           {review.response !== undefined && review.response !== null && review.response !== "" && review.response !== "null"
             ? <div><strong>Seller response:</strong><br />{review.response}</div>
             : null}
+            
+          {/* helpful and report actions -- report conditionally rendered as actionable or not */}
           <div className="is-size-7">
             Helpful? <span className="actionable underline" id={`${review.review_id}-helpful`} onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
               ? <span>Reported</span>
