@@ -1,8 +1,15 @@
-import { load, getTitle } from "../pageObjects/index";
+const load = async () => {
+  await page.goto(URL, {
+    waitUntil: "networkidle0",
+    timeout: 60000
+  });
+};
 
-describe("React Redux App", () => {
-  it("should be titled React Redux App", async () => {
+const getTitle = async () => await page.title();
+
+describe("Sequoia Shop", () => {
+  it("should be titled Sequoia Shop", async () => {
     await load();
-    expect(await getTitle()).toBe("React Redux App");
+    expect(await getTitle()).toBe("Sequoia Shop");
   });
 });

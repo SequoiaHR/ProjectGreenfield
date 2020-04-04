@@ -19,20 +19,15 @@ class Question extends React.Component {
 
   //INITIALIZES LOCAL STORAGE OBJECTS FOR QUESTIONS ON MOUNT
   componentDidMount() {
-    let reportedQuestions = localStorage.getItem("reportedQuestions");
     let helpfulQuestions = localStorage.getItem("helpfulQuestions");
     if (helpfulQuestions === null) {
       localStorage.setItem("helpfulQuestions", JSON.stringify([]));
-    }
-    if (reportedQuestions === null) {
-      localStorage.setItem("reportedQuestions", JSON.stringify([]));
     }
   }
 
   //CHECKS LOCAL STORAGE FOR PREVIOUSE QUESTIONS MARKED HELPFUL AND IF HELPFUL CLICK
   //CORROSPONDS TO A QUESTION NOT CONTAINED ON LOCAL STORAGE LIST THEN IT SENDS A PUT REQUEST
   //TO THE API AND RELOADS THE QUESTIONS
-
   helpfulClick(event) {
     let helpfulQuestions = localStorage.getItem("helpfulQuestions");
     helpfulQuestions = JSON.parse(helpfulQuestions);
