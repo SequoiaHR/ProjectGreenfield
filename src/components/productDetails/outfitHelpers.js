@@ -1,4 +1,3 @@
-import React from "react";
 import { fetchProducts } from "../../redux/actions/getProductsHelper.js";
 import { fetchImages } from "../../redux/actions/getImagesHelper.js";
 import { fetchReviews } from "../../redux/actions/getReviewsHelper.js";

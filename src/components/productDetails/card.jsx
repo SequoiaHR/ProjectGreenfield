@@ -45,7 +45,7 @@ const Card = ({
   }
 
   return (
-    <div style={{ "max-height": "60vh" }} className="card">
+    <div style={{ "maxHeight": "60vh" }} className="card">
       <div>
         {showModal === true ? (
           <div>
@@ -68,7 +68,7 @@ const Card = ({
         <figure className="image is-square">
           <button
             style={{
-              "z-index": "2",
+              "zIndex": "2",
               position: "absolute",
               top: "0",
               right: "0"
@@ -122,7 +122,7 @@ const Card = ({
       </div>
       <div className="flex-container">
         <div className="flex-container-info">
-          <p style={{ "border-bottom": ".5px solid black" }} className="">
+          <p style={{ "borderBottom": ".5px solid black" }} className="">
             {product.category}
           </p>
           <p className="">{product.name}</p>

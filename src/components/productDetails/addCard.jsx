@@ -5,8 +5,7 @@ const AddToOutfitCard = ({ onClickButton, pageProduct }) => {
   return (
     <div className="column is-3">
       <div
-        style={{ 'min-height': '30vh' }}
-        className="card is-vertical-centered has-background-grey-lighter"
+        className="card is-vertical-centered has-background-grey-lighter minCardHeight"
       >
         <button
           className="button is-medium is-vertical-centered addCardButton"

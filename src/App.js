@@ -17,7 +17,7 @@ function App(props) {
       <div className="container">
         <OverviewContainer paramsId={params.id} />
       </div>
-      <div className="container" style={{"margin-bottom": "20px"}}>
+      <div className="container" style={{"marginBottom": "20px"}}>
         <ListContainer paramsId={params.id} listName="Related" />
         <ListContainer paramsId={params.id} listName="Outfit" />
       </div>

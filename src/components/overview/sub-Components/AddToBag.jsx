@@ -104,7 +104,7 @@ const AddToBag = function(props) {
             </a>
           </div>
           <a className="favoritesButton">
-            <i class="far fa-star"></i>
+            <i className="far fa-star"></i>
           </a>
         </div>
       </div>
