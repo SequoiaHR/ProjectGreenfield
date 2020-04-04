@@ -34,7 +34,6 @@ const ZoomImage = function(props) {
   if (props.state.currentImage !== undefined) {
     let indexImage = props.state.currentImage;
     let imageURL = props.state.otherImagesInStyle[indexImage].url;
-    // console.log(document.getElementById("test"))
     return (
       <div className="largeImageModalBucket">
         {arrowLeft}

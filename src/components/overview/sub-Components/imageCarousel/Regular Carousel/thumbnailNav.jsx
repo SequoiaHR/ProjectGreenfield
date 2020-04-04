@@ -18,8 +18,8 @@ const ThumbnailNav = function(props) {
       </div>
     );
   }
-  //this isn't great logic, but because my variable with number of rows is in another
-  //component, I'm using a quick calculation to get the number of rows for my conditional logic
+
+  // Calculation to get the number of rows for my conditional logic
   let numberOfImageRows = Math.ceil(props.state.otherImagesInStyle.length / 4);
 
   if (props.state.currentThumbnailRow !== numberOfImageRows - 1) {

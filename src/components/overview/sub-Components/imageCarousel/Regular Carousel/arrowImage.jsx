@@ -9,7 +9,6 @@ function DirectionalButton({ arrowDirection, icon, onImageArrowClick }) {
   } else if (arrowDirection === 'right') {
     arrowStyle = 'nextArrowImg';
   }
-  //arrow div
   return (
     <div
       className={arrowStyle}
