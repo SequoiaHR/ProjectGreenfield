@@ -24,6 +24,7 @@ class AddReviewForm extends React.Component {
     this.onChangeBound = this.onChange.bind(this);
     this.changeCharacteristicBound = this.changeCharacteristic.bind(this);
     this.changeRatingBound = this.changeRating.bind(this);
+    this.changeRecommendBound = this.changeRecommend.bind(this);
     this.uploadChangeBound = this.uploadChange.bind(this);
     this.validateBound = this.validate.bind(this);
   }
@@ -58,6 +59,18 @@ class AddReviewForm extends React.Component {
     this.setState({
       rating: num
     });
+  }
+
+  changeRecommend() {
+    if (document.getElementById("yes").checked) {
+      this.setState({
+        recommend: 1
+      });
+    } else {
+      this.setState({
+        recommend: 0
+      });
+    }
   }
 
   readFileAsync(file) {
@@ -183,8 +196,8 @@ class AddReviewForm extends React.Component {
           <label>
           <div className="add-input">Do you recommend this product?*</div>
             <div>
-              <input type="radio" name="recommend" value={1} onChange={this.onChangeBound} /> Yes
-              <input type="radio" name="recommend" value={0} onChange={this.onChangeBound} /> No
+              <input type="radio" name="recommend" id="yes" value={1} onChange={this.changeRecommendBound} /> Yes
+              <input type="radio" name="recommend" id="no" value={0} onChange={this.changeRecommendBound} /> No
             </div>
           </label>
           <br />
