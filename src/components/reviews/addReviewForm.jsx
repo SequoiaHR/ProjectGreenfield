@@ -187,7 +187,7 @@ class AddReviewForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="review-form">
         <div className="subtitle">{`About the ${this.props.name}`}</div>
         <form>
 
