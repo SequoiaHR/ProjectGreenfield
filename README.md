@@ -1,4 +1,14 @@
-Mockup of a fashion retail website's product detail page. Single page application that re renders depending on the product data and related meta-data it receives
+# Project Greenfield
+
+This project is a Mockup of a fashion retail website's product detail page. It is made up of a Single page application that re renders depending on the product data and related meta-data it receives from an external API containing test data. All changes to the page are dynamically rendered based on user input, and any elements which are clicked have their clicks logged to an external API for further analysis.
+<br/>
+This is accomplished using industry standard tools such as:
+<br/>
+
+- React <br/>
+- Axios <br/>
+- Express <br/>
+- Bulma <br/>
 
 ## Available Scripts
 
