@@ -31,7 +31,6 @@ class Answer extends React.Component {
   //CHECKS LOCAL STORAGE FOR PREVIOUS ANSWERS MARKED HELPFUL AND IF HELPFUL CLICK
   //CORROSPONDS TO AN ANSWER NOT CONTAINED ON LOCAL STORAGE LIST THEN IT SENDS A PUT REQUEST
   //TO THE API AND RELOADS THE ANSWERS
-
   helpfulClick(event) {
     let helpfulAnswers = localStorage.getItem("helpfulAnswers");
     helpfulAnswers = JSON.parse(helpfulAnswers);
@@ -63,7 +62,6 @@ class Answer extends React.Component {
   //CHECKS LOCAL STORAGE FOR PREVIOUS ANSWERS MARKED REPORTED AND IF REPORT CLICK
   //CORROSPONDS TO AN ANSWER NOT CONTAINED ON LOCAL STORAGE LIST THEN IT SENDS A PUT REQUEST
   //TO THE API AND CHANGES THE 'REPORT' TEXT TO 'REPORTED'
-
   reportedClick(event) {
     let reportedAnswers = localStorage.getItem("reportedAnswers");
     reportedAnswers = JSON.parse(reportedAnswers);
@@ -93,24 +91,23 @@ class Answer extends React.Component {
   }
 
   render() {
-    //BOLDEN IF SELLER IS ANSWERER
+    //BOLDEN ANSWERER'S NAME IF SELLER IS ANSWERER
     let name = "";
-    this.props.answerer_name === "Seller"
-      ? (name = <b>{this.props.answerer_name}</b>)
-      : (name = this.props.answerer_name);
-    //CREATE INDIVIDUAL ANSWER TILE
+    this.props.answerer_name === "Seller" ?
+    (name = <b>{this.props.answerer_name}</b>) :
+    (name = this.props.answerer_name);
+    //CREATE INDIVIDUAL ANSWER ENTRIES
     return (
       <div className="tile is-child box">
         <div className="title is-5">{`A: ${this.props.body}`}</div>
+        {/* MAP ANY EXISTING PHOTOS TO ANSWER */}
         {this.props.photos.map((photo, index) => (
           <img style={{ maxHeight: 100, maxWidth: 100 }} src={photo} alt={photo} />
         ))}
         <br/>
         <div className="is-inline-block">
           <div className="is-inline-block">
-            by {name}
-            {`,
-            ${formatDate(this.props.date)} | \u00A0`}
+            by {name}{`, ${formatDate(this.props.date)} | \u00A0`}
           </div>
           <div className="is-inline-block is-clickable" id={this.props.id} onClick={this.helpfulClick}>
             Helpful?{" "}
@@ -128,11 +125,7 @@ class Answer extends React.Component {
           ) : (
             <div className="is-inline-block">Reported</div>
           )}
-
-          {/* MAP ANY EXISTING PHOTOS TO ANSWER */}
         </div>
-
-
       </div>
     );
   }

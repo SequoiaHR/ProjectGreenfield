@@ -18,6 +18,7 @@ class AddQuestion extends React.Component {
     this.checkEmailValidity = this.checkEmailValidity.bind(this);
   }
 
+  //STORES FORM INPUTS
   onChange(event) {
     let field = event.target.name;
     let value = event.target.value;
@@ -30,6 +31,7 @@ class AddQuestion extends React.Component {
     return regex.test(email);
   }
 
+  //CHECKS FEILD REQUIREMENTS AND TRIGGERS WARNING IF NEEDED ELSE SENDS POST REQUEST
   submitAnswer(event) {
     // event.preventDefault()
     if (this.state.question.length === 0) {
@@ -90,14 +92,9 @@ class AddQuestion extends React.Component {
           <React.Fragment></React.Fragment>
         )}
         {/* DISPLAY WARNING IF QUESTION IS FIELD IS EMPTY*/}
-        {this.state.requiredQuestion ? (
-          <React.Fragment>
-            <b>Question is a Required Feild!!!</b>
-            <br />
-          </React.Fragment>
-        ) : (
-          <React.Fragment />
-        )}
+        {this.state.requiredQuestion ?
+        (<React.Fragment> <b>Question is a Required Feild!!!</b><br /></React.Fragment>) :
+        <React.Fragment />}
 
         <label>Your Nickname*</label>
         <br />
@@ -109,6 +106,7 @@ class AddQuestion extends React.Component {
           onChange={this.onChange}
           placeholder="Jackson11!"
         ></input>
+
         {/* DISPLAY WARNING IF NICKNAME IS GETTING TOO LONG*/}
         {this.state.nickname.length > 58 ? (
           <React.Fragment>
@@ -118,18 +116,14 @@ class AddQuestion extends React.Component {
         ) : (
           <React.Fragment></React.Fragment>
         )}
+
         {/* DISPLAY WARNING IF NICKNAME FEILD IS EMPTY*/}
-        {this.state.requiredNickname ? (
-          <React.Fragment>
-            <b>Nickname is a Required Feild!!!</b>
-            <br />
-          </React.Fragment>
-        ) : (
-          <React.Fragment />
-        )}
+        {this.state.requiredNickname ?
+        (<React.Fragment> <b>Nickname is a Required Feild!!!</b> <br /> </React.Fragment>) :
+        <React.Fragment />}
+
         <div>For Privacy Reasons, Do Not Use Your Full Name Or Email Address</div>
         <br />
-
         <label>Your Email*</label>
         <br />
         <input
@@ -140,33 +134,21 @@ class AddQuestion extends React.Component {
           onChange={this.onChange}
           placeholder="Jackson11@email.com"
         ></input>
+
         {/* DISPLAY WARNING IF EMAIL IS GETTING TOO LONG*/}
-        {this.state.email.length > 58 ? (
-          <React.Fragment>
-            <div>Your Email is Too Long! Please Shorten</div>
-            <br />
-          </React.Fragment>
-        ) : (
-          <React.Fragment></React.Fragment>
-        )}
+        {this.state.email.length > 58 ?
+        (<React.Fragment> <div>Your Email is Too Long! Please Shorten</div> <br /> </React.Fragment> ) :
+        <React.Fragment></React.Fragment>}
+
         {/* DISPLAY WARNING IF EMAIL FEILD IS EMPTY*/}
-        {this.state.requiredEmail ? (
-          <React.Fragment>
-            <b>Email is a Required Feild!!!</b>
-            <br />
-          </React.Fragment>
-        ) : (
-          <React.Fragment />
-        )}
+        {this.state.requiredEmail ?
+        (<React.Fragment> <b>Email is a Required Feild!!!</b> <br /></React.Fragment>) :
+        <React.Fragment />}
+
         {/* DISPLAY WARNING IF ENTERED EMAIL IS INVALID*/}
-        {this.state.validEmail ? (
-          <React.Fragment>
-            <b>Current Email Is Invalid!!!</b>
-            <br />
-          </React.Fragment>
-        ) : (
-          <React.Fragment />
-        )}
+        {this.state.validEmail ? (<React.Fragment> <b>Current Email Is Invalid!!!</b> <br /></React.Fragment>) :
+        <React.Fragment />}
+
         <div>For Authentication Reasons, You Will Not Be Emailed</div>
         <br />
         <button className="button is-small is-primary is-outlined " onClick={this.submitAnswer}>
