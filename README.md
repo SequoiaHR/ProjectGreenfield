@@ -38,7 +38,7 @@ Once the app has been built it can deployed to a server by installing node, git,
 1.) pull down the repository<br />
 2.) run `npm install` in the root directory<br />
 3.) run `node server/server.js`<br />
-4.) visit via [http://public.ip.address/product/1](http://public.ip.address/product/1) of if running on local host [http://localhost/product/1](http://localhost/product/1)<br />
+4.) visit via [http://public.ip.address/product/1](http://public.ip.address/product/1) or if running on local host [http://localhost/product/1](http://localhost/product/1)<br />
 
 ### `npm run eject`
 
