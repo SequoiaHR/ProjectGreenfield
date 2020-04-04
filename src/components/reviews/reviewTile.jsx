@@ -98,16 +98,24 @@ class ReviewTile extends React.Component {
         <div className="tile is-child box">
           <div className="level">
             <div className="level-left">
+
+              {/* overall rating */}
               <div className="level-item"><StarRating rating={review.rating} width="15" height="15" /></div>
             </div>
             <div className="level-right">
+
+              {/* verified not currently used */}
               {this.state.verified
                 ? <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}
                   <br /><i className="fas fa-check-circle"></i> Verified user</div>
                 : <div className="level-item is-size-7">{review.reviewer_name}, {moment(review.date).format("MMMM DD, YYYY")}</div>}
             </div>
           </div>
+
+          {/* review summary */}
           <div className="subtitle">{review.summary}</div>
+
+          {/* conditionally render review body as open or closed */}
           {this.state.expanded || review.body.length <= 250
             ? <div>{review.body}</div>
             : <div>{review.body.slice(0, 250)}...</div>}
@@ -117,9 +125,13 @@ class ReviewTile extends React.Component {
           {this.state.expanded
             ? <div className="actionable is-size-7" id={`${review.review_id}-show-less`} onClick={this.toggleExpandBound}>Show less</div>
             : null}
+
+          {/* conditionally rendered 'recommended' flag */}
           {review.recommend
             ? <div className="recommend"><i className="fas fa-check"></i> I recommend this product</div>
             : null}
+
+          {/* product photos */}
           <div className="photos-wrapper">
           {review.photos !== undefined && review.photos.length > 0
             ? review.photos.map((photo) => {
@@ -127,9 +139,13 @@ class ReviewTile extends React.Component {
             })
             : null}
           </div>
+
+          {/* seller response if exists */}
           {review.response !== undefined && review.response !== null && review.response !== "" && review.response !== "null"
             ? <div><strong>Seller response:</strong><br />{review.response}</div>
             : null}
+            
+          {/* helpful and report actions -- report conditionally rendered as actionable or not */}
           <div className="is-size-7">
             Helpful? <span className="actionable underline" id={`${review.review_id}-helpful`} onClick={this.handleHelpfulBound}>Yes({this.state.numHelpful})</span> | {this.state.reported 
               ? <span>Reported</span>
