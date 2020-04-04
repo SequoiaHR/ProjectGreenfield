@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ReviewsList from "../../components/reviews/reviewsList.jsx";
-import { fetchReviews, fetchMetadata, changeSort } from "../../redux/actions/reviewsActionCreators.js";
+import { fetchReviews, fetchMetadata } from "../../redux/actions/reviewsActionCreators.js";
 
 const mapStateToProps = (state) => {
   return {
