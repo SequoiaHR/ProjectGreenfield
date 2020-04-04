@@ -25,7 +25,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-Once the app has been built it can deployed to a rever by installing node, git, and npm:<br />
+Once the app has been built it can deployed to a server by installing node, git, and npm:<br />
 1.) pull down the repository<br />
 2.) run `npm install` in the root directory<br />
 3.) run `node server/server.js`<br />
