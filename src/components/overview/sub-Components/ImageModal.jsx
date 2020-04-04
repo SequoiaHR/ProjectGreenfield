@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ImageModal = ({ title, children, onExitClick }) => {
+  //zoom modal, childlren are are zoom components passed in above
   return (
     <div>
       <div className="modal is-active">

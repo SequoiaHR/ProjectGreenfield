@@ -4,7 +4,7 @@ import './componentStyle.css';
 const AddToBag = function(props) {
   //conditional logic to get around async
   if (props.state.selectedStyle.selectedStyleId !== undefined) {
-    //this is confusing logic that essentially just gives me the sizes for the selected style
+    //this creates sizes for the selected style
     let selectedStyleId = props.state.selectedStyle.selectedStyleId;
     let allStyles = props.state.allStyles;
     var sizesObj = {};

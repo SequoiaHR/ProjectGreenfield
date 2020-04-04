@@ -46,14 +46,7 @@
   border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
-/* .prevArrowImg:hover,
-.nextArrowImg:hover {
-  background-color: hsl(171, 100%, 41%);
-  color: white;
-} */
-
-/****************** thumbnails *******************************  */
+/****************** navigation arrows *******************************  */
 
 /********* arrow styling ****************/
 .prevArrowNav,
@@ -81,13 +74,6 @@
   left: 40px;
   border-radius: 3px 0 0 3px;
 }
-
-/* On hover, add a black background color with a little bit see-through */
-/* .prevArrowNav:hover,
-.nextArrowNav:hover {
-  background-color: hsl(171, 100%, 41%);
-  color: white;
-} */
 
 /****************** circle styling *******************************  */
 .regularCircleBorder {
@@ -123,5 +109,3 @@
   border-width: 2px;
   background-color: white;
 }
-
-/****************** magnifying glass styling *******************************  */

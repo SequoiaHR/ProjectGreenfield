@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Description = function(props) {
+  //conditional logic for async
   if (props.state.description.slogan !== undefined) {
     return (
       <div className="columns" style={{ marginTop: '-30px' }}>

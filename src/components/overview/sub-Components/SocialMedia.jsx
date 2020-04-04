@@ -8,7 +8,9 @@ import { FacebookIcon, TwitterIcon, PinterestIcon } from 'react-share';
 import './componentStyle.css';
 
 const SocialMedia = function(props) {
+  //conditional logic to handle async
   if (props.state.images.currentImage !== undefined) {
+    //inputs for our social media componenets
     let indexImage = props.state.images.currentImage;
     let imageURL = props.state.images.otherImagesInStyle[indexImage].url;
     let productName = props.state.basicDetails.name;

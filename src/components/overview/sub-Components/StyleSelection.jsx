@@ -2,7 +2,7 @@ import React from 'react';
 import './componentStyle.css';
 
 const StyleSelection = function(props) {
-  //get our rows of styles
+  //logic to create rows of styles
   let styleRows = [];
   for (let index = 0; index < props.state.allStyles.length; index += 4) {
     let row = props.state.allStyles.slice(index, index + 4);

@@ -5,18 +5,13 @@ import StarRating from '../../starRating.jsx';
 import calculateRating from '../../../calculateRating';
 import ReadAllReviews from './readAllReviews.jsx';
 
-const productNameStyle = {
-  fontSize: '32pt',
-  color: 'black'
-};
-
 const BasicDetails = function(props) {
   //conditional logic for  a sale
   let prices;
   if (props.state.selectedStyle.selectedReducedPrice > 0) {
     prices = (
       <div>
-        <strike style={{ float: 'left', display: 'inline', width: '10%' }}>
+        <strike className="strikeStyle">
           ${props.state.basicDetails.price}
         </strike>
         <div>${props.state.selectedStyle.selectedReducedPrice}</div>
@@ -30,7 +25,7 @@ const BasicDetails = function(props) {
     return (
       <div>
         <div>{props.state.basicDetails.category}</div>
-        <div style={productNameStyle}>{props.state.basicDetails.name}</div>
+        <div className="productNameStyle">{props.state.basicDetails.name}</div>
         <div className="flexContainer">
           <div style={{ fontSize: '15pt' }}>{prices}</div>
           <div className="starContainerStyling">
