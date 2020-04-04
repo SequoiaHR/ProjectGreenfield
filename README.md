@@ -5,6 +5,8 @@ This project is a Mockup of a fashion retail website's product detail page creat
 This is accomplished using industry standard tools such as:
 
 - React <br/>
+- React Router <br/>
+- Redux <br/>
 - Axios <br/>
 - Express <br/>
 - Bulma <br/>
