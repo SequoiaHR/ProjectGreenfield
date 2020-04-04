@@ -95,7 +95,7 @@ class ReviewTile extends React.Component {
     let { review } = this.props;
     return (
       <div className="tile is-parent">
-        <div className="tile is-child box">
+        <div className="tile is-child box review-tile">
           <div className="level">
             <div className="level-left">
 

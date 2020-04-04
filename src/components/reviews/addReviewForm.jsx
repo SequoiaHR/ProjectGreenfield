@@ -187,7 +187,7 @@ class AddReviewForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="review-form">
         <div className="subtitle">{`About the ${this.props.name}`}</div>
         <form>
 
@@ -296,13 +296,13 @@ class AddReviewForm extends React.Component {
             })}
           </div>
 
-          <button className="button add-input" type="submit" id={`${this.props.id}-submit-review`} onClick={this.validateBound}>Submit</button>
+          <button className="button add-input review-submit" type="submit" id={`${this.props.id}-submit-review`} onClick={this.validateBound}>Submit</button>
         </form>
         
         {/* render out any errors that have been detected */}
         <div id="errors">
           {this.state.errors.map((err) => {
-            return <div key={err[1]}>{err[0]}</div>;
+            return <div className="review-error" key={err[1]}>{err[0]}</div>;
           })}
           {this.state.imageError}
         </div>
