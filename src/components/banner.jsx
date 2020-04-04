@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 var Banner = () => {
@@ -9,14 +9,18 @@ var Banner = () => {
 
   var getProductsList = () => {
     axios
-      .get("http://3.134.102.30/products/list?count=500")
+      .get("http://3.134.102.30/products/list?count=2000")
       .then(({ data }) => {
         console.log("data: ", data);
         // make the search process case insensitive
         let lowercaseInput = inputText.toLowerCase();
         for (let product of data) {
           if (product.hasOwnProperty("description")) {
-            if (product.description.toLowerCase().includes(lowercaseInput)) {
+            // Check for match in description or name to input
+            if (
+              product.description.toLowerCase().includes(lowercaseInput) ||
+              product.name.toLowerCase().includes(lowercaseInput)
+            ) {
               // reroute the product to the new ID
               history.push(`/product/${product.id}`);
               setInputText("");
@@ -25,7 +29,7 @@ var Banner = () => {
           }
         }
         // If no products match input keyword let the client know this
-        setInputText("Product Not Found");
+        setInputText("No Product Found");
       });
   };
 

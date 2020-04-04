@@ -141,22 +141,22 @@ const List = ({
   var wrapperStyle = {
     width: "100%",
     overflow: "hidden",
-    "max-height": "100%"
+    "maxHeight": "100%"
   };
   var outerWrapperStyle = {
     width: "100%",
-    "max-height": "100%"
+    "maxHeight": "100%"
   };
   var innerWrapperStyle = {
     width: "100%",
-    "max-height": "100%"
+    "maxHeight": "100%"
   };
 
   if (showRelatedWidget === true) {
     return (
       <div style={outerWrapperStyle}>
         <h1
-          style={{ "margin-left": "3%", "margin-top": "3%" }}
+          style={{ "marginLeft": "3%", "marginTop": "3%" }}
           className="title is-4"
         >
           {listName === "Related" ? "Related Products" : "Your Outfit"}
@@ -190,7 +190,7 @@ const List = ({
                 {filterForShownItems(products, shownIndices).map(
                   (product, idx) => {
                     return (
-                      <div className="column is-3">
+                      <div key={idx} className="column is-3">
                         <Card
                           key={idx}
                           listName={listName}
@@ -234,7 +234,7 @@ const List = ({
                       // The next index corresponding to a card I would like to show a piece of.
                       var nextIndex = shownIndices[shownIndices.length - 1] + 1;
                       return (
-                        <div className="column is-3">
+                        <div key={nextIndex} className="column is-3">
                           <Card
                             key={nextIndex}
                             listName={listName}
