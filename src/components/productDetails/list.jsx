@@ -4,7 +4,7 @@ import {
   fetchOutfitsImages,
   fetchOutfitsReviews,
   addToOutfit,
-  removeFromOutfit
+  removeFromOutfit,
 } from "./outfitHelpers.js";
 import Card from "./card.jsx";
 import AddToOutfitCard from "./addCard.jsx";
@@ -21,7 +21,7 @@ const List = ({
   productsImages,
   fetchRelatedDataAsync,
   productsReviews,
-  paramsId
+  paramsId,
 }) => {
   // Set Local State For Outfits
   var [outfits, setOutfits] = useState([]);
@@ -33,15 +33,15 @@ const List = ({
   let initialShownIndices = listName === "Outfit" ? [0, 1, 2] : [0, 1, 2, 3];
   var [shownIndices, setShownIndices] = useState(initialShownIndices);
 
-  //conditionally set outfits to Outfit data if this list represents outfits
+  //conditionally set outfits to Outfit data if this list represents outfits (on first render)
   if (listName === "Outfit") {
     products = outfits;
     productsImages = outfitsImages;
     productsReviews = outfitsReviews;
   }
 
-  //HANDLE FETCHING DATA ON AFTER FIRST RENDER
   useEffect(() => {
+    //Handle fetching data after first render for Related Products
     if (listName === "Related") {
       getRelatedIds(paramsId).then(({ data }) => {
         // If there are no related product IDs
@@ -55,16 +55,17 @@ const List = ({
         }
       });
     }
-  }, [paramsId]);
-
-  useEffect(() => {
+    //Handle fetching data after first render for Your Outfit
     if (listName === "Outfit") {
       fetchOutfits(setOutfits);
       fetchOutfitsImages(setOutfitsImages);
       fetchOutfitsReviews(setOutfitsReviews);
     }
+    // Reset shown indices in either case
+    setShownIndices(initialShownIndices);
   }, [paramsId]);
 
+  // If List Component is an Outfit List, set product data to outfit data
   useEffect(() => {
     if (listName === "Outfit") {
       products = outfits;
@@ -76,7 +77,7 @@ const List = ({
   function onArrowClick(direction) {
     if (direction === "left") {
       if (shownIndices[0] !== 0) {
-        let newShownIndices = shownIndices.map(idx => idx - 1);
+        let newShownIndices = shownIndices.map((idx) => idx - 1);
         setShownIndices(newShownIndices);
         recordInteraction(
           `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
@@ -87,7 +88,7 @@ const List = ({
       }
     } else if (direction === "right") {
       if (shownIndices[shownIndices.length - 1] !== products.length - 1) {
-        let newShownIndices = shownIndices.map(idx => idx + 1);
+        let newShownIndices = shownIndices.map((idx) => idx + 1);
         setShownIndices(newShownIndices);
         recordInteraction(
           `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
@@ -132,7 +133,7 @@ const List = ({
       );
       // on delete - move all shown indices down one if first shown index doesn't equal zero.
       if (shownIndices[0] !== 0) {
-        let newShownIndices = shownIndices.map(idx => idx - 1);
+        let newShownIndices = shownIndices.map((idx) => idx - 1);
         setShownIndices(newShownIndices);
       }
     }
@@ -141,22 +142,22 @@ const List = ({
   var wrapperStyle = {
     width: "100%",
     overflow: "hidden",
-    "maxHeight": "100%"
+    maxHeight: "100%",
   };
   var outerWrapperStyle = {
     width: "100%",
-    "maxHeight": "100%"
+    maxHeight: "100%",
   };
   var innerWrapperStyle = {
     width: "100%",
-    "maxHeight": "100%"
+    maxHeight: "100%",
   };
 
   if (showRelatedWidget === true) {
     return (
       <div style={outerWrapperStyle}>
         <h1
-          style={{ "marginLeft": "3%", "marginTop": "3%" }}
+          style={{ marginLeft: "3%", marginTop: "3%" }}
           className="title is-4"
         >
           {listName === "Related" ? "Related Products" : "Your Outfit"}
@@ -229,8 +230,8 @@ const List = ({
                 )}
                 {shownIndices[shownIndices.length - 1] !== products.length - 1
                   ? filterForShownItems(products, [
-                      shownIndices[shownIndices.length - 1] + 1
-                    ]).map(product => {
+                      shownIndices[shownIndices.length - 1] + 1,
+                    ]).map((product) => {
                       // The next index corresponding to a card I would like to show a piece of.
                       var nextIndex = shownIndices[shownIndices.length - 1] + 1;
                       return (
@@ -247,20 +248,20 @@ const List = ({
                                 0
                               )
                                 ? filterForShownItems(productsImages, [
-                                    nextIndex
+                                    nextIndex,
                                   ])[0].results[0].photos[0].thumbnail_url
                                 : null
                             }
                             onClickButton={onClickButton}
                             productReviews={
                               filterForShownItems(productsReviews, [
-                                nextIndex
+                                nextIndex,
                               ])[0]
                             }
                             productSalesData={
                               productsImages
                                 ? filterForShownItems(productsImages, [
-                                    nextIndex
+                                    nextIndex,
                                   ])[0]
                                 : null
                             }
