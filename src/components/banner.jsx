@@ -1,46 +1,57 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 var Banner = () => {
   let [inputText, setInputText] = useState("");
+  let [allProducts, setAllProducts] = useState([]);
   let history = useHistory();
 
-  var getProductsList = () => {
-    axios
-      .get("http://3.134.102.30/products/list?count=2000")
-      .then(({ data }) => {
-        console.log("data: ", data);
-        // make the search process case insensitive
-        let lowercaseInput = inputText.toLowerCase();
-        for (let product of data) {
-          if (product.hasOwnProperty("description")) {
-            // Check for match in description or name to input
-            if (
-              product.description.toLowerCase().includes(lowercaseInput) ||
-              product.name.toLowerCase().includes(lowercaseInput)
-            ) {
-              // reroute the product to the new ID
-              history.push(`/product/${product.id}`);
-              setInputText("");
-              return;
-            }
-          }
-        }
-        // If no products match input keyword let the client know this
-        setInputText("No Product Found");
-      });
-  };
-
-  var search = (e) => {
-    e.preventDefault();
-    getProductsList();
+  var serveRecommendations = (text) => {
+    console.log("serve recos related to :", text);
   };
 
   var handleChange = (e) => {
     setInputText(e.target.value);
   };
+
+  var getProductsList = () => {
+    return axios.get("http://3.134.102.30/products/list?count=10010");
+  };
+
+  useEffect(() => {
+    // if allProducts state is empty
+    if (allProducts.length === 0) {
+      getProductsList().then(({ data }) => setAllProducts(data));
+    }
+  }, [allProducts]);
+
+  useEffect(() => {
+    serveRecommendations(inputText);
+  }, [inputText]);
+
+  // .then(({ data }) => {
+  //   console.log("data: ", data);
+  //   // make the search process case insensitive
+  //   let lowercaseInput = inputText.toLowerCase();
+  //   for (let product of data) {
+  //     if (product.hasOwnProperty("description")) {
+  //       // Check for match in description or name to input
+  //       if (
+  //         product.description.toLowerCase().includes(lowercaseInput) ||
+  //         product.name.toLowerCase().includes(lowercaseInput)
+  //       ) {
+  //         // reroute the product to the new ID
+  //         history.push(`/product/${product.id}`);
+  //         setInputText("");
+  //         return;
+  //       }
+  //     }
+  //   }
+  //   // If no products match input keyword let the client know this
+  //   setInputText("No Product Found");
+  // });
 
   return (
     <section className="hero is-primary is-small">
@@ -59,11 +70,6 @@ var Banner = () => {
                     type="text"
                     className="input"
                   ></input>
-                </a>
-                <a className="navbar-item is-active">
-                  <button onClick={search} className="button">
-                    <i className="fas fa-tree"></i>
-                  </button>
                 </a>
               </div>
             </div>
