@@ -65,7 +65,7 @@ class ReviewTile extends React.Component {
       this.setState({
         numHelpful: this.state.numHelpful + 1 // avoid re-fetching reviews to display updated num
       });
-      axios.put(`http://3.134.102.30/reviews/helpful/${this.props.review.review_id}`)
+      axios.put(`http://18.224.200.47/reviews/helpful/${this.props.review.review_id}`)
         .catch((err) => {
           console.log("Error marking helpful:", err);
         });
@@ -85,7 +85,7 @@ class ReviewTile extends React.Component {
     this.setState({
       reported: true
     });
-    axios.put(`http://3.134.102.30/reviews/report/${this.props.review.review_id}`)
+    axios.put(`http://18.224.200.47/reviews/report/${this.props.review.review_id}`)
       .catch((err) => {
         console.log("Error reporting review:", err);
       });

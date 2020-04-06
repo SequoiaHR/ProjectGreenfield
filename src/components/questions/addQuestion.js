@@ -45,7 +45,7 @@ class AddQuestion extends React.Component {
     } else {
       axios({
         method: "POST",
-        url: `http://3.134.102.30/qa/${this.props.paramsId}?count=100`,
+        url: `http://18.224.200.47/qa/${this.props.paramsId}?count=100`,
         data: {
           body: this.state.question,
           name: this.state.nickname,
@@ -151,7 +151,7 @@ class AddQuestion extends React.Component {
 
         <div>For Authentication Reasons, You Will Not Be Emailed</div>
         <br />
-        <button className="button is-small is-primary is-outlined " onClick={this.submitAnswer}>
+        <button className="button is-small is-primary is-outlined submitQuestionButton" onClick={this.submitAnswer}>
           SUBMIT QUESTION
         </button>
         <br />

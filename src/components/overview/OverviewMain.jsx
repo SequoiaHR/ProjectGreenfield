@@ -282,7 +282,7 @@ class overviewMain extends React.Component {
 
   //get data from API and save it
   getData(page_id) {
-    Axios.get(`http://3.134.102.30/products/${page_id}`)
+    Axios.get(`http://18.224.200.47/products/${page_id}`)
       .then(API_details => {
         //input data into store
         this.props.storeProductDetails(API_details.data);
@@ -308,7 +308,7 @@ class overviewMain extends React.Component {
         console.log(err);
       });
 
-    Axios.get(`http://3.134.102.30/products/${page_id}/styles`)
+    Axios.get(`http://18.224.200.47/products/${page_id}/styles`)
       .then(API_Styles => {
         //input data into store
         this.props.storeProductStyles(API_Styles.data);

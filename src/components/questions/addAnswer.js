@@ -46,7 +46,7 @@ class AddAnswer extends React.Component {
     } else {
       axios({
         method: "POST",
-        url: `http://3.134.102.30/qa/${this.state.qID}/answers`,
+        url: `http://18.224.200.47/qa/${this.state.qID}/answers`,
         data:{
           body:this.state.answer,
           name:this.state.nickname,

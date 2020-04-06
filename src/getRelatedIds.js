@@ -1,7 +1,7 @@
 import axios from "axios";
 
 let getRelatedIds = (id) => {
-  return axios.get(`http://3.134.102.30/products/${id}/related`);
+  return axios.get(`http://18.224.200.47/products/${id}/related`);
 };
 
 export default getRelatedIds;

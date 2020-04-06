@@ -4,7 +4,7 @@ import axios from "axios";
 
 export function fetchReviews(id, sort) {
   return function(dispatch) {
-    axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
+    axios.get(`http://18.224.200.47/reviews/${id}/list?count=100&sort=${sort}`)
       .then(({data}) => {
         dispatch(setReviews(data.results));
       })
@@ -16,7 +16,7 @@ export function fetchReviews(id, sort) {
 
 // export function changeSort(id, sort) {
 //   return function(dispatch) {
-//     axios.get(`http://3.134.102.30/reviews/${id}/list?count=100&sort=${sort}`)
+//     axios.get(`http://18.224.200.47/reviews/${id}/list?count=100&sort=${sort}`)
 //       .then(({data}) => {
 //         dispatch(setReviews(data.results));
 //       })
@@ -37,7 +37,7 @@ function setReviews(data) {
 
 export function fetchMetadata(id) {
   return function(dispatch) {
-    axios.get(`http://3.134.102.30/reviews/${id}/meta`)
+    axios.get(`http://18.224.200.47/reviews/${id}/meta`)
       .then(({data}) => {
         dispatch(setMetadata(data));
       })

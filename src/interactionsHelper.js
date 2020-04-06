@@ -4,7 +4,7 @@ import axios from "axios";
 let recordInteraction = (element, widget) => {
   let time = new Date();
   axios
-    .post(`http://3.134.102.30/interactions/`, {
+    .post(`http://18.224.200.47/interactions/`, {
       element: element,
       widget: widget,
       time: time

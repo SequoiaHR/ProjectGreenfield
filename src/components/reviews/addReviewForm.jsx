@@ -166,7 +166,7 @@ class AddReviewForm extends React.Component {
   }
 
   submit() {
-    axios.post(`http://3.134.102.30/reviews/${this.props.id}`, {
+    axios.post(`http://18.224.200.47/reviews/${this.props.id}`, {
       rating: this.state.rating,
       summary: this.state.summary,
       body: this.state.body,

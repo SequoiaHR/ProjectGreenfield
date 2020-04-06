@@ -46,7 +46,7 @@ class Answer extends React.Component {
   sendHelpful(id) {
     axios({
       method: "PUT",
-      url: `http://3.134.102.30/qa/answer/${id}/helpful`
+      url: `http://18.224.200.47/qa/answer/${id}/helpful`
     })
       .then(data => {
         // console.log(data);
@@ -77,7 +77,7 @@ class Answer extends React.Component {
   sendReported(id) {
     axios({
       method: "PUT",
-      url: `http://3.134.102.30/qa/answer/${id}/report`
+      url: `http://18.224.200.47/qa/answer/${id}/report`
     })
       .then(data => {
         // console.log(data);
@@ -94,7 +94,7 @@ class Answer extends React.Component {
     //BOLDEN ANSWERER'S NAME IF SELLER IS ANSWERER
     let name = "";
     this.props.answerer_name === "Seller" ?
-    (name = <b>{this.props.answerer_name}</b>) :
+    (name = <b>{this.props.answerer_name} Response</b>) :
     (name = this.props.answerer_name);
     //CREATE INDIVIDUAL ANSWER ENTRIES
     return (

@@ -43,7 +43,7 @@ class Question extends React.Component {
   sendHelpful(id) {
     axios({
       method: "PUT",
-      url: `http://3.134.102.30/qa/question/${id}/helpful`
+      url: `http://18.224.200.47/qa/question/${id}/helpful`
     })
       .then(data => {
         // console.log(data);

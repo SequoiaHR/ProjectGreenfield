@@ -7,7 +7,7 @@ import filterForUniqueIds from "./filterForUniqueIds";
 export function fetchRelatedReviews(id) {
   return function(dispatch) {
     return axios
-      .get(`http://3.134.102.30/products/${id}/related`)
+      .get(`http://18.224.200.47/products/${id}/related`)
       .then(({ data }) => {
         // data is an array of ids
         let filtered = filterForUniqueIds(data);
