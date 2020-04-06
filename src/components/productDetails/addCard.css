@@ -5,7 +5,11 @@
 }
 
 .addCardButton {
-    padding: 0;
-    border: none;
-    background: none;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.minCardHeight {
+  min-height: 10vh;
 }

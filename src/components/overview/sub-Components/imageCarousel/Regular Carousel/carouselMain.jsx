@@ -2,6 +2,7 @@ import React from 'react';
 import ImageFullSize from './imageFullSize';
 import ThumbnailNav from './thumbnailNav';
 
+//entire image carousel with subordinate components
 const ImageCarousel = function(props) {
   return (
     <div className="entireImageCarouselStyling">

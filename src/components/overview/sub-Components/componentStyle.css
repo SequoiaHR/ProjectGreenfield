@@ -1,3 +1,13 @@
+/***************** basic details ****************************/
+
+.productNameStyle {
+  font-size: 32px;
+  color: black;
+}
+
+.strikeStyle {
+  display: inline;
+}
 /***************** social media ****************************/
 
 .flexContainerSocial {

@@ -13,6 +13,7 @@ const ThumbnailCircles = function(props) {
     thumbnailRows.push(row);
   }
 
+  //creates circles for naviagtion bar below modal image
   if (props.state.currentThumbnailRow !== undefined) {
     let indexImage = props.state.currentImage;
     let imageURL = props.state.otherImagesInStyle[indexImage].url;

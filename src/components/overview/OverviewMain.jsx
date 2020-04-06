@@ -9,7 +9,7 @@ import ImageModal from './sub-Components/ImageModal.jsx';
 import ZoomImage from './sub-Components/imageCarousel/Zoomed Carousel/ZoomImage.jsx';
 import ZoomNavigation from './sub-Components/imageCarousel/Zoomed Carousel/ZoomNavigation.jsx';
 
-class overviewMain extends React.Component {
+class OverviewMain extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -56,7 +56,6 @@ class overviewMain extends React.Component {
     );
     this.zoomImage = this.zoomImage.bind(this);
     this.selectProductSize = this.selectProductSize.bind(this);
-    this.handleSeeAllReviewsClick = this.handleSeeAllReviewsClick.bind(this);
     this.selectProductStock = this.selectProductStock.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.onImageModalArrowClick = this.onImageModalArrowClick.bind(this);
@@ -111,8 +110,7 @@ class overviewMain extends React.Component {
   ////////////////////////////////////////////////////////////////////////////////////
 
   //this function is attached to the thumbnail images in the image carousel and
-  //changes the selected image when these images are clicked.
-
+  //changes the selected image when those images are clicked
   changeImageOnThumbnailClick(newThumbnailUrl) {
     for (let i = 0; i < this.state.images.otherImagesInStyle.length; i++) {
       if (
@@ -159,7 +157,7 @@ class overviewMain extends React.Component {
     }
   }
 
-  //this function zooms the entire image to fill the screen
+  //this function zooms the entire image to fill the screen as a modal
   zoomImage() {
     if (this.state.zoom) {
       this.setState({ zoom: false });
@@ -171,7 +169,7 @@ class overviewMain extends React.Component {
     }
   }
 
-  //this function changes the displayed thumbnail images when you click the arrow
+  //this function changes the displayed thumbnail images when you click their arrows
   onNavArrowClick(direction) {
     if (direction === 'left') {
       this.setState({
@@ -224,6 +222,7 @@ class overviewMain extends React.Component {
     }
   }
 
+  //this changes the displayed image when you clicke the modal navigation circles below the image
   changeZoomImageOnCircleClick(newThumbnailUrl) {
     for (
       let i = 0;
@@ -245,6 +244,7 @@ class overviewMain extends React.Component {
       }
     }
   }
+
   //this function changes the displayed circles when you click the modal arrow
   onModalNavArrowClick(direction) {
     if (direction === 'left') {
@@ -270,17 +270,7 @@ class overviewMain extends React.Component {
   ///////////////////////// DETAILS AND API CODE /////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////
 
-  //click to see all reviews
-  handleSeeAllReviewsClick = e => {
-    e.preventDefault();
-    window.scrollTo({
-      top: 2250,
-      left: 0,
-      behavior: 'instant'
-    });
-  };
-
-  //get data from API and save it
+  //get data from API, stores it, and saves it in the internal state
   getData(page_id) {
     Axios.get(`http://18.224.200.47/products/${page_id}`)
       .then(API_details => {
@@ -308,7 +298,12 @@ class overviewMain extends React.Component {
         console.log(err);
       });
 
+<<<<<<< HEAD
     Axios.get(`http://18.224.200.47/products/${page_id}/styles`)
+=======
+    //separate API request for styles
+    Axios.get(`http://3.134.102.30/products/${page_id}/styles`)
+>>>>>>> e6ef576b0533d62932ce168de3edf6918c23a1f5
       .then(API_Styles => {
         //input data into store
         this.props.storeProductStyles(API_Styles.data);
@@ -367,7 +362,7 @@ class overviewMain extends React.Component {
 
   //submit add to cart on button click
   addToCart() {
-    //API request does nothing
+    //API request does nothing, so we just have an alert for now
     if (
       this.state.cart.cartNumber !== undefined &&
       this.state.cart.cartSize !== undefined
@@ -387,6 +382,7 @@ class overviewMain extends React.Component {
   ///////////////////////// LIFE CYCLE CODE /////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////////
 
+  //if there's a page change, this refreshes things
   componentDidUpdate(prevProps) {
     if (this.props.paramsId !== prevProps.paramsId) {
       this.getData(this.props.paramsId);
@@ -396,7 +392,6 @@ class overviewMain extends React.Component {
   componentDidMount() {
     //when the component mounts, this gets the API data, sets it as the store, and
     //then organizes it and saves it as the state
-    //componentDidMount, grab the API data for the product info
     this.getData(this.props.paramsId);
   }
 
@@ -422,7 +417,6 @@ class overviewMain extends React.Component {
                   <BasicDetails
                     state={this.state}
                     reviews={this.props.storeState.reviewsMetadata}
-                    handleSeeAllReviewsClick={this.handleSeeAllReviewsClick}
                   />
                   <StyleSelection
                     state={this.state}
@@ -467,4 +461,4 @@ class overviewMain extends React.Component {
   }
 }
 
-export default overviewMain;
+export default OverviewMain;
