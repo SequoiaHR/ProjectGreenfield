@@ -13,7 +13,7 @@ function App(props) {
   } = props;
   return (
     <div className="App container">
-      <Banner/>
+      <Banner paramsId={params.id}/>
       <div className="container">
         <OverviewContainer paramsId={params.id} />
       </div>

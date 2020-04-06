@@ -1,46 +1,67 @@
 import React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-var Banner = () => {
+var Banner = (paramsId) => {
   let [inputText, setInputText] = useState("");
+  let [allProducts, setAllProducts] = useState([]);
+  let [searchList, setSearchList] = useState([]);
   let history = useHistory();
 
-  var getProductsList = () => {
-    axios
-      .get("http://3.134.102.30/products/list?count=2000")
-      .then(({ data }) => {
-        console.log("data: ", data);
-        // make the search process case insensitive
-        let lowercaseInput = inputText.toLowerCase();
-        for (let product of data) {
-          if (product.hasOwnProperty("description")) {
-            // Check for match in description or name to input
-            if (
-              product.description.toLowerCase().includes(lowercaseInput) ||
-              product.name.toLowerCase().includes(lowercaseInput)
-            ) {
-              // reroute the product to the new ID
-              history.push(`/product/${product.id}`);
-              setInputText("");
-              return;
-            }
-          }
-        }
-        // If no products match input keyword let the client know this
-        setInputText("No Product Found");
-      });
+  var serveRecommendations = (text) => {
+    let matches = [];
+    let lowercaseInput = text.toLowerCase();
+    for (let product of allProducts) {
+      if (matches.length > 6) {
+        break;
+      }
+      if (
+        product.description.toLowerCase().includes(lowercaseInput) ||
+        product.name.toLowerCase().includes(lowercaseInput)
+      ) {
+        matches.push(product);
+      }
+    }
+    setSearchList(matches);
   };
 
-  var search = (e) => {
-    e.preventDefault();
-    getProductsList();
-  };
-
-  var handleChange = (e) => {
+  var handleInputChange = (e) => {
     setInputText(e.target.value);
   };
+
+  var getProductsList = () => {
+    return axios.get("http://3.134.102.30/products/list?count=10010");
+  };
+
+  // After first render of the app, fetch all of the products
+  useEffect(() => {
+    if (allProducts.length === 0) {
+      getProductsList().then(({ data }) => setAllProducts(data));
+    }
+  }, []);
+
+  // Every time input text is updated, serve new recommendations
+  useEffect(() => {
+    serveRecommendations(inputText);
+  }, [inputText]);
+
+  // Check for "exact match" search (assumes the user chose a drop-down menu item)
+  useEffect(() => {
+    if (searchList.length === 1) {
+      let searched = searchList[0];
+      if (searched.name === inputText) {
+        history.push(`/product/${searched.id}`);
+      }
+    }
+  }, [searchList]);
+
+  // When switching to a new page, clear the input form
+  useEffect(() => {
+    if (inputText.length > 0) {
+      setInputText("");
+    }
+  }, [paramsId]);
 
   return (
     <section className="hero is-primary is-small">
@@ -54,16 +75,17 @@ var Banner = () => {
               <div className="navbar-end">
                 <a className="navbar-item is-active">
                   <input
-                    onChange={handleChange}
+                    list="browsers"
+                    onChange={handleInputChange}
                     value={inputText}
                     type="text"
                     className="input"
                   ></input>
-                </a>
-                <a className="navbar-item is-active">
-                  <button onClick={search} className="button">
-                    <i className="fas fa-tree"></i>
-                  </button>
+                  <datalist id="browsers">
+                    {searchList.map((product) => {
+                      return <option value={product.name}></option>;
+                    })}
+                  </datalist>
                 </a>
               </div>
             </div>
