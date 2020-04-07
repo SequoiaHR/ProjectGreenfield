@@ -9,28 +9,7 @@ var Banner = (paramsId) => {
   let [searchList, setSearchList] = useState([]);
   let history = useHistory();
 
-<<<<<<< HEAD
-  var getProductsList = () => {
-    axios
-      .get("http://18.224.200.47/products/list?count=500")
-      .then(({ data }) => {
-        console.log("data: ", data);
-        // make the search process case insensitive
-        let lowercaseInput = inputText.toLowerCase();
-        for (let product of data) {
-          if (product.hasOwnProperty("description")) {
-            if (product.description.toLowerCase().includes(lowercaseInput)) {
-              // reroute the product to the new ID
-              history.push(`/product/${product.id}`);
-              setInputText("");
-              return;
-            }
-          }
-        }
-        // If no products match input keyword let the client know this
-        setInputText("Product Not Found");
-      });
-=======
+
   var serveRecommendations = (text) => {
     let matches = [];
     let lowercaseInput = text.toLowerCase();
@@ -46,7 +25,6 @@ var Banner = (paramsId) => {
       }
     }
     setSearchList(matches);
->>>>>>> e6ef576b0533d62932ce168de3edf6918c23a1f5
   };
 
   var handleInputChange = (e) => {
@@ -62,12 +40,12 @@ var Banner = (paramsId) => {
     if (allProducts.length === 0) {
       getProductsList().then(({ data }) => setAllProducts(data));
     }
-  }, []);
+  }, [allProducts.length]);
 
   // Every time input text is updated, serve new recommendations
   useEffect(() => {
     serveRecommendations(inputText);
-  }, [inputText]);
+  }, [inputText, serveRecommendations]);
 
   // Check for "exact match" search (assumes the user chose a drop-down menu item)
   useEffect(() => {
@@ -77,14 +55,14 @@ var Banner = (paramsId) => {
         history.push(`/product/${searched.id}`);
       }
     }
-  }, [searchList]);
+  }, [history, inputText, searchList]);
 
   // When switching to a new page, clear the input form
   useEffect(() => {
     if (inputText.length > 0) {
       setInputText("");
     }
-  }, [paramsId]);
+  }, [inputText.length, paramsId]);
 
   return (
     <section className="hero is-primary is-small">

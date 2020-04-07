@@ -298,12 +298,9 @@ class OverviewMain extends React.Component {
         console.log(err);
       });
 
-<<<<<<< HEAD
+
     Axios.get(`http://18.224.200.47/products/${page_id}/styles`)
-=======
-    //separate API request for styles
-    Axios.get(`http://3.134.102.30/products/${page_id}/styles`)
->>>>>>> e6ef576b0533d62932ce168de3edf6918c23a1f5
+
       .then(API_Styles => {
         //input data into store
         this.props.storeProductStyles(API_Styles.data);
