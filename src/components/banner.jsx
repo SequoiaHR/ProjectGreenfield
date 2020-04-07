@@ -32,7 +32,7 @@ var Banner = (paramsId) => {
   };
 
   var getProductsList = () => {
-    return axios.get("http://3.134.102.30/products/list?count=10010");
+    return axios.get("http://18.224.200.47/products/list?count=10010");
   };
 
   // After first render of the app, fetch all of the products
