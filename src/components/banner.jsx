@@ -9,7 +9,6 @@ var Banner = (paramsId) => {
   let [searchList, setSearchList] = useState([]);
   let history = useHistory();
 
-
   var serveRecommendations = (text) => {
     let matches = [];
     let lowercaseInput = text.toLowerCase();
@@ -45,7 +44,7 @@ var Banner = (paramsId) => {
   // Every time input text is updated, serve new recommendations
   useEffect(() => {
     serveRecommendations(inputText);
-  }, [inputText, serveRecommendations]);
+  }, [inputText]);
 
   // Check for "exact match" search (assumes the user chose a drop-down menu item)
   useEffect(() => {
@@ -55,14 +54,14 @@ var Banner = (paramsId) => {
         history.push(`/product/${searched.id}`);
       }
     }
-  }, [history, inputText, searchList]);
+  }, [inputText, searchList]);
 
   // When switching to a new page, clear the input form
   useEffect(() => {
     if (inputText.length > 0) {
       setInputText("");
     }
-  }, [inputText.length, paramsId]);
+  }, [paramsId]);
 
   return (
     <section className="hero is-primary is-small">
