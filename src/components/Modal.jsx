@@ -21,5 +21,4 @@ const Modal = ({ title, children, onExitClick }) => {
   );
 };
 
-//need to close modal as well.
 export default Modal;

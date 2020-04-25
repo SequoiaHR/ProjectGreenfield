@@ -16,7 +16,6 @@ const Card = ({
   productSalesData,
   onClickButton
 }) => {
-  // local state needed to determine if modal will show
   let [showModal, setShowModal] = useState(false);
 
   // Sales Price Value Calculation
@@ -36,7 +35,6 @@ const Card = ({
   }
 
   function showAverageReview(productReviews) {
-    // check if ProductReviews exists and if the ratings property exists.
     if (productReviews && calculateRating(productReviews) !== null) {
       return true;
     } else {

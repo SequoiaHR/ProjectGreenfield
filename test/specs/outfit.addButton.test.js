@@ -16,7 +16,6 @@ describe("Your Outfit: Add Button", () => {
   it("should always leave the add card on the screen", async () => {
     var right = await page.$("button.button-Outfit-right");
     await right.evaluate(right => right.click());
-    // Check if add card is still on screen
     var add = await page.$("button.addCardButton");
     await expect(add).toBeTruthy();
   });

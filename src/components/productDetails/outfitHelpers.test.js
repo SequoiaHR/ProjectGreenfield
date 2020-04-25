@@ -1,6 +1,5 @@
 import { addToOutfit, removeFromOutfit } from "./outfitHelpers.js";
 
-//Closure scope to store Current Local Storage Outfit Before Tests
 let localOutfit;
 beforeEach(() => {
   localOutfit = JSON.parse(window.localStorage.getItem("outfit"));

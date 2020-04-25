@@ -44,12 +44,9 @@ const List = ({
     //Handle fetching data after first render for Related Products
     if (listName === "Related") {
       getRelatedIds(paramsId).then(({ data }) => {
-        // If there are no related product IDs
         if (data.length === 0) {
-          // Hide Related Widget
           setShowRelatedWidget(false);
         } else {
-          // Show Related Widget & Fetch Data
           setShowRelatedWidget(true);
           fetchRelatedDataAsync(paramsId);
         }
@@ -83,8 +80,6 @@ const List = ({
           `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
           "related-items-comparison"
         );
-      } else {
-        console.log("Already at left-most item");
       }
     } else if (direction === "right") {
       if (shownIndices[shownIndices.length - 1] !== products.length - 1) {
@@ -94,8 +89,6 @@ const List = ({
           `span.${listName} button.directionalButton svg.fa-chevron-${direction}`,
           "related-items-comparison"
         );
-      } else {
-        console.log("Already at right-most item");
       }
     }
   }
@@ -131,7 +124,6 @@ const List = ({
         `button.Outfit.product-${id}`,
         "related-items-comparison"
       );
-      // on delete - move all shown indices down one if first shown index doesn't equal zero.
       if (shownIndices[0] !== 0) {
         let newShownIndices = shownIndices.map((idx) => idx - 1);
         setShownIndices(newShownIndices);

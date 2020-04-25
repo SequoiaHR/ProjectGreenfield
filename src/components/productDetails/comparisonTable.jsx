@@ -70,5 +70,4 @@ const ComparisonTable = ({ product, pageProduct }) => {
   );
 };
 
-//need to close modal as well.
 export default ComparisonTable;

@@ -52,5 +52,5 @@ const StarRating = ({ rating, width, height }) => {
     </span>
   );
 };
-//need to close modal as well.
+
 export default StarRating;
