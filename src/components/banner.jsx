@@ -82,8 +82,8 @@ var Banner = (paramsId) => {
                     className="input"
                   ></input>
                   <datalist id="browsers">
-                    {searchList.map((product) => {
-                      return <option value={product.name}></option>;
+                    {searchList.map((product, idx) => {
+                      return <option key={idx} value={product.name}></option>;
                     })}
                   </datalist>
                 </a>

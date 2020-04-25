@@ -8,7 +8,6 @@ export function fetchRelatedImages(id) {
     return axios
       .get(`http://18.224.200.47/products/${id}/related`)
       .then(({ data }) => {
-        // data is an array of ids
         let filtered = filterForUniqueIds(data);
         return fetchImages(filtered);
       })

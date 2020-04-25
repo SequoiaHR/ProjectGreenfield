@@ -1,7 +1,3 @@
-
-// given one reviews metadata object, return the product's average rating
-// rounded to one decimal place.
-
 const calculateRating = function(metadata) {
   if (!metadata.ratings) {
     return null;
@@ -11,8 +7,8 @@ const calculateRating = function(metadata) {
   let reviewers = 0;
 
   for (let rating of Object.keys(metadata.ratings)) {
-    totalStars += Number(rating) * metadata.ratings[rating]; // star rating times users who chose it
-    reviewers += metadata.ratings[rating]; // number of users choosing that rating
+    totalStars += Number(rating) * metadata.ratings[rating]; 
+    reviewers += metadata.ratings[rating];
   }
 
   let overallRating;
