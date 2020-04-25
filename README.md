@@ -8,7 +8,7 @@ This is accomplished using mainly:
 - [React Router](https://reacttraining.com/react-router/) <br/>
 - [Redux](https://redux.js.org/) <br/>
 - [Axios](https://github.com/axios/axios) <br/>
-- [Bulma[(https://bulma.io/) <br/>
+- [Bulma](https://bulma.io/) <br/>
 
 ### Available Scripts
 
