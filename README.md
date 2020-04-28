@@ -10,6 +10,14 @@ This is accomplished using mainly:
 - [Axios](https://github.com/axios/axios) <br/>
 - [Bulma](https://bulma.io/) <br/>
 
+### Related Products
+The Related Products section displays products with similar characteristics to the currently selected product, as provided by the team's external API. Upon clicking the Star icon within each Card, a modal is displayed comparing the current product and selected related product's characteristics. 
+![alt-text](http://g.recordit.co/PJU6hDV5IY.gif)
+ 
+### Your Outfit
+The Your Outfit section allows users to keep track of their favorite articles of clothing! The user has the ability to add items to their persistent Outfit by clicking the Add card. They can remove items by clicking the "X" on each card.
+![alt-text](http://g.recordit.co/d55Bt6W8Ea.gif)
+
 ### Available Scripts
 
 In the project directory, you can run:
