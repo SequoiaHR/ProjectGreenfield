@@ -11,10 +11,17 @@ This is accomplished using mainly:
 - [Bulma](https://bulma.io/) <br/>
 
 ### Related Products
-The Related Products section displays products with similar characteristics to the currently selected product, as provided by the team's external API. Upon clicking the Star icon within each Card, a modal is displayed comparing the current product and selected related product's characteristics. 
+*Developed by Dan Prevoznik*
+
+The Related Products section displays products with similar characteristics to the currently selected product, as provided by the team's external API.
 ![alt-text](http://g.recordit.co/PJU6hDV5IY.gif)
- 
+
+Upon clicking the Star icon within each Product Card, a modal is displayed comparing the current product and selected related product's characteristics. This allows for easy product comparison. 
+![alt-text](http://g.recordit.co/Avhh4Hh9Om.gif)
+
 ### Your Outfit
+*Developed by Dan Prevoznik*
+
 The Your Outfit section allows users to keep track of their favorite articles of clothing! The user has the ability to add items to their persistent Outfit by clicking the Add card. They can remove items by clicking the "X" on each card.
 ![alt-text](http://g.recordit.co/d55Bt6W8Ea.gif)
 
