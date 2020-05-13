@@ -16,14 +16,17 @@ This is accomplished using mainly the following tools:
 *Developed by Tristan Deitzer*
 
 The Questions and Answers section allows users to view and contribute questions about the displayed product as well as answers to existing questions. The questions and answers are sorted by the 'helpful' rating given by users (users are limited to one helpful vote by site data stored in the browser's local storage), however an answer from the Seller will be displayed before all others. If a user 'reports' a question it will be removed from the display and flagged for internal review by a site administrator.
-
+<br>
 The module displays only the two most prominent questions and their answers by default, allowing the user to expand the display to take up a maximum of 100% of the view port, with all additional questions being displayed uing a scroll bar.
+<br>
 ![expand-functionality](http://g.recordit.co/QE1PgEXPWQ.gif)
-
+<br>
 Users can add a question or an answer about a product through a modal popup, the information inputted for both questions and answers is validated using a combination of [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) and functional checks to make sure required feilds are utilized. 
+<br>
 ![add-question-answer-functionality](http://g.recordit.co/SQtKuu208b.gif)
-
+<br>
 Users can search existing questions for desired terms using a the live search bar at the top of the module, which will narrow results dynamically as the user inputs charcters
+<br>
 ![live-search-functionality](http://g.recordit.co/zfrnXyVjbr.gif)
 
 ### Related Products
