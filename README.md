@@ -22,13 +22,9 @@ The Product Details section allows users to view a product's name and price, as 
 <br><br>
 ![details-functionality](http://g.recordit.co/n7eIvu0bHY.gif)
 <br><br>
-Users can share the product to various social media platforms, including Facebook, Pinterest, and Twitter. The posts automatically populate with the product's information as well as a link back to the website.
+Users can share the product to various social media platforms, including Facebook, Pinterest, and Twitter. The posts automatically populate with the product's information as well as a link back to the website. Users can also select the number of units they want to purchase and the interface populates the form with the number of units left in stock. Users' purchase can then be added to their cart.
 <br><br>
-![social-media-functionality](https://recordit.co/LQu1tbrt4R.gif)
-<br><br>
-Users can select the number of units they want to purchase and the interface automatically populates the form with the number of units left in stock. The user can then add the product to their cart.
-<br><br>
-![add-to-cart-functionality](http://g.recordit.co/cZ9dvYDph3.gif)
+![social-media-functionality](http://g.recordit.co/lMKE7gPg75.gif)
 <br><br>
 
 ### Questions and Answers
