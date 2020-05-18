@@ -1,5 +1,7 @@
 # Project Greenfield <br>
+
 ## Project Overview
+
 This project is a retail fashion website's product detail page created in Javascript and designed to run in a Chrome V8 enviornment. It is made up of a Single page application that re-renders depending on the product data and related meta-data it receives from an external API containing data on products, associated meta-data, reviews, and Q&A . All changes to the page are dynamically rendered based on user input and API response, and any elements which are clicked have their clicks logged to the API for further analysis.
 <br/>
 This is accomplished using mainly the following tools:
@@ -12,8 +14,30 @@ This is accomplished using mainly the following tools:
 
 ## Page Modules
 
+### Product Details
+
+_Developed by Ryan Fulmer_
+
+The Product Details section allows users to view a product's name and price, as well as different images for each product via a dynamic image carousel. The user can select different styles of the product to view, and the interfaces supports an expanded image view for users who wish to look at an enlarged images for greater detail.
+<br><br>
+![details-functionality](http://g.recordit.co/n7eIvu0bHY.gif)
+<br><br>
+Users can share the product to various social media platforms, including Facebook, Pinterest, and Twitter. The posts automatically populate with the product's information as well as a link back to the website.
+<br><br>
+![social-media-functionality](https://recordit.co/LQu1tbrt4R)
+<br><br>
+Users can select the number of units they want to purchase and the interface automatically populates the form with the number of units left in stock. The user can then add the product to their cart.
+<br><br>
+![add-to-cart-functionality](http://g.recordit.co/cZ9dvYDph3.gif)
+<br><br>
+Users can also view the average rating for each product, and click down to see the reviews in their entirety.
+<br><br>
+![click-to-reviews-functionality](http://g.recordit.co/vCAyDLxmVu.gif)
+<br><br>
+
 ### Questions and Answers
-*Developed by Tristan Deitzer*
+
+_Developed by Tristan Deitzer_
 
 The Questions and Answers section allows users to view and contribute questions about the displayed product as well as answers to existing questions. The questions and answers are sorted by the 'helpful' rating given by users (users are limited to one helpful vote by site data stored in the browser's local storage), however an answer from the Seller will be displayed before all others. If a user 'reports' a question it will be removed from the display and flagged for internal review by a site administrator.
 <br><br>
@@ -21,7 +45,7 @@ The module displays only the two most prominent questions and their two most pro
 <br><br>
 ![expand-functionality](http://g.recordit.co/QE1PgEXPWQ.gif)
 <br><br>
-Users can add a question or an answer about a product through a modal popup, the information inputted for both questions and answers is validated using a combination of [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) and functional checks to make sure required feilds are utilized. 
+Users can add a question or an answer about a product through a modal popup, the information inputted for both questions and answers is validated using a combination of [regex](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) and functional checks to make sure required feilds are utilized.
 <br><br>
 ![add-question-answer-functionality](http://g.recordit.co/SQtKuu208b.gif)
 <br><br>
@@ -31,21 +55,24 @@ Users can search existing questions for desired terms using a the live search ba
 <br><br>
 
 ### Related Products
-*Developed by Dan Prevoznik*
+
+_Developed by Dan Prevoznik_
 
 The Related Products section displays products with similar characteristics to the currently selected product, as provided by the team's external API.
 ![arrow-functionality](http://g.recordit.co/PJU6hDV5IY.gif)
 
-Upon clicking the Star icon within each Product Card, a modal is displayed comparing the current product and selected related product's characteristics. This allows for easy product comparison. 
+Upon clicking the Star icon within each Product Card, a modal is displayed comparing the current product and selected related product's characteristics. This allows for easy product comparison.
 ![compare-functionality](http://g.recordit.co/Avhh4Hh9Om.gif)
 
 ### Your Outfit
-*Developed by Dan Prevoznik*
+
+_Developed by Dan Prevoznik_
 
 The Your Outfit section allows users to keep track of their favorite articles of clothing! The user has the ability to add items to their persistent Outfit by clicking the Add card. They can remove items by clicking the "X" on each card.
 ![add-to-outfit-functionality](http://g.recordit.co/d55Bt6W8Ea.gif)
 
 <br><br><br>
+
 ## Package.json Details
 
 ### Available Scripts
