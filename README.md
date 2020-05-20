@@ -63,6 +63,20 @@ _Developed by Dan Prevoznik_
 The Your Outfit section allows users to keep track of their favorite articles of clothing! The user has the ability to add items to their persistent Outfit by clicking the Add card. They can remove items by clicking the "X" on each card.
 ![add-to-outfit-functionality](http://g.recordit.co/d55Bt6W8Ea.gif)
 
+<br><br>
+
+### Ratings and Reviews
+
+_Developed by Mayanne Chess_
+
+The Ratings and Reviews section allows users to see the overall rating for a product, as well as the number of reviews, percent of reviewers recommending the product, and the product's performance on a number of features such as quality and fit. Reviews may be sorted by relevance, helpfulness, or most recent. The module displays two reviews by default, with options to expand and collapse the reviews list, which will not take up a height greater than that of the viewport.
+
+![reviews-list-functionality](http://g.recordit.co/sVNLBCKQu9.gif)
+
+A modal form allows users to add a new review. They may select the number of stars to give the product and either recommend it or not. The review body must be at least 50 characters, which is live validated beneath the input textarea. Responsive error messages prevent the user from submitting the form when required fields are missing. In addition, the user may upload up to five photos, which are hosted via a third-party media API.
+
+![add-a-review-functionality](http://g.recordit.co/jbcpDf6Khj.gif)
+
 <br><br><br>
 
 ## Package.json Details
